@@ -24,3 +24,5 @@ if __name__ == '__main__':
   print "This step should run dartdevc tests"
   print "Current directory when running on a bot should be"
   print "/b/build/slave/[builder name]/build/sdk"
+  os.chdir("pkg/dev_compiler")
+  subprocess.call("./tool/presubmit.sh", shell=True)

@@ -32,12 +32,12 @@ before_install:
 
   # Chrome install
   - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  - wget https://dl.google.com/linux/direct/google-chrome-unstable_current_amd64.deb
+  - wget https://dl.google.com/linux/direct/google-chrome-beta_current_amd64.deb
   - sudo dpkg -i google-chrome*.deb
   - /usr/bin/google-chrome --version
   - export CHROME_BIN=/usr/bin/google-chrome
-  - /usr/bin/google-chrome-unstable --version
-  - export CHROME_CANARY_BIN=/usr/bin/google-chrome-unstable
+  - /usr/bin/google-chrome-beta --version
+  - export CHROME_CANARY_BIN=/usr/bin/google-chrome-beta
 
   # Install Depot Tools
   - git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git

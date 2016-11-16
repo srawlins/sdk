@@ -124,6 +124,7 @@
   let InternalMap = () => (InternalMap = dart.constFn(_js_helper.InternalMap$()))();
   let JSArrayOfint = () => (JSArrayOfint = dart.constFn(_interceptors.JSArray$(core.int)))();
   let ListOfint = () => (ListOfint = dart.constFn(core.List$(core.int)))();
+  let JavaScriptIndexingBehavior = () => (JavaScriptIndexingBehavior = dart.constFn(_js_helper.JavaScriptIndexingBehavior$()))();
   let SyncIterator = () => (SyncIterator = dart.constFn(_js_helper.SyncIterator$()))();
   let IterableBase = () => (IterableBase = dart.constFn(collection.IterableBase$()))();
   let SyncIterable = () => (SyncIterable = dart.constFn(_js_helper.SyncIterable$()))();
@@ -437,10 +438,12 @@
   let _ElementEventStreamImplOfEvent = () => (_ElementEventStreamImplOfEvent = dart.constFn(html$._ElementEventStreamImpl$(html$.Event)))();
   let CompleterOfFileWriter = () => (CompleterOfFileWriter = dart.constFn(async.Completer$(html$.FileWriter)))();
   let CompleterOfFile = () => (CompleterOfFile = dart.constFn(async.Completer$(html$.File)))();
+  let JavaScriptIndexingBehaviorOfFile = () => (JavaScriptIndexingBehaviorOfFile = dart.constFn(_js_helper.JavaScriptIndexingBehavior$(html$.File)))();
   let ListOfFontFace = () => (ListOfFontFace = dart.constFn(core.List$(html$.FontFace)))();
   let ListOfGamepadButton = () => (ListOfGamepadButton = dart.constFn(core.List$(html$.GamepadButton)))();
   let CompleterOfGeoposition = () => (CompleterOfGeoposition = dart.constFn(async.Completer$(html$.Geoposition)))();
   let StreamControllerOfGeoposition = () => (StreamControllerOfGeoposition = dart.constFn(async.StreamController$(html$.Geoposition)))();
+  let JavaScriptIndexingBehaviorOfNode = () => (JavaScriptIndexingBehaviorOfNode = dart.constFn(_js_helper.JavaScriptIndexingBehavior$(html$.Node)))();
   let _CustomEventStreamProviderOfEvent = () => (_CustomEventStreamProviderOfEvent = dart.constFn(html$._CustomEventStreamProvider$(html$.Event)))();
   let CompleterOfHttpRequest = () => (CompleterOfHttpRequest = dart.constFn(async.Completer$(html$.HttpRequest)))();
   let ProgressEventTovoid = () => (ProgressEventTovoid = dart.constFn(dart.functionType(dart.void, [html$.ProgressEvent])))();
@@ -450,11 +453,13 @@
   let CompleterOfListOfSourceInfo = () => (CompleterOfListOfSourceInfo = dart.constFn(async.Completer$(ListOfSourceInfo())))();
   let EventStreamProviderOfMidiMessageEvent = () => (EventStreamProviderOfMidiMessageEvent = dart.constFn(html$.EventStreamProvider$(html$.MidiMessageEvent)))();
   let ListOfMimeType = () => (ListOfMimeType = dart.constFn(core.List$(html$.MimeType)))();
+  let JavaScriptIndexingBehaviorOfMimeType = () => (JavaScriptIndexingBehaviorOfMimeType = dart.constFn(_js_helper.JavaScriptIndexingBehavior$(html$.MimeType)))();
   let ListOfMutationRecord = () => (ListOfMutationRecord = dart.constFn(core.List$(html$.MutationRecord)))();
   let MapOfString$bool = () => (MapOfString$bool = dart.constFn(core.Map$(core.String, core.bool)))();
   let CompleterOfMediaStream = () => (CompleterOfMediaStream = dart.constFn(async.Completer$(html$.MediaStream)))();
   let NodeTobool = () => (NodeTobool = dart.constFn(dart.functionType(core.bool, [html$.Node])))();
   let ComparatorOfNode = () => (ComparatorOfNode = dart.constFn(core.Comparator$(html$.Node)))();
+  let JavaScriptIndexingBehaviorOfPlugin = () => (JavaScriptIndexingBehaviorOfPlugin = dart.constFn(_js_helper.JavaScriptIndexingBehavior$(html$.Plugin)))();
   let ListOfPlugin = () => (ListOfPlugin = dart.constFn(core.List$(html$.Plugin)))();
   let EventStreamProviderOfRtcDtmfToneChangeEvent = () => (EventStreamProviderOfRtcDtmfToneChangeEvent = dart.constFn(html$.EventStreamProvider$(html$.RtcDtmfToneChangeEvent)))();
   let JSArrayOfMapOfString$String = () => (JSArrayOfMapOfString$String = dart.constFn(_interceptors.JSArray$(MapOfString$String())))();
@@ -467,7 +472,9 @@
   let ListOfOptionElement = () => (ListOfOptionElement = dart.constFn(core.List$(html$.OptionElement)))();
   let UnmodifiableListViewOfOptionElement = () => (UnmodifiableListViewOfOptionElement = dart.constFn(collection.UnmodifiableListView$(html$.OptionElement)))();
   let JSArrayOfOptionElement = () => (JSArrayOfOptionElement = dart.constFn(_interceptors.JSArray$(html$.OptionElement)))();
+  let JavaScriptIndexingBehaviorOfSourceBuffer = () => (JavaScriptIndexingBehaviorOfSourceBuffer = dart.constFn(_js_helper.JavaScriptIndexingBehavior$(html$.SourceBuffer)))();
   let ListOfSourceBuffer = () => (ListOfSourceBuffer = dart.constFn(core.List$(html$.SourceBuffer)))();
+  let JavaScriptIndexingBehaviorOfSpeechGrammar = () => (JavaScriptIndexingBehaviorOfSpeechGrammar = dart.constFn(_js_helper.JavaScriptIndexingBehavior$(html$.SpeechGrammar)))();
   let ListOfSpeechGrammar = () => (ListOfSpeechGrammar = dart.constFn(core.List$(html$.SpeechGrammar)))();
   let EventStreamProviderOfSpeechRecognitionError = () => (EventStreamProviderOfSpeechRecognitionError = dart.constFn(html$.EventStreamProvider$(html$.SpeechRecognitionError)))();
   let EventStreamProviderOfSpeechRecognitionEvent = () => (EventStreamProviderOfSpeechRecognitionEvent = dart.constFn(html$.EventStreamProvider$(html$.SpeechRecognitionEvent)))();
@@ -479,8 +486,11 @@
   let _WrappedListOfTableRowElement = () => (_WrappedListOfTableRowElement = dart.constFn(html$._WrappedList$(html$.TableRowElement)))();
   let _WrappedListOfTableCellElement = () => (_WrappedListOfTableCellElement = dart.constFn(html$._WrappedList$(html$.TableCellElement)))();
   let ListOfTextTrackCue = () => (ListOfTextTrackCue = dart.constFn(core.List$(html$.TextTrackCue)))();
+  let JavaScriptIndexingBehaviorOfTextTrackCue = () => (JavaScriptIndexingBehaviorOfTextTrackCue = dart.constFn(_js_helper.JavaScriptIndexingBehavior$(html$.TextTrackCue)))();
   let ListOfTextTrack = () => (ListOfTextTrack = dart.constFn(core.List$(html$.TextTrack)))();
+  let JavaScriptIndexingBehaviorOfTextTrack = () => (JavaScriptIndexingBehaviorOfTextTrack = dart.constFn(_js_helper.JavaScriptIndexingBehavior$(html$.TextTrack)))();
   let EventStreamProviderOfTrackEvent = () => (EventStreamProviderOfTrackEvent = dart.constFn(html$.EventStreamProvider$(html$.TrackEvent)))();
+  let JavaScriptIndexingBehaviorOfTouch = () => (JavaScriptIndexingBehaviorOfTouch = dart.constFn(_js_helper.JavaScriptIndexingBehavior$(html$.Touch)))();
   let ListOfTouch = () => (ListOfTouch = dart.constFn(core.List$(html$.Touch)))();
   let ListOfTrackDefault = () => (ListOfTrackDefault = dart.constFn(core.List$(html$.TrackDefault)))();
   let EventStreamProviderOfCloseEvent = () => (EventStreamProviderOfCloseEvent = dart.constFn(html$.EventStreamProvider$(html$.CloseEvent)))();
@@ -495,7 +505,11 @@
   let _ElementListEventStreamImplOfBeforeUnloadEvent = () => (_ElementListEventStreamImplOfBeforeUnloadEvent = dart.constFn(html$._ElementListEventStreamImpl$(html$.BeforeUnloadEvent)))();
   let ElementListOfElement = () => (ElementListOfElement = dart.constFn(html$.ElementList$(html$.Element)))();
   let ListOfRectangleOfnum = () => (ListOfRectangleOfnum = dart.constFn(core.List$(RectangleOfnum())))();
+  let JavaScriptIndexingBehaviorOfCssRule = () => (JavaScriptIndexingBehaviorOfCssRule = dart.constFn(_js_helper.JavaScriptIndexingBehavior$(html$.CssRule)))();
   let ListOfGamepad = () => (ListOfGamepad = dart.constFn(core.List$(html$.Gamepad)))();
+  let JavaScriptIndexingBehaviorOfGamepad = () => (JavaScriptIndexingBehaviorOfGamepad = dart.constFn(_js_helper.JavaScriptIndexingBehavior$(html$.Gamepad)))();
+  let JavaScriptIndexingBehaviorOfSpeechRecognitionResult = () => (JavaScriptIndexingBehaviorOfSpeechRecognitionResult = dart.constFn(_js_helper.JavaScriptIndexingBehavior$(html$.SpeechRecognitionResult)))();
+  let JavaScriptIndexingBehaviorOfStyleSheet = () => (JavaScriptIndexingBehaviorOfStyleSheet = dart.constFn(_js_helper.JavaScriptIndexingBehavior$(html$.StyleSheet)))();
   let ListOfCssClassSetImpl = () => (ListOfCssClassSetImpl = dart.constFn(core.List$(html_common.CssClassSetImpl)))();
   let LinkedHashSetOfString = () => (LinkedHashSetOfString = dart.constFn(collection.LinkedHashSet$(core.String)))();
   let StringTobool = () => (StringTobool = dart.constFn(dart.functionType(core.bool, [core.String])))();
@@ -11618,7 +11632,12 @@
     constructors: () => ({new: dart.definiteFunctionType(_js_helper.JSName, [core.String])}),
     fields: () => ({name: core.String})
   });
-  _js_helper.JavaScriptIndexingBehavior = class JavaScriptIndexingBehavior extends core.Object {};
+  _js_helper.JavaScriptIndexingBehavior$ = dart.generic(E => {
+    class JavaScriptIndexingBehavior extends core.Object {}
+    dart.addTypeTests(JavaScriptIndexingBehavior);
+    return JavaScriptIndexingBehavior;
+  });
+  _js_helper.JavaScriptIndexingBehavior = JavaScriptIndexingBehavior();
   _js_helper.TypeErrorImplementation = class TypeErrorImplementation extends core.Error {
     new(value, actualType, expectedType) {
       this.message = dart.str`Type '${actualType}' is not a subtype ` + dart.str`of type '${expectedType}'`;
@@ -57543,7 +57562,7 @@
       return this.item.apply(this, args);
     }
   };
-  html$.FileList[dart.implements] = () => [ListOfFile(), _js_helper.JavaScriptIndexingBehavior];
+  html$.FileList[dart.implements] = () => [ListOfFile(), JavaScriptIndexingBehaviorOfFile()];
   dart.setSignature(html$.FileList, {
     constructors: () => ({_: dart.definiteFunctionType(html$.FileList, [])}),
     getters: () => ({
@@ -59621,7 +59640,7 @@
       return this.namedItem.apply(this, args);
     }
   };
-  html$.HtmlCollection[dart.implements] = () => [_js_helper.JavaScriptIndexingBehavior, ListOfNode()];
+  html$.HtmlCollection[dart.implements] = () => [JavaScriptIndexingBehaviorOfNode(), ListOfNode()];
   dart.setSignature(html$.HtmlCollection, {
     constructors: () => ({_: dart.definiteFunctionType(html$.HtmlCollection, [])}),
     getters: () => ({
@@ -64815,7 +64834,7 @@
       return this.namedItem.apply(this, args);
     }
   };
-  html$.MimeTypeArray[dart.implements] = () => [ListOfMimeType(), _js_helper.JavaScriptIndexingBehavior];
+  html$.MimeTypeArray[dart.implements] = () => [ListOfMimeType(), JavaScriptIndexingBehaviorOfMimeType()];
   dart.setSignature(html$.MimeTypeArray, {
     constructors: () => ({_: dart.definiteFunctionType(html$.MimeTypeArray, [])}),
     getters: () => ({
@@ -66047,7 +66066,7 @@
       return this.item.apply(this, args);
     }
   };
-  html$.NodeList[dart.implements] = () => [_js_helper.JavaScriptIndexingBehavior, ListOfNode()];
+  html$.NodeList[dart.implements] = () => [JavaScriptIndexingBehaviorOfNode(), ListOfNode()];
   dart.setSignature(html$.NodeList, {
     constructors: () => ({_: dart.definiteFunctionType(html$.NodeList, [])}),
     getters: () => ({
@@ -67738,7 +67757,7 @@
       return this.refresh.apply(this, args);
     }
   };
-  html$.PluginArray[dart.implements] = () => [_js_helper.JavaScriptIndexingBehavior, ListOfPlugin()];
+  html$.PluginArray[dart.implements] = () => [JavaScriptIndexingBehaviorOfPlugin(), ListOfPlugin()];
   dart.setSignature(html$.PluginArray, {
     constructors: () => ({_: dart.definiteFunctionType(html$.PluginArray, [])}),
     getters: () => ({
@@ -71205,7 +71224,7 @@
       return this.item.apply(this, args);
     }
   };
-  html$.SourceBufferList[dart.implements] = () => [_js_helper.JavaScriptIndexingBehavior, ListOfSourceBuffer()];
+  html$.SourceBufferList[dart.implements] = () => [JavaScriptIndexingBehaviorOfSourceBuffer(), ListOfSourceBuffer()];
   dart.setSignature(html$.SourceBufferList, {
     constructors: () => ({_: dart.definiteFunctionType(html$.SourceBufferList, [])}),
     getters: () => ({
@@ -71456,7 +71475,7 @@
       return this.item.apply(this, args);
     }
   };
-  html$.SpeechGrammarList[dart.implements] = () => [_js_helper.JavaScriptIndexingBehavior, ListOfSpeechGrammar()];
+  html$.SpeechGrammarList[dart.implements] = () => [JavaScriptIndexingBehaviorOfSpeechGrammar(), ListOfSpeechGrammar()];
   dart.setSignature(html$.SpeechGrammarList, {
     constructors: () => ({
       _: dart.definiteFunctionType(html$.SpeechGrammarList, []),
@@ -73666,7 +73685,7 @@
       return this.item.apply(this, args);
     }
   };
-  html$.TextTrackCueList[dart.implements] = () => [ListOfTextTrackCue(), _js_helper.JavaScriptIndexingBehavior];
+  html$.TextTrackCueList[dart.implements] = () => [ListOfTextTrackCue(), JavaScriptIndexingBehaviorOfTextTrackCue()];
   dart.setSignature(html$.TextTrackCueList, {
     constructors: () => ({_: dart.definiteFunctionType(html$.TextTrackCueList, [])}),
     getters: () => ({
@@ -73754,7 +73773,7 @@
       return html$.TextTrackList.changeEvent.forTarget(this);
     }
   };
-  html$.TextTrackList[dart.implements] = () => [ListOfTextTrack(), _js_helper.JavaScriptIndexingBehavior];
+  html$.TextTrackList[dart.implements] = () => [ListOfTextTrack(), JavaScriptIndexingBehaviorOfTextTrack()];
   dart.setSignature(html$.TextTrackList, {
     constructors: () => ({_: dart.definiteFunctionType(html$.TextTrackList, [])}),
     getters: () => ({
@@ -74114,7 +74133,7 @@
       return this.item.apply(this, args);
     }
   };
-  html$.TouchList[dart.implements] = () => [_js_helper.JavaScriptIndexingBehavior, ListOfTouch()];
+  html$.TouchList[dart.implements] = () => [JavaScriptIndexingBehaviorOfTouch(), ListOfTouch()];
   dart.setSignature(html$.TouchList, {
     constructors: () => ({
       new: dart.definiteFunctionType(html$.TouchList, []),
@@ -78078,7 +78097,7 @@
       return this.item.apply(this, args);
     }
   };
-  html$._CssRuleList[dart.implements] = () => [_js_helper.JavaScriptIndexingBehavior, ListOfCssRule()];
+  html$._CssRuleList[dart.implements] = () => [JavaScriptIndexingBehaviorOfCssRule(), ListOfCssRule()];
   dart.setSignature(html$._CssRuleList, {
     constructors: () => ({_: dart.definiteFunctionType(html$._CssRuleList, [])}),
     getters: () => ({
@@ -78331,7 +78350,7 @@
       return this.item.apply(this, args);
     }
   };
-  html$._GamepadList[dart.implements] = () => [ListOfGamepad(), _js_helper.JavaScriptIndexingBehavior];
+  html$._GamepadList[dart.implements] = () => [ListOfGamepad(), JavaScriptIndexingBehaviorOfGamepad()];
   dart.setSignature(html$._GamepadList, {
     constructors: () => ({_: dart.definiteFunctionType(html$._GamepadList, [])}),
     getters: () => ({
@@ -78540,7 +78559,7 @@
       return this.setNamedItemNS.apply(this, args);
     }
   };
-  html$._NamedNodeMap[dart.implements] = () => [_js_helper.JavaScriptIndexingBehavior, ListOfNode()];
+  html$._NamedNodeMap[dart.implements] = () => [JavaScriptIndexingBehaviorOfNode(), ListOfNode()];
   dart.setSignature(html$._NamedNodeMap, {
     constructors: () => ({_: dart.definiteFunctionType(html$._NamedNodeMap, [])}),
     getters: () => ({
@@ -78759,7 +78778,7 @@
       return this.item.apply(this, args);
     }
   };
-  html$._SpeechRecognitionResultList[dart.implements] = () => [_js_helper.JavaScriptIndexingBehavior, ListOfSpeechRecognitionResult()];
+  html$._SpeechRecognitionResultList[dart.implements] = () => [JavaScriptIndexingBehaviorOfSpeechRecognitionResult(), ListOfSpeechRecognitionResult()];
   dart.setSignature(html$._SpeechRecognitionResultList, {
     constructors: () => ({_: dart.definiteFunctionType(html$._SpeechRecognitionResultList, [])}),
     getters: () => ({
@@ -78837,7 +78856,7 @@
       return this.item.apply(this, args);
     }
   };
-  html$._StyleSheetList[dart.implements] = () => [ListOfStyleSheet(), _js_helper.JavaScriptIndexingBehavior];
+  html$._StyleSheetList[dart.implements] = () => [ListOfStyleSheet(), JavaScriptIndexingBehaviorOfStyleSheet()];
   dart.setSignature(html$._StyleSheetList, {
     constructors: () => ({_: dart.definiteFunctionType(html$._StyleSheetList, [])}),
     getters: () => ({

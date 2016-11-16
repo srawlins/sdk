@@ -5063,7 +5063,6 @@ class SvgElement extends Element implements GlobalEventHandlers {
   @DocsEditable()
   @Experimental() // untriaged
   static const EventStreamProvider<Event> waitingEvent = const EventStreamProvider<Event>('waiting');
-
   /**
    * Constructor instantiated by the DOM when a custom element has been created.
    *

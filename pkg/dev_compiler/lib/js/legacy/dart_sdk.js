@@ -409,7 +409,6 @@ dart_library.library('dart_sdk', null, /* Imports */[
   let EventStreamProviderOfTouchEvent = () => (EventStreamProviderOfTouchEvent = dart.constFn(html$.EventStreamProvider$(html$.TouchEvent)))();
   let _CustomEventStreamProviderOfWheelEvent = () => (_CustomEventStreamProviderOfWheelEvent = dart.constFn(html$._CustomEventStreamProvider$(html$.WheelEvent)))();
   let _CustomEventStreamProviderOfTransitionEvent = () => (_CustomEventStreamProviderOfTransitionEvent = dart.constFn(html$._CustomEventStreamProvider$(html$.TransitionEvent)))();
-  let ListOfEntry = () => (ListOfEntry = dart.constFn(core.List$(html$.Entry)))();
   let EventStreamProviderOfProgressEvent = () => (EventStreamProviderOfProgressEvent = dart.constFn(html$.EventStreamProvider$(html$.ProgressEvent)))();
   let EventStreamProviderOfMediaKeyEvent = () => (EventStreamProviderOfMediaKeyEvent = dart.constFn(html$.EventStreamProvider$(html$.MediaKeyEvent)))();
   let EventStreamProviderOfMessageEvent = () => (EventStreamProviderOfMessageEvent = dart.constFn(html$.EventStreamProvider$(html$.MessageEvent)))();
@@ -426,6 +425,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
   let ListOfFile = () => (ListOfFile = dart.constFn(core.List$(html$.File)))();
   let CompleterOfString = () => (CompleterOfString = dart.constFn(async.Completer$(core.String)))();
   let CompleterOfMetadata = () => (CompleterOfMetadata = dart.constFn(async.Completer$(html$.Metadata)))();
+  let ListOfEntry = () => (ListOfEntry = dart.constFn(core.List$(html$.Entry)))();
   let CompleterOfListOfEntry = () => (CompleterOfListOfEntry = dart.constFn(async.Completer$(ListOfEntry())))();
   let ListOfStyleSheet = () => (ListOfStyleSheet = dart.constFn(core.List$(html$.StyleSheet)))();
   let EventStreamProviderOfSecurityPolicyViolationEvent = () => (EventStreamProviderOfSecurityPolicyViolationEvent = dart.constFn(html$.EventStreamProvider$(html$.SecurityPolicyViolationEvent)))();
@@ -490,6 +490,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
   let EventStreamProviderOfDeviceOrientationEvent = () => (EventStreamProviderOfDeviceOrientationEvent = dart.constFn(html$.EventStreamProvider$(html$.DeviceOrientationEvent)))();
   let EventStreamProviderOfAnimationEvent = () => (EventStreamProviderOfAnimationEvent = dart.constFn(html$.EventStreamProvider$(html$.AnimationEvent)))();
   let EventStreamProviderOfBeforeUnloadEvent = () => (EventStreamProviderOfBeforeUnloadEvent = dart.constFn(html$.EventStreamProvider$(html$.BeforeUnloadEvent)))();
+  let _EventStreamOfBeforeUnloadEvent = () => (_EventStreamOfBeforeUnloadEvent = dart.constFn(html$._EventStream$(html$.BeforeUnloadEvent)))();
   let StreamControllerOfBeforeUnloadEvent = () => (StreamControllerOfBeforeUnloadEvent = dart.constFn(async.StreamController$(html$.BeforeUnloadEvent)))();
   let _ElementEventStreamImplOfBeforeUnloadEvent = () => (_ElementEventStreamImplOfBeforeUnloadEvent = dart.constFn(html$._ElementEventStreamImpl$(html$.BeforeUnloadEvent)))();
   let _ElementListEventStreamImplOfBeforeUnloadEvent = () => (_ElementListEventStreamImplOfBeforeUnloadEvent = dart.constFn(html$._ElementListEventStreamImpl$(html$.BeforeUnloadEvent)))();
@@ -728,6 +729,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
   let RtcStatsResponseTovoid = () => (RtcStatsResponseTovoid = dart.constFn(dart.definiteFunctionType(dart.void, [html$.RtcStatsResponse])))();
   let OptionElementTobool = () => (OptionElementTobool = dart.constFn(dart.definiteFunctionType(core.bool, [html$.OptionElement])))();
   let numTovoid = () => (numTovoid = dart.constFn(dart.definiteFunctionType(dart.void, [core.num])))();
+  let BeforeUnloadEventTovoid = () => (BeforeUnloadEventTovoid = dart.constFn(dart.definiteFunctionType(dart.void, [html$.BeforeUnloadEvent])))();
   let ElementTovoid$ = () => (ElementTovoid$ = dart.constFn(dart.definiteFunctionType(dart.void, [html$.Element])))();
   let ElementToCssClassSet = () => (ElementToCssClassSet = dart.constFn(dart.definiteFunctionType(html$.CssClassSet, [html$.Element])))();
   let CssClassSetImplTovoid = () => (CssClassSetImplTovoid = dart.constFn(dart.definiteFunctionType(dart.void, [html_common.CssClassSetImpl])))();
@@ -41793,9 +41795,6 @@ dart_library.library('dart_sdk', null, /* Imports */[
     })
   });
   dart.registerExtension(dart.global.HTMLElement, html$.HtmlElement);
-  html$._EntryArray = class _EntryArray extends core.Object {};
-  html$._EntryArray[dart.implements] = () => [ListOfEntry()];
-  dart.registerExtension(dart.global.EntryArray, html$._EntryArray);
   html$.spawnDomUri = function(uri, args, message) {
     dart.throw(new core.UnimplementedError());
   };
@@ -44010,7 +44009,6 @@ dart_library.library('dart_sdk', null, /* Imports */[
     })
   });
   dart.registerExtension(dart.global.HTMLButtonElement, html$.ButtonElement);
-  const _createTextNode = Symbol('_createTextNode');
   dart.defineExtensionNames([
     'appendData',
     'deleteData',
@@ -44092,7 +44090,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
   ]);
   html$.Text = class Text extends html$.CharacterData {
     static new(data) {
-      return html$.document[_createTextNode](data);
+      return html$.document.createTextNode(data);
     }
     static _() {
       dart.throw(new core.UnsupportedError("Not supported"));
@@ -45148,10 +45146,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
   html$.Comment = class Comment extends html$.CharacterData {
     static new(data) {
       if (data === void 0) data = null;
-      if (data != null) {
-        return html$.document.createComment(data);
-      }
-      return html$.document.createComment("");
+      return html$.document.createComment(data == null ? "" : data);
     }
     static _() {
       dart.throw(new core.UnsupportedError("Not supported"));
@@ -46420,6 +46415,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
   const _getPropertyValue = Symbol('_getPropertyValue');
   const _setPropertyHelper = Symbol('_setPropertyHelper');
   const _browserPropertyName = Symbol('_browserPropertyName');
+  let const$53;
   const _background = Symbol('_background');
   const _backgroundAttachment = Symbol('_backgroundAttachment');
   const _backgroundColor = Symbol('_backgroundColor');
@@ -50866,7 +50862,8 @@ dart_library.library('dart_sdk', null, /* Imports */[
     }
     static _camelCase(hyphenated) {
       let replacedMs = hyphenated.replace(/^-ms-/, "ms-");
-      return replacedMs.replace(/-([\da-z])/ig, (_, letter) => letter.toUpperCase());
+      let fToUpper = const$53 || (const$53 = dart.const(new _foreign_helper.JS_CONST('function(_, letter) { return letter.toUpperCase(); }')));
+      return replacedMs.replace(/-([\da-z])/ig, fToUpper);
     }
     [_setPropertyHelper](propertyName, value, priority) {
       if (priority === void 0) priority = null;
@@ -54038,6 +54035,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
   const _caretRangeFromPoint = Symbol('_caretRangeFromPoint');
   const _createElement = Symbol('_createElement');
   const _createElementNS = Symbol('_createElementNS');
+  const _createTextNode = Symbol('_createTextNode');
   const _createTouch_1 = Symbol('_createTouch_1');
   const _createTouch = Symbol('_createTouch');
   const _createTouchList = Symbol('_createTouchList');
@@ -56171,14 +56169,38 @@ dart_library.library('dart_sdk', null, /* Imports */[
     })
   });
   dart.registerExtension(dart.global.DOMStringList, html$.DomStringList);
+  const __delete__ = Symbol('__delete__');
+  const __setter__ = Symbol('__setter__');
+  dart.defineExtensionNames([
+    'item'
+  ]);
   html$.DomStringMap = class DomStringMap extends _interceptors.Interceptor {
     static _() {
       dart.throw(new core.UnsupportedError("Not supported"));
     }
+    [__delete__](...args) {
+      return this.__delete__.apply(this, args);
+    }
+    [__getter__](...args) {
+      return this.__getter__.apply(this, args);
+    }
+    [__setter__](...args) {
+      return this.__setter__.apply(this, args);
+    }
+    [dartx.item](...args) {
+      return this.item.apply(this, args);
+    }
   };
   dart.setSignature(html$.DomStringMap, {
-    constructors: () => ({_: dart.definiteFunctionType(html$.DomStringMap, [])})
+    constructors: () => ({_: dart.definiteFunctionType(html$.DomStringMap, [])}),
+    methods: () => ({
+      [__delete__]: dart.definiteFunctionType(dart.void, [dart.dynamic]),
+      [__getter__]: dart.definiteFunctionType(core.String, [core.int]),
+      [__setter__]: dart.definiteFunctionType(dart.void, [dart.dynamic, core.String]),
+      [dartx.item]: dart.definiteFunctionType(core.String, [core.String])
+    })
   });
+  dart.registerExtension(dart.global.DOMStringMap, html$.DomStringMap);
   html$.EffectModel = class EffectModel extends _interceptors.Interceptor {
     static _() {
       dart.throw(new core.UnsupportedError("Not supported"));
@@ -56817,7 +56839,6 @@ dart_library.library('dart_sdk', null, /* Imports */[
       return dart.const(new html$.ScrollAlignment._internal('BOTTOM'));
     }
   });
-  const __setter__ = Symbol('__setter__');
   dart.defineExtensionNames([
     'height',
     'name',
@@ -57523,7 +57544,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
       return this.item.apply(this, args);
     }
   };
-  html$.FileList[dart.implements] = () => [_js_helper.JavaScriptIndexingBehavior, ListOfFile()];
+  html$.FileList[dart.implements] = () => [ListOfFile(), _js_helper.JavaScriptIndexingBehavior];
   dart.setSignature(html$.FileList, {
     constructors: () => ({_: dart.definiteFunctionType(html$.FileList, [])}),
     getters: () => ({
@@ -64795,7 +64816,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
       return this.namedItem.apply(this, args);
     }
   };
-  html$.MimeTypeArray[dart.implements] = () => [_js_helper.JavaScriptIndexingBehavior, ListOfMimeType()];
+  html$.MimeTypeArray[dart.implements] = () => [ListOfMimeType(), _js_helper.JavaScriptIndexingBehavior];
   dart.setSignature(html$.MimeTypeArray, {
     constructors: () => ({_: dart.definiteFunctionType(html$.MimeTypeArray, [])}),
     getters: () => ({
@@ -64863,8 +64884,6 @@ dart_library.library('dart_sdk', null, /* Imports */[
   const _pageY = Symbol('_pageY');
   const _screenX = Symbol('_screenX');
   const _screenY = Symbol('_screenY');
-  const _webkitMovementX = Symbol('_webkitMovementX');
-  const _webkitMovementY = Symbol('_webkitMovementY');
   const _initMouseEvent_1 = Symbol('_initMouseEvent_1');
   dart.defineExtensionNames([
     'relatedTarget',
@@ -64988,12 +65007,6 @@ dart_library.library('dart_sdk', null, /* Imports */[
     get [dartx.toElement]() {
       return this.toElement;
     }
-    get [_webkitMovementX]() {
-      return this.webkitMovementX;
-    }
-    get [_webkitMovementY]() {
-      return this.webkitMovementY;
-    }
     [_initMouseEvent](type, bubbles, cancelable, view, detail, screenX, screenY, clientX, clientY, ctrlKey, altKey, shiftKey, metaKey, button, relatedTarget) {
       let relatedTarget_1 = html$._convertDartToNative_EventTarget(relatedTarget);
       this[_initMouseEvent_1](type, bubbles, cancelable, view, detail, screenX, screenY, clientX, clientY, ctrlKey, altKey, shiftKey, metaKey, button, relatedTarget_1);
@@ -65006,7 +65019,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
       return new (PointOfnum())(this[_clientX], this[_clientY]);
     }
     get [dartx.movement]() {
-      return new (PointOfnum())(this[_webkitMovementX], this[_webkitMovementY]);
+      return new (PointOfnum())(this[_movementX], this[_movementY]);
     }
     get [dartx.offset]() {
       if (!!this.offsetX) {
@@ -65058,9 +65071,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
       [_screenX]: core.int,
       [_screenY]: core.int,
       [dartx.shiftKey]: core.bool,
-      [dartx.toElement]: html$.Node,
-      [_webkitMovementX]: core.int,
-      [_webkitMovementY]: core.int
+      [dartx.toElement]: html$.Node
     }),
     getters: () => ({
       [dartx.relatedTarget]: dart.definiteFunctionType(html$.EventTarget, []),
@@ -68814,22 +68825,6 @@ dart_library.library('dart_sdk', null, /* Imports */[
   dart.registerExtension(dart.global.RelatedEvent, html$.RelatedEvent);
   html$.RequestAnimationFrameCallback = dart.typedef('RequestAnimationFrameCallback', () => dart.functionType(dart.void, [core.num]));
   dart.defineExtensionNames([
-    'url'
-  ]);
-  html$.ResourceProgressEvent = class ResourceProgressEvent extends html$.ProgressEvent {
-    static _() {
-      dart.throw(new core.UnsupportedError("Not supported"));
-    }
-    get [dartx.url]() {
-      return this.url;
-    }
-  };
-  dart.setSignature(html$.ResourceProgressEvent, {
-    constructors: () => ({_: dart.definiteFunctionType(html$.ResourceProgressEvent, [])}),
-    fields: () => ({[dartx.url]: core.String})
-  });
-  dart.registerExtension(dart.global.ResourceProgressEvent, html$.ResourceProgressEvent);
-  dart.defineExtensionNames([
     'close',
     'send',
     'sendBlob',
@@ -69494,6 +69489,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
     }
   });
   dart.registerExtension(dart.global.RTCPeerConnection, html$.RtcPeerConnection);
+  dart.registerExtension(dart.global.webkitRTCPeerConnection, html$.RtcPeerConnection);
   dart.registerExtension(dart.global.mozRTCPeerConnection, html$.RtcPeerConnection);
   dart.defineExtensionNames([
     'sdp',
@@ -72163,7 +72159,6 @@ dart_library.library('dart_sdk', null, /* Imports */[
   const _removeItem = Symbol('_removeItem');
   const _key = Symbol('_key');
   const _length$2 = Symbol('_length');
-  const __delete__ = Symbol('__delete__');
   dart.defineExtensionNames([
     'addAll',
     'containsValue',
@@ -73760,7 +73755,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
       return html$.TextTrackList.changeEvent.forTarget(this);
     }
   };
-  html$.TextTrackList[dart.implements] = () => [_js_helper.JavaScriptIndexingBehavior, ListOfTextTrack()];
+  html$.TextTrackList[dart.implements] = () => [ListOfTextTrack(), _js_helper.JavaScriptIndexingBehavior];
   dart.setSignature(html$.TextTrackList, {
     constructors: () => ({_: dart.definiteFunctionType(html$.TextTrackList, [])}),
     getters: () => ({
@@ -77190,12 +77185,12 @@ dart_library.library('dart_sdk', null, /* Imports */[
     }
     forTarget(e, opts) {
       let useCapture = opts && 'useCapture' in opts ? opts.useCapture : false;
-      let stream = new (_EventStreamOfEvent())(e, this[_eventType], useCapture);
+      let stream = new (_EventStreamOfBeforeUnloadEvent())(e, this[_eventType], useCapture);
       let controller = StreamControllerOfBeforeUnloadEvent().new({sync: true});
       stream.listen(dart.fn(event => {
         let wrapped = new html$._BeforeUnloadEvent(event);
         controller.add(wrapped);
-      }, EventTovoid$()));
+      }, BeforeUnloadEventTovoid()));
       return controller.stream;
     }
     getEventType(target) {
@@ -78337,7 +78332,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
       return this.item.apply(this, args);
     }
   };
-  html$._GamepadList[dart.implements] = () => [_js_helper.JavaScriptIndexingBehavior, ListOfGamepad()];
+  html$._GamepadList[dart.implements] = () => [ListOfGamepad(), _js_helper.JavaScriptIndexingBehavior];
   dart.setSignature(html$._GamepadList, {
     constructors: () => ({_: dart.definiteFunctionType(html$._GamepadList, [])}),
     getters: () => ({
@@ -78650,6 +78645,15 @@ dart_library.library('dart_sdk', null, /* Imports */[
     names: ['_create_1', '_create_2']
   });
   dart.registerExtension(dart.global.Request, html$._Request);
+  html$._ResourceProgressEvent = class _ResourceProgressEvent extends html$.ProgressEvent {
+    static _() {
+      dart.throw(new core.UnsupportedError("Not supported"));
+    }
+  };
+  dart.setSignature(html$._ResourceProgressEvent, {
+    constructors: () => ({_: dart.definiteFunctionType(html$._ResourceProgressEvent, [])})
+  });
+  dart.registerExtension(dart.global.ResourceProgressEvent, html$._ResourceProgressEvent);
   html$._Response = class _Response extends html$.Body {
     static _() {
       dart.throw(new core.UnsupportedError("Not supported"));
@@ -78834,7 +78838,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
       return this.item.apply(this, args);
     }
   };
-  html$._StyleSheetList[dart.implements] = () => [_js_helper.JavaScriptIndexingBehavior, ListOfStyleSheet()];
+  html$._StyleSheetList[dart.implements] = () => [ListOfStyleSheet(), _js_helper.JavaScriptIndexingBehavior];
   dart.setSignature(html$._StyleSheetList, {
     constructors: () => ({_: dart.definiteFunctionType(html$._StyleSheetList, [])}),
     getters: () => ({
@@ -80408,10 +80412,12 @@ dart_library.library('dart_sdk', null, /* Imports */[
           this[_target$][dartx.removeEventListener](this[_eventType], this[_onData$], this[_useCapture]);
         }
       }
-      asFuture(futureValue) {
-        if (futureValue === void 0) futureValue = null;
-        let completer = async.Completer.new();
-        return completer.future;
+      asFuture(E) {
+        return futureValue => {
+          if (futureValue === void 0) futureValue = null;
+          let completer = async.Completer$(E).new();
+          return completer.future;
+        };
       }
     }
     dart.setSignature(_EventStreamSubscription, {
@@ -80436,7 +80442,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
         resume: dart.definiteFunctionType(dart.void, []),
         [_tryResume]: dart.definiteFunctionType(dart.void, []),
         [_unlisten]: dart.definiteFunctionType(dart.void, []),
-        asFuture: dart.definiteFunctionType(async.Future, [], [dart.dynamic])
+        asFuture: dart.definiteFunctionType(E => [async.Future$(E), [], [E]])
       })
     });
     return _EventStreamSubscription;
@@ -82109,7 +82115,6 @@ dart_library.library('dart_sdk', null, /* Imports */[
       allowsAttribute: dart.definiteFunctionType(core.bool, [html$.Element, core.String, core.String])
     })
   });
-  let const$53;
   let const$54;
   let const$55;
   let const$56;
@@ -82119,15 +82124,16 @@ dart_library.library('dart_sdk', null, /* Imports */[
   let const$60;
   let const$61;
   let const$62;
+  let const$63;
   html$._SimpleNodeValidator = class _SimpleNodeValidator extends core.Object {
     static allowNavigation(uriPolicy) {
-      return new html$._SimpleNodeValidator(uriPolicy, {allowedElements: const$53 || (const$53 = dart.constList(['A', 'FORM'], core.String)), allowedAttributes: const$54 || (const$54 = dart.constList(['A::accesskey', 'A::coords', 'A::hreflang', 'A::name', 'A::shape', 'A::tabindex', 'A::target', 'A::type', 'FORM::accept', 'FORM::autocomplete', 'FORM::enctype', 'FORM::method', 'FORM::name', 'FORM::novalidate', 'FORM::target'], core.String)), allowedUriAttributes: const$55 || (const$55 = dart.constList(['A::href', 'FORM::action'], core.String))});
+      return new html$._SimpleNodeValidator(uriPolicy, {allowedElements: const$54 || (const$54 = dart.constList(['A', 'FORM'], core.String)), allowedAttributes: const$55 || (const$55 = dart.constList(['A::accesskey', 'A::coords', 'A::hreflang', 'A::name', 'A::shape', 'A::tabindex', 'A::target', 'A::type', 'FORM::accept', 'FORM::autocomplete', 'FORM::enctype', 'FORM::method', 'FORM::name', 'FORM::novalidate', 'FORM::target'], core.String)), allowedUriAttributes: const$56 || (const$56 = dart.constList(['A::href', 'FORM::action'], core.String))});
     }
     static allowImages(uriPolicy) {
-      return new html$._SimpleNodeValidator(uriPolicy, {allowedElements: const$56 || (const$56 = dart.constList(['IMG'], core.String)), allowedAttributes: const$57 || (const$57 = dart.constList(['IMG::align', 'IMG::alt', 'IMG::border', 'IMG::height', 'IMG::hspace', 'IMG::ismap', 'IMG::name', 'IMG::usemap', 'IMG::vspace', 'IMG::width'], core.String)), allowedUriAttributes: const$58 || (const$58 = dart.constList(['IMG::src'], core.String))});
+      return new html$._SimpleNodeValidator(uriPolicy, {allowedElements: const$57 || (const$57 = dart.constList(['IMG'], core.String)), allowedAttributes: const$58 || (const$58 = dart.constList(['IMG::align', 'IMG::alt', 'IMG::border', 'IMG::height', 'IMG::hspace', 'IMG::ismap', 'IMG::name', 'IMG::usemap', 'IMG::vspace', 'IMG::width'], core.String)), allowedUriAttributes: const$59 || (const$59 = dart.constList(['IMG::src'], core.String))});
     }
     static allowTextElements() {
-      return new html$._SimpleNodeValidator(null, {allowedElements: const$59 || (const$59 = dart.constList(['B', 'BLOCKQUOTE', 'BR', 'EM', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'HR', 'I', 'LI', 'OL', 'P', 'SPAN', 'UL'], core.String))});
+      return new html$._SimpleNodeValidator(null, {allowedElements: const$60 || (const$60 = dart.constList(['B', 'BLOCKQUOTE', 'BR', 'EM', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'HR', 'I', 'LI', 'OL', 'P', 'SPAN', 'UL'], core.String))});
     }
     new(uriPolicy, opts) {
       let allowedElements = opts && 'allowedElements' in opts ? opts.allowedElements : null;
@@ -82137,9 +82143,9 @@ dart_library.library('dart_sdk', null, /* Imports */[
       this.allowedAttributes = SetOfString().new();
       this.allowedUriAttributes = SetOfString().new();
       this.uriPolicy = uriPolicy;
-      this.allowedElements.addAll((allowedElements != null ? allowedElements : const$60 || (const$60 = dart.constList([], core.String))));
-      allowedAttributes = allowedAttributes != null ? allowedAttributes : const$61 || (const$61 = dart.constList([], core.String));
-      allowedUriAttributes = allowedUriAttributes != null ? allowedUriAttributes : const$62 || (const$62 = dart.constList([], core.String));
+      this.allowedElements.addAll((allowedElements != null ? allowedElements : const$61 || (const$61 = dart.constList([], core.String))));
+      allowedAttributes = allowedAttributes != null ? allowedAttributes : const$62 || (const$62 = dart.constList([], core.String));
+      allowedUriAttributes = allowedUriAttributes != null ? allowedUriAttributes : const$63 || (const$63 = dart.constList([], core.String));
       let legalAttributes = allowedAttributes[dartx.where](dart.fn(x => !dart.test(html$._Html5NodeValidator._uriAttributes[dartx.contains](x)), StringTobool$()));
       let extraUriAttributes = allowedAttributes[dartx.where](dart.fn(x => html$._Html5NodeValidator._uriAttributes[dartx.contains](x), StringTobool$()));
       this.allowedAttributes.addAll(legalAttributes);
@@ -82674,7 +82680,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
         this[_nativeType] = dart.wrapType(html$.HtmlElement);
       } else {
         let element = document[dartx.createElement](extendsTag);
-        if (!(element instanceof window[baseClassName])) {
+        if (!(element instanceof window[baseClassName]) && !(extendsTag == 'template' && element instanceof window.HTMLUnknownElement)) {
           dart.throw(new core.UnsupportedError('extendsTag does not match base native class'));
         }
         this[_nativeType] = dart.runtimeType(element);
@@ -82890,7 +82896,8 @@ dart_library.library('dart_sdk', null, /* Imports */[
     return callback => {
       if (dart.equals(async.Zone.current, async.Zone.ROOT)) return callback;
       if (callback == null) return null;
-      return async.Zone.current.bindUnaryCallback(R, A)(callback, {runGuarded: true});
+      let wrapped = async.Zone.current.bindUnaryCallback(R, A)(callback, {runGuarded: true});
+      return wrapped;
     };
   };
   dart.fn(html$._wrapZone, _wrapZoneCallbackOfA$RTo_wrapZoneCallbackOfA$R());
@@ -82898,7 +82905,8 @@ dart_library.library('dart_sdk', null, /* Imports */[
     return callback => {
       if (dart.equals(async.Zone.current, async.Zone.ROOT)) return callback;
       if (callback == null) return null;
-      return async.Zone.current.bindBinaryCallback(R, A, B)(callback, {runGuarded: true});
+      let wrapped = async.Zone.current.bindBinaryCallback(R, A, B)(callback, {runGuarded: true});
+      return wrapped;
     };
   };
   dart.fn(html$._wrapBinaryZone, _wrapZoneBinaryCallbackOfA$B$RTo_wrapZoneBinaryCallbackOfA$B$R());
@@ -83022,10 +83030,18 @@ dart_library.library('dart_sdk', null, /* Imports */[
       const walk = (function(node, parent) {
         this.sanitizeNode(node, parent);
         let child = node[dartx.lastChild];
-        while (child != null) {
-          let nextChild = child[dartx.previousNode];
-          walk(child, node);
-          child = nextChild;
+        while (null != child) {
+          let nextChild = null;
+          try {
+            nextChild = child[dartx.previousNode];
+          } catch (e) {
+            this[_removeNode](child, node);
+            child = null;
+            nextChild = node[dartx.lastChild];
+          }
+
+          if (child != null) walk(child, node);
+          child = html$.Node._check(nextChild);
         }
       }).bind(this);
       dart.fn(walk, NodeAndNodeTovoid());
@@ -91068,11 +91084,11 @@ dart_library.library('dart_sdk', null, /* Imports */[
     [dartx.connectNode](destination, output, input) {
       if (output === void 0) output = 0;
       if (input === void 0) input = 0;
-      return this[_connect](destination, output, input);
+      this[_connect](destination, output, input);
     }
     [dartx.connectParam](destination, output) {
       if (output === void 0) output = 0;
-      return this[_connect](destination, output);
+      this[_connect](destination, output);
     }
   };
   dart.setSignature(web_audio.AudioNode, {
@@ -91086,8 +91102,8 @@ dart_library.library('dart_sdk', null, /* Imports */[
       [dartx.numberOfOutputs]: core.int
     }),
     methods: () => ({
-      [_connect]: dart.definiteFunctionType(dart.void, [dart.dynamic, core.int], [core.int]),
-      [dartx.disconnect]: dart.definiteFunctionType(dart.void, [core.int]),
+      [_connect]: dart.definiteFunctionType(dart.void, [dart.dynamic], [core.int, core.int]),
+      [dartx.disconnect]: dart.definiteFunctionType(dart.void, [], [dart.dynamic, core.int, core.int]),
       [dartx.connectNode]: dart.definiteFunctionType(dart.void, [web_audio.AudioNode], [core.int, core.int]),
       [dartx.connectParam]: dart.definiteFunctionType(dart.void, [web_audio.AudioParam], [core.int])
     })
@@ -91167,6 +91183,8 @@ dart_library.library('dart_sdk', null, /* Imports */[
   dart.registerExtension(dart.global.AnalyserNode, web_audio.AnalyserNode);
   dart.registerExtension(dart.global.RealtimeAnalyserNode, web_audio.AnalyserNode);
   dart.defineExtensionNames([
+    'copyFromChannel',
+    'copyToChannel',
     'getChannelData',
     'duration',
     'length',
@@ -91189,6 +91207,12 @@ dart_library.library('dart_sdk', null, /* Imports */[
     get [dartx.sampleRate]() {
       return this.sampleRate;
     }
+    [dartx.copyFromChannel](...args) {
+      return this.copyFromChannel.apply(this, args);
+    }
+    [dartx.copyToChannel](...args) {
+      return this.copyToChannel.apply(this, args);
+    }
     [dartx.getChannelData](...args) {
       return this.getChannelData.apply(this, args);
     }
@@ -91201,7 +91225,11 @@ dart_library.library('dart_sdk', null, /* Imports */[
       [dartx.numberOfChannels]: core.int,
       [dartx.sampleRate]: core.double
     }),
-    methods: () => ({[dartx.getChannelData]: dart.definiteFunctionType(typed_data.Float32List, [core.int])})
+    methods: () => ({
+      [dartx.copyFromChannel]: dart.definiteFunctionType(dart.void, [typed_data.Float32List, core.int], [core.int]),
+      [dartx.copyToChannel]: dart.definiteFunctionType(dart.void, [typed_data.Float32List, core.int], [core.int]),
+      [dartx.getChannelData]: dart.definiteFunctionType(typed_data.Float32List, [core.int])
+    })
   });
   dart.registerExtension(dart.global.AudioBuffer, web_audio.AudioBuffer);
   web_audio.AudioBufferCallback = dart.typedef('AudioBufferCallback', () => dart.functionType(dart.void, [web_audio.AudioBuffer]));
@@ -91219,6 +91247,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
     'stop',
     'onEnded',
     'buffer',
+    'detune',
     'loop',
     'loopEnd',
     'loopStart',
@@ -91262,6 +91291,9 @@ dart_library.library('dart_sdk', null, /* Imports */[
     set [dartx.buffer](value) {
       this.buffer = value;
     }
+    get [dartx.detune]() {
+      return this.detune;
+    }
     get [dartx.loop]() {
       return this.loop;
     }
@@ -91291,6 +91323,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
     constructors: () => ({_: dart.definiteFunctionType(web_audio.AudioBufferSourceNode, [])}),
     fields: () => ({
       [dartx.buffer]: web_audio.AudioBuffer,
+      [dartx.detune]: web_audio.AudioParam,
       [dartx.loop]: core.bool,
       [dartx.loopEnd]: core.num,
       [dartx.loopStart]: core.num,
@@ -91307,6 +91340,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
   dart.registerExtension(dart.global.AudioBufferSourceNode, web_audio.AudioBufferSourceNode);
   const _decodeAudioData = Symbol('_decodeAudioData');
   dart.defineExtensionNames([
+    'close',
     'createAnalyser',
     'createBiquadFilter',
     'createBuffer',
@@ -91322,16 +91356,18 @@ dart_library.library('dart_sdk', null, /* Imports */[
     'createOscillator',
     'createPanner',
     'createPeriodicWave',
+    'createStereoPanner',
     'createWaveShaper',
-    'startRendering',
-    'onComplete',
+    'resume',
+    'suspend',
     'createGain',
     'createScriptProcessor',
     'decodeAudioData',
     'currentTime',
     'destination',
     'listener',
-    'sampleRate'
+    'sampleRate',
+    'state'
   ]);
   web_audio.AudioContext = class AudioContext extends html$.EventTarget {
     static _() {
@@ -91351,6 +91387,12 @@ dart_library.library('dart_sdk', null, /* Imports */[
     }
     get [dartx.sampleRate]() {
       return this.sampleRate;
+    }
+    get [dartx.state]() {
+      return this.state;
+    }
+    [dartx.close](...args) {
+      return this.close.apply(this, args);
     }
     [dartx.createAnalyser](...args) {
       return this.createAnalyser.apply(this, args);
@@ -91397,17 +91439,20 @@ dart_library.library('dart_sdk', null, /* Imports */[
     [dartx.createPeriodicWave](...args) {
       return this.createPeriodicWave.apply(this, args);
     }
+    [dartx.createStereoPanner](...args) {
+      return this.createStereoPanner.apply(this, args);
+    }
     [dartx.createWaveShaper](...args) {
       return this.createWaveShaper.apply(this, args);
     }
     [_decodeAudioData](...args) {
       return this.decodeAudioData.apply(this, args);
     }
-    [dartx.startRendering](...args) {
-      return this.startRendering.apply(this, args);
+    [dartx.resume](...args) {
+      return this.resume.apply(this, args);
     }
-    get [dartx.onComplete]() {
-      return web_audio.AudioContext.completeEvent.forTarget(this);
+    [dartx.suspend](...args) {
+      return this.suspend.apply(this, args);
     }
     static new() {
       return new (window.AudioContext || window.webkitAudioContext)();
@@ -91454,10 +91499,11 @@ dart_library.library('dart_sdk', null, /* Imports */[
       [dartx.currentTime]: core.double,
       [dartx.destination]: web_audio.AudioDestinationNode,
       [dartx.listener]: web_audio.AudioListener,
-      [dartx.sampleRate]: core.double
+      [dartx.sampleRate]: core.double,
+      [dartx.state]: core.String
     }),
-    getters: () => ({[dartx.onComplete]: dart.definiteFunctionType(async.Stream$(html$.Event), [])}),
     methods: () => ({
+      [dartx.close]: dart.definiteFunctionType(async.Future, []),
       [dartx.createAnalyser]: dart.definiteFunctionType(web_audio.AnalyserNode, []),
       [dartx.createBiquadFilter]: dart.definiteFunctionType(web_audio.BiquadFilterNode, []),
       [dartx.createBuffer]: dart.definiteFunctionType(web_audio.AudioBuffer, [core.int, core.int, core.num]),
@@ -91473,17 +91519,17 @@ dart_library.library('dart_sdk', null, /* Imports */[
       [dartx.createOscillator]: dart.definiteFunctionType(web_audio.OscillatorNode, []),
       [dartx.createPanner]: dart.definiteFunctionType(web_audio.PannerNode, []),
       [dartx.createPeriodicWave]: dart.definiteFunctionType(web_audio.PeriodicWave, [typed_data.Float32List, typed_data.Float32List]),
+      [dartx.createStereoPanner]: dart.definiteFunctionType(web_audio.StereoPannerNode, []),
       [dartx.createWaveShaper]: dart.definiteFunctionType(web_audio.WaveShaperNode, []),
       [_decodeAudioData]: dart.definiteFunctionType(dart.void, [typed_data.ByteBuffer, web_audio.AudioBufferCallback], [web_audio.AudioBufferCallback]),
-      [dartx.startRendering]: dart.definiteFunctionType(dart.void, []),
+      [dartx.resume]: dart.definiteFunctionType(async.Future, []),
+      [dartx.suspend]: dart.definiteFunctionType(async.Future, []),
       [dartx.createGain]: dart.definiteFunctionType(web_audio.GainNode, []),
       [dartx.createScriptProcessor]: dart.definiteFunctionType(web_audio.ScriptProcessorNode, [core.int], [core.int, core.int]),
       [dartx.decodeAudioData]: dart.definiteFunctionType(async.Future$(web_audio.AudioBuffer), [typed_data.ByteBuffer])
     }),
-    sfields: () => ({completeEvent: EventStreamProviderOfEvent()}),
     sgetters: () => ({supported: dart.definiteFunctionType(core.bool, [])})
   });
-  web_audio.AudioContext.completeEvent = dart.const(new (EventStreamProviderOfEvent())('complete'));
   dart.registerExtension(dart.global.AudioContext, web_audio.AudioContext);
   dart.registerExtension(dart.global.webkitAudioContext, web_audio.AudioContext);
   dart.defineExtensionNames([
@@ -91869,6 +91915,9 @@ dart_library.library('dart_sdk', null, /* Imports */[
     fields: () => ({[dartx.renderedBuffer]: web_audio.AudioBuffer})
   });
   dart.registerExtension(dart.global.OfflineAudioCompletionEvent, web_audio.OfflineAudioCompletionEvent);
+  dart.defineExtensionNames([
+    'startRendering'
+  ]);
   web_audio.OfflineAudioContext = class OfflineAudioContext extends web_audio.AudioContext {
     static _() {
       dart.throw(new core.UnsupportedError("Not supported"));
@@ -91879,19 +91928,21 @@ dart_library.library('dart_sdk', null, /* Imports */[
     static _create_1(numberOfChannels, numberOfFrames, sampleRate) {
       return new OfflineAudioContext(numberOfChannels, numberOfFrames, sampleRate);
     }
+    [dartx.startRendering](...args) {
+      return this.startRendering.apply(this, args);
+    }
   };
   dart.setSignature(web_audio.OfflineAudioContext, {
     constructors: () => ({
       _: dart.definiteFunctionType(web_audio.OfflineAudioContext, []),
       new: dart.definiteFunctionType(web_audio.OfflineAudioContext, [core.int, core.int, core.num])
     }),
+    methods: () => ({[dartx.startRendering]: dart.definiteFunctionType(async.Future, [])}),
     statics: () => ({_create_1: dart.definiteFunctionType(web_audio.OfflineAudioContext, [dart.dynamic, dart.dynamic, dart.dynamic])}),
     names: ['_create_1']
   });
   dart.registerExtension(dart.global.OfflineAudioContext, web_audio.OfflineAudioContext);
   dart.defineExtensionNames([
-    'noteOff',
-    'noteOn',
     'setPeriodicWave',
     'start',
     'stop',
@@ -91916,12 +91967,6 @@ dart_library.library('dart_sdk', null, /* Imports */[
     set [dartx.type](value) {
       this.type = value;
     }
-    [dartx.noteOff](...args) {
-      return this.noteOff.apply(this, args);
-    }
-    [dartx.noteOn](...args) {
-      return this.noteOn.apply(this, args);
-    }
     [dartx.setPeriodicWave](...args) {
       return this.setPeriodicWave.apply(this, args);
     }
@@ -91944,8 +91989,6 @@ dart_library.library('dart_sdk', null, /* Imports */[
     }),
     getters: () => ({[dartx.onEnded]: dart.definiteFunctionType(async.Stream$(html$.Event), [])}),
     methods: () => ({
-      [dartx.noteOff]: dart.definiteFunctionType(dart.void, [core.num]),
-      [dartx.noteOn]: dart.definiteFunctionType(dart.void, [core.num]),
       [dartx.setPeriodicWave]: dart.definiteFunctionType(dart.void, [web_audio.PeriodicWave]),
       [dartx.start]: dart.definiteFunctionType(dart.void, [], [core.num]),
       [dartx.stop]: dart.definiteFunctionType(dart.void, [], [core.num])
@@ -92090,6 +92133,22 @@ dart_library.library('dart_sdk', null, /* Imports */[
   dart.registerExtension(dart.global.ScriptProcessorNode, web_audio.ScriptProcessorNode);
   dart.registerExtension(dart.global.JavaScriptAudioNode, web_audio.ScriptProcessorNode);
   dart.defineExtensionNames([
+    'pan'
+  ]);
+  web_audio.StereoPannerNode = class StereoPannerNode extends web_audio.AudioNode {
+    static _() {
+      dart.throw(new core.UnsupportedError("Not supported"));
+    }
+    get [dartx.pan]() {
+      return this.pan;
+    }
+  };
+  dart.setSignature(web_audio.StereoPannerNode, {
+    constructors: () => ({_: dart.definiteFunctionType(web_audio.StereoPannerNode, [])}),
+    fields: () => ({[dartx.pan]: web_audio.AudioParam})
+  });
+  dart.registerExtension(dart.global.StereoPannerNode, web_audio.StereoPannerNode);
+  dart.defineExtensionNames([
     'curve',
     'oversample'
   ]);
@@ -92124,13 +92183,11 @@ dart_library.library('dart_sdk', null, /* Imports */[
   const _texImage2D_3 = Symbol('_texImage2D_3');
   const _texImage2D_4 = Symbol('_texImage2D_4');
   const _texImage2D_5 = Symbol('_texImage2D_5');
-  const _texImage2DImageData_1 = Symbol('_texImage2DImageData_1');
   const _texSubImage2D_1 = Symbol('_texSubImage2D_1');
   const _texSubImage2D_2 = Symbol('_texSubImage2D_2');
   const _texSubImage2D_3 = Symbol('_texSubImage2D_3');
   const _texSubImage2D_4 = Symbol('_texSubImage2D_4');
   const _texSubImage2D_5 = Symbol('_texSubImage2D_5');
-  const _texSubImage2DImageData_1 = Symbol('_texSubImage2DImageData_1');
   dart.defineExtensionNames([
     'activeTexture',
     'attachShader',
@@ -92144,12 +92201,8 @@ dart_library.library('dart_sdk', null, /* Imports */[
     'blendEquationSeparate',
     'blendFunc',
     'blendFuncSeparate',
-    'bufferByteData',
     'bufferData',
-    'bufferDataTyped',
-    'bufferSubByteData',
     'bufferSubData',
-    'bufferSubDataTyped',
     'checkFramebufferStatus',
     'clear',
     'clearColor',
@@ -92238,17 +92291,9 @@ dart_library.library('dart_sdk', null, /* Imports */[
     'stencilOp',
     'stencilOpSeparate',
     'texImage2D',
-    'texImage2DCanvas',
-    'texImage2DImage',
-    'texImage2DImageData',
-    'texImage2DVideo',
     'texParameterf',
     'texParameteri',
     'texSubImage2D',
-    'texSubImage2DCanvas',
-    'texSubImage2DImage',
-    'texSubImage2DImageData',
-    'texSubImage2DVideo',
     'uniform1f',
     'uniform1fv',
     'uniform1i',
@@ -92284,6 +92329,8 @@ dart_library.library('dart_sdk', null, /* Imports */[
     'texImage2DTyped',
     'texSubImage2DUntyped',
     'texSubImage2DTyped',
+    'bufferDataTyped',
+    'bufferSubDataTyped',
     'canvas',
     'drawingBufferHeight',
     'drawingBufferWidth'
@@ -92340,22 +92387,10 @@ dart_library.library('dart_sdk', null, /* Imports */[
     [dartx.blendFuncSeparate](...args) {
       return this.blendFuncSeparate.apply(this, args);
     }
-    [dartx.bufferByteData](...args) {
-      return this.bufferData.apply(this, args);
-    }
     [dartx.bufferData](...args) {
       return this.bufferData.apply(this, args);
     }
-    [dartx.bufferDataTyped](...args) {
-      return this.bufferData.apply(this, args);
-    }
-    [dartx.bufferSubByteData](...args) {
-      return this.bufferSubData.apply(this, args);
-    }
     [dartx.bufferSubData](...args) {
-      return this.bufferSubData.apply(this, args);
-    }
-    [dartx.bufferSubDataTyped](...args) {
       return this.bufferSubData.apply(this, args);
     }
     [dartx.checkFramebufferStatus](...args) {
@@ -92494,7 +92529,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
       return this.getBufferParameter.apply(this, args);
     }
     [dartx.getContextAttributes]() {
-      return web_gl.ContextAttributes._check(html_common.convertNativeToDart_ContextAttributes(this[_getContextAttributes_1$]()));
+      return html_common.convertNativeToDart_Dictionary(this[_getContextAttributes_1$]());
     }
     [_getContextAttributes_1$](...args) {
       return this.getContextAttributes.apply(this, args);
@@ -92626,7 +92661,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
       if (format === void 0) format = null;
       if (type === void 0) type = null;
       if (pixels === void 0) pixels = null;
-      if (pixels != null && type != null && format != null && typeof border_OR_canvas_OR_image_OR_pixels_OR_video == 'number') {
+      if (type != null && format != null && typeof border_OR_canvas_OR_image_OR_pixels_OR_video == 'number') {
         this[_texImage2D_1](target, level, internalformat, format_OR_width, height_OR_type, border_OR_canvas_OR_image_OR_pixels_OR_video, format, type, pixels);
         return;
       }
@@ -92664,23 +92699,6 @@ dart_library.library('dart_sdk', null, /* Imports */[
     [_texImage2D_5](...args) {
       return this.texImage2D.apply(this, args);
     }
-    [dartx.texImage2DCanvas](...args) {
-      return this.texImage2D.apply(this, args);
-    }
-    [dartx.texImage2DImage](...args) {
-      return this.texImage2D.apply(this, args);
-    }
-    [dartx.texImage2DImageData](target, level, internalformat, format, type, pixels) {
-      let pixels_1 = html_common.convertDartToNative_ImageData(pixels);
-      this[_texImage2DImageData_1](target, level, internalformat, format, type, pixels_1);
-      return;
-    }
-    [_texImage2DImageData_1](...args) {
-      return this.texImage2D.apply(this, args);
-    }
-    [dartx.texImage2DVideo](...args) {
-      return this.texImage2D.apply(this, args);
-    }
     [dartx.texParameterf](...args) {
       return this.texParameterf.apply(this, args);
     }
@@ -92690,7 +92708,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
     [dartx.texSubImage2D](target, level, xoffset, yoffset, format_OR_width, height_OR_type, canvas_OR_format_OR_image_OR_pixels_OR_video, type, pixels) {
       if (type === void 0) type = null;
       if (pixels === void 0) pixels = null;
-      if (pixels != null && type != null && typeof canvas_OR_format_OR_image_OR_pixels_OR_video == 'number') {
+      if (type != null && typeof canvas_OR_format_OR_image_OR_pixels_OR_video == 'number') {
         this[_texSubImage2D_1](target, level, xoffset, yoffset, format_OR_width, height_OR_type, canvas_OR_format_OR_image_OR_pixels_OR_video, type, pixels);
         return;
       }
@@ -92726,23 +92744,6 @@ dart_library.library('dart_sdk', null, /* Imports */[
       return this.texSubImage2D.apply(this, args);
     }
     [_texSubImage2D_5](...args) {
-      return this.texSubImage2D.apply(this, args);
-    }
-    [dartx.texSubImage2DCanvas](...args) {
-      return this.texSubImage2D.apply(this, args);
-    }
-    [dartx.texSubImage2DImage](...args) {
-      return this.texSubImage2D.apply(this, args);
-    }
-    [dartx.texSubImage2DImageData](target, level, xoffset, yoffset, format, type, pixels) {
-      let pixels_1 = html_common.convertDartToNative_ImageData(pixels);
-      this[_texSubImage2DImageData_1](target, level, xoffset, yoffset, format, type, pixels_1);
-      return;
-    }
-    [_texSubImage2DImageData_1](...args) {
-      return this.texSubImage2D.apply(this, args);
-    }
-    [dartx.texSubImage2DVideo](...args) {
       return this.texSubImage2D.apply(this, args);
     }
     [dartx.uniform1f](...args) {
@@ -92838,17 +92839,23 @@ dart_library.library('dart_sdk', null, /* Imports */[
     [dartx.viewport](...args) {
       return this.viewport.apply(this, args);
     }
-    [dartx.texImage2DUntyped](...args) {
-      return this.texImage2D.apply(this, args);
+    [dartx.texImage2DUntyped](targetTexture, levelOfDetail, internalFormat, format, type, data) {
+      this[dartx.texImage2D](targetTexture, levelOfDetail, internalFormat, format, type, data);
     }
-    [dartx.texImage2DTyped](...args) {
-      return this.texImage2D.apply(this, args);
+    [dartx.texImage2DTyped](targetTexture, levelOfDetail, internalFormat, width, height, border, format, type, data) {
+      this[dartx.texImage2D](targetTexture, levelOfDetail, internalFormat, width, height, border, format, type, data);
     }
-    [dartx.texSubImage2DUntyped](...args) {
-      return this.texSubImage2D.apply(this, args);
+    [dartx.texSubImage2DUntyped](targetTexture, levelOfDetail, xOffset, yOffset, format, type, data) {
+      this[dartx.texSubImage2D](targetTexture, levelOfDetail, xOffset, yOffset, format, type, data);
     }
-    [dartx.texSubImage2DTyped](...args) {
-      return this.texSubImage2D.apply(this, args);
+    [dartx.texSubImage2DTyped](targetTexture, levelOfDetail, xOffset, yOffset, width, height, border, format, type, data) {
+      this[dartx.texSubImage2D](targetTexture, levelOfDetail, xOffset, yOffset, width, height, format, type, data);
+    }
+    [dartx.bufferDataTyped](target, data, usage) {
+      this[dartx.bufferData](target, data, usage);
+    }
+    [dartx.bufferSubDataTyped](target, offset, data) {
+      this[dartx.bufferSubData](target, offset, data);
     }
   };
   web_gl.RenderingContext[dart.implements] = () => [html$.CanvasRenderingContext];
@@ -92872,12 +92879,8 @@ dart_library.library('dart_sdk', null, /* Imports */[
       [dartx.blendEquationSeparate]: dart.definiteFunctionType(dart.void, [core.int, core.int]),
       [dartx.blendFunc]: dart.definiteFunctionType(dart.void, [core.int, core.int]),
       [dartx.blendFuncSeparate]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int]),
-      [dartx.bufferByteData]: dart.definiteFunctionType(dart.void, [core.int, typed_data.ByteBuffer, core.int]),
       [dartx.bufferData]: dart.definiteFunctionType(dart.void, [core.int, dart.dynamic, core.int]),
-      [dartx.bufferDataTyped]: dart.definiteFunctionType(dart.void, [core.int, typed_data.TypedData, core.int]),
-      [dartx.bufferSubByteData]: dart.definiteFunctionType(dart.void, [core.int, core.int, typed_data.ByteBuffer]),
       [dartx.bufferSubData]: dart.definiteFunctionType(dart.void, [core.int, core.int, dart.dynamic]),
-      [dartx.bufferSubDataTyped]: dart.definiteFunctionType(dart.void, [core.int, core.int, typed_data.TypedData]),
       [dartx.checkFramebufferStatus]: dart.definiteFunctionType(core.int, [core.int]),
       [dartx.clear]: dart.definiteFunctionType(dart.void, [core.int]),
       [dartx.clearColor]: dart.definiteFunctionType(dart.void, [core.num, core.num, core.num, core.num]),
@@ -92923,7 +92926,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
       [dartx.getAttachedShaders]: dart.definiteFunctionType(core.List$(web_gl.Shader), [web_gl.Program]),
       [dartx.getAttribLocation]: dart.definiteFunctionType(core.int, [web_gl.Program, core.String]),
       [dartx.getBufferParameter]: dart.definiteFunctionType(core.Object, [core.int, core.int]),
-      [dartx.getContextAttributes]: dart.definiteFunctionType(web_gl.ContextAttributes, []),
+      [dartx.getContextAttributes]: dart.definiteFunctionType(core.Map, []),
       [_getContextAttributes_1$]: dart.definiteFunctionType(dart.dynamic, []),
       [dartx.getError]: dart.definiteFunctionType(core.int, []),
       [dartx.getExtension]: dart.definiteFunctionType(core.Object, [core.String]),
@@ -92972,11 +92975,6 @@ dart_library.library('dart_sdk', null, /* Imports */[
       [_texImage2D_3]: dart.definiteFunctionType(dart.void, [dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, html$.ImageElement]),
       [_texImage2D_4]: dart.definiteFunctionType(dart.void, [dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, html$.CanvasElement]),
       [_texImage2D_5]: dart.definiteFunctionType(dart.void, [dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, html$.VideoElement]),
-      [dartx.texImage2DCanvas]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int, html$.CanvasElement]),
-      [dartx.texImage2DImage]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int, html$.ImageElement]),
-      [dartx.texImage2DImageData]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int, html$.ImageData]),
-      [_texImage2DImageData_1]: dart.definiteFunctionType(dart.void, [dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic]),
-      [dartx.texImage2DVideo]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int, html$.VideoElement]),
       [dartx.texParameterf]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.num]),
       [dartx.texParameteri]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int]),
       [dartx.texSubImage2D]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int, core.int, dart.dynamic], [core.int, typed_data.TypedData]),
@@ -92985,46 +92983,43 @@ dart_library.library('dart_sdk', null, /* Imports */[
       [_texSubImage2D_3]: dart.definiteFunctionType(dart.void, [dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, html$.ImageElement]),
       [_texSubImage2D_4]: dart.definiteFunctionType(dart.void, [dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, html$.CanvasElement]),
       [_texSubImage2D_5]: dart.definiteFunctionType(dart.void, [dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, html$.VideoElement]),
-      [dartx.texSubImage2DCanvas]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int, core.int, html$.CanvasElement]),
-      [dartx.texSubImage2DImage]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int, core.int, html$.ImageElement]),
-      [dartx.texSubImage2DImageData]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int, core.int, html$.ImageData]),
-      [_texSubImage2DImageData_1]: dart.definiteFunctionType(dart.void, [dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic]),
-      [dartx.texSubImage2DVideo]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int, core.int, html$.VideoElement]),
       [dartx.uniform1f]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.num]),
-      [dartx.uniform1fv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, typed_data.Float32List]),
+      [dartx.uniform1fv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, dart.dynamic]),
       [dartx.uniform1i]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.int]),
-      [dartx.uniform1iv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, typed_data.Int32List]),
+      [dartx.uniform1iv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, dart.dynamic]),
       [dartx.uniform2f]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.num, core.num]),
-      [dartx.uniform2fv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, typed_data.Float32List]),
+      [dartx.uniform2fv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, dart.dynamic]),
       [dartx.uniform2i]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.int, core.int]),
-      [dartx.uniform2iv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, typed_data.Int32List]),
+      [dartx.uniform2iv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, dart.dynamic]),
       [dartx.uniform3f]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.num, core.num, core.num]),
-      [dartx.uniform3fv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, typed_data.Float32List]),
+      [dartx.uniform3fv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, dart.dynamic]),
       [dartx.uniform3i]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.int, core.int, core.int]),
-      [dartx.uniform3iv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, typed_data.Int32List]),
+      [dartx.uniform3iv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, dart.dynamic]),
       [dartx.uniform4f]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.num, core.num, core.num, core.num]),
-      [dartx.uniform4fv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, typed_data.Float32List]),
+      [dartx.uniform4fv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, dart.dynamic]),
       [dartx.uniform4i]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.int, core.int, core.int, core.int]),
-      [dartx.uniform4iv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, typed_data.Int32List]),
-      [dartx.uniformMatrix2fv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.bool, typed_data.Float32List]),
-      [dartx.uniformMatrix3fv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.bool, typed_data.Float32List]),
-      [dartx.uniformMatrix4fv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.bool, typed_data.Float32List]),
+      [dartx.uniform4iv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, dart.dynamic]),
+      [dartx.uniformMatrix2fv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.bool, dart.dynamic]),
+      [dartx.uniformMatrix3fv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.bool, dart.dynamic]),
+      [dartx.uniformMatrix4fv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.bool, dart.dynamic]),
       [dartx.useProgram]: dart.definiteFunctionType(dart.void, [web_gl.Program]),
       [dartx.validateProgram]: dart.definiteFunctionType(dart.void, [web_gl.Program]),
       [dartx.vertexAttrib1f]: dart.definiteFunctionType(dart.void, [core.int, core.num]),
-      [dartx.vertexAttrib1fv]: dart.definiteFunctionType(dart.void, [core.int, typed_data.Float32List]),
+      [dartx.vertexAttrib1fv]: dart.definiteFunctionType(dart.void, [core.int, dart.dynamic]),
       [dartx.vertexAttrib2f]: dart.definiteFunctionType(dart.void, [core.int, core.num, core.num]),
-      [dartx.vertexAttrib2fv]: dart.definiteFunctionType(dart.void, [core.int, typed_data.Float32List]),
+      [dartx.vertexAttrib2fv]: dart.definiteFunctionType(dart.void, [core.int, dart.dynamic]),
       [dartx.vertexAttrib3f]: dart.definiteFunctionType(dart.void, [core.int, core.num, core.num, core.num]),
-      [dartx.vertexAttrib3fv]: dart.definiteFunctionType(dart.void, [core.int, typed_data.Float32List]),
+      [dartx.vertexAttrib3fv]: dart.definiteFunctionType(dart.void, [core.int, dart.dynamic]),
       [dartx.vertexAttrib4f]: dart.definiteFunctionType(dart.void, [core.int, core.num, core.num, core.num, core.num]),
-      [dartx.vertexAttrib4fv]: dart.definiteFunctionType(dart.void, [core.int, typed_data.Float32List]),
+      [dartx.vertexAttrib4fv]: dart.definiteFunctionType(dart.void, [core.int, dart.dynamic]),
       [dartx.vertexAttribPointer]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.bool, core.int, core.int]),
       [dartx.viewport]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int]),
       [dartx.texImage2DUntyped]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int, dart.dynamic]),
       [dartx.texImage2DTyped]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int, core.int, core.int, core.int, typed_data.TypedData]),
       [dartx.texSubImage2DUntyped]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int, core.int, dart.dynamic]),
-      [dartx.texSubImage2DTyped]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int, core.int, core.int, core.int, core.int, typed_data.TypedData])
+      [dartx.texSubImage2DTyped]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int, core.int, core.int, core.int, core.int, typed_data.TypedData]),
+      [dartx.bufferDataTyped]: dart.definiteFunctionType(dart.void, [core.int, typed_data.TypedData, core.int]),
+      [dartx.bufferSubDataTyped]: dart.definiteFunctionType(dart.void, [core.int, core.int, typed_data.TypedData])
     }),
     sfields: () => ({
       ACTIVE_ATTRIBUTES: core.int,
@@ -93735,6 +93730,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
   });
   web_gl.OesTextureHalfFloat.HALF_FLOAT_OES = 36193;
   dart.registerExtension(dart.global.OESTextureHalfFloat, web_gl.OesTextureHalfFloat);
+  dart.registerExtension(dart.global.OES_texture_half_float, web_gl.OesTextureHalfFloat);
   web_gl.HALF_FLOAT_OES = web_gl.OesTextureHalfFloat.HALF_FLOAT_OES;
   web_gl.HIGH_FLOAT = web_gl.RenderingContext.HIGH_FLOAT;
   web_gl.HIGH_INT = web_gl.RenderingContext.HIGH_INT;
@@ -93990,6 +93986,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
   });
   web_gl.AngleInstancedArrays.VERTEX_ATTRIB_ARRAY_DIVISOR_ANGLE = 35070;
   dart.registerExtension(dart.global.ANGLEInstancedArrays, web_gl.AngleInstancedArrays);
+  dart.registerExtension(dart.global.ANGLE_instanced_arrays, web_gl.AngleInstancedArrays);
   web_gl.Buffer = class Buffer extends _interceptors.Interceptor {
     static _() {
       dart.throw(new core.UnsupportedError("Not supported"));
@@ -93999,6 +93996,60 @@ dart_library.library('dart_sdk', null, /* Imports */[
     constructors: () => ({_: dart.definiteFunctionType(web_gl.Buffer, [])})
   });
   dart.registerExtension(dart.global.WebGLBuffer, web_gl.Buffer);
+  dart.defineExtensionNames([
+    'bindValuebufferChromium',
+    'createValuebufferChromium',
+    'deleteValuebufferChromium',
+    'isValuebufferChromium',
+    'populateSubscribedValuesChromium',
+    'subscribeValueChromium',
+    'uniformValuebufferChromium'
+  ]);
+  web_gl.ChromiumSubscribeUniform = class ChromiumSubscribeUniform extends _interceptors.Interceptor {
+    static _() {
+      dart.throw(new core.UnsupportedError("Not supported"));
+    }
+    [dartx.bindValuebufferChromium](...args) {
+      return this.bindValuebufferCHROMIUM.apply(this, args);
+    }
+    [dartx.createValuebufferChromium](...args) {
+      return this.createValuebufferCHROMIUM.apply(this, args);
+    }
+    [dartx.deleteValuebufferChromium](...args) {
+      return this.deleteValuebufferCHROMIUM.apply(this, args);
+    }
+    [dartx.isValuebufferChromium](...args) {
+      return this.isValuebufferCHROMIUM.apply(this, args);
+    }
+    [dartx.populateSubscribedValuesChromium](...args) {
+      return this.populateSubscribedValuesCHROMIUM.apply(this, args);
+    }
+    [dartx.subscribeValueChromium](...args) {
+      return this.subscribeValueCHROMIUM.apply(this, args);
+    }
+    [dartx.uniformValuebufferChromium](...args) {
+      return this.uniformValuebufferCHROMIUM.apply(this, args);
+    }
+  };
+  dart.setSignature(web_gl.ChromiumSubscribeUniform, {
+    constructors: () => ({_: dart.definiteFunctionType(web_gl.ChromiumSubscribeUniform, [])}),
+    methods: () => ({
+      [dartx.bindValuebufferChromium]: dart.definiteFunctionType(dart.void, [core.int, html$.ChromiumValuebuffer]),
+      [dartx.createValuebufferChromium]: dart.definiteFunctionType(html$.ChromiumValuebuffer, []),
+      [dartx.deleteValuebufferChromium]: dart.definiteFunctionType(dart.void, [html$.ChromiumValuebuffer]),
+      [dartx.isValuebufferChromium]: dart.definiteFunctionType(core.bool, [html$.ChromiumValuebuffer]),
+      [dartx.populateSubscribedValuesChromium]: dart.definiteFunctionType(dart.void, [core.int]),
+      [dartx.subscribeValueChromium]: dart.definiteFunctionType(dart.void, [core.int, core.int]),
+      [dartx.uniformValuebufferChromium]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.int, core.int])
+    }),
+    sfields: () => ({
+      MOUSE_POSITION_CHROMIUM: core.int,
+      SUBSCRIBED_VALUES_BUFFER_CHROMIUM: core.int
+    })
+  });
+  web_gl.ChromiumSubscribeUniform.MOUSE_POSITION_CHROMIUM = 37452;
+  web_gl.ChromiumSubscribeUniform.SUBSCRIBED_VALUES_BUFFER_CHROMIUM = 37451;
+  dart.registerExtension(dart.global.CHROMIUMSubscribeUniform, web_gl.ChromiumSubscribeUniform);
   web_gl.CompressedTextureAtc = class CompressedTextureAtc extends _interceptors.Interceptor {
     static _() {
       dart.throw(new core.UnsupportedError("Not supported"));
@@ -94016,6 +94067,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
   web_gl.CompressedTextureAtc.COMPRESSED_RGBA_ATC_INTERPOLATED_ALPHA_WEBGL = 34798;
   web_gl.CompressedTextureAtc.COMPRESSED_RGB_ATC_WEBGL = 35986;
   dart.registerExtension(dart.global.WebGLCompressedTextureATC, web_gl.CompressedTextureAtc);
+  dart.registerExtension(dart.global.WEBGL_compressed_texture_atc, web_gl.CompressedTextureAtc);
   web_gl.CompressedTextureETC1 = class CompressedTextureETC1 extends _interceptors.Interceptor {
     static _() {
       dart.throw(new core.UnsupportedError("Not supported"));
@@ -94027,6 +94079,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
   });
   web_gl.CompressedTextureETC1.COMPRESSED_RGB_ETC1_WEBGL = 36196;
   dart.registerExtension(dart.global.WebGLCompressedTextureETC1, web_gl.CompressedTextureETC1);
+  dart.registerExtension(dart.global.WEBGL_compressed_texture_etc1, web_gl.CompressedTextureETC1);
   web_gl.CompressedTexturePvrtc = class CompressedTexturePvrtc extends _interceptors.Interceptor {
     static _() {
       dart.throw(new core.UnsupportedError("Not supported"));
@@ -94046,6 +94099,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
   web_gl.CompressedTexturePvrtc.COMPRESSED_RGB_PVRTC_2BPPV1_IMG = 35841;
   web_gl.CompressedTexturePvrtc.COMPRESSED_RGB_PVRTC_4BPPV1_IMG = 35840;
   dart.registerExtension(dart.global.WebGLCompressedTexturePVRTC, web_gl.CompressedTexturePvrtc);
+  dart.registerExtension(dart.global.WEBGL_compressed_texture_pvrtc, web_gl.CompressedTexturePvrtc);
   web_gl.CompressedTextureS3TC = class CompressedTextureS3TC extends _interceptors.Interceptor {
     static _() {
       dart.throw(new core.UnsupportedError("Not supported"));
@@ -94065,75 +94119,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
   web_gl.CompressedTextureS3TC.COMPRESSED_RGBA_S3TC_DXT5_EXT = 33779;
   web_gl.CompressedTextureS3TC.COMPRESSED_RGB_S3TC_DXT1_EXT = 33776;
   dart.registerExtension(dart.global.WebGLCompressedTextureS3TC, web_gl.CompressedTextureS3TC);
-  dart.defineExtensionNames([
-    'alpha',
-    'antialias',
-    'depth',
-    'failIfMajorPerformanceCaveat',
-    'premultipliedAlpha',
-    'preserveDrawingBuffer',
-    'stencil'
-  ]);
-  web_gl.ContextAttributes = class ContextAttributes extends _interceptors.Interceptor {
-    static _() {
-      dart.throw(new core.UnsupportedError("Not supported"));
-    }
-    get [dartx.alpha]() {
-      return this.alpha;
-    }
-    set [dartx.alpha](value) {
-      this.alpha = value;
-    }
-    get [dartx.antialias]() {
-      return this.antialias;
-    }
-    set [dartx.antialias](value) {
-      this.antialias = value;
-    }
-    get [dartx.depth]() {
-      return this.depth;
-    }
-    set [dartx.depth](value) {
-      this.depth = value;
-    }
-    get [dartx.failIfMajorPerformanceCaveat]() {
-      return this.failIfMajorPerformanceCaveat;
-    }
-    set [dartx.failIfMajorPerformanceCaveat](value) {
-      this.failIfMajorPerformanceCaveat = value;
-    }
-    get [dartx.premultipliedAlpha]() {
-      return this.premultipliedAlpha;
-    }
-    set [dartx.premultipliedAlpha](value) {
-      this.premultipliedAlpha = value;
-    }
-    get [dartx.preserveDrawingBuffer]() {
-      return this.preserveDrawingBuffer;
-    }
-    set [dartx.preserveDrawingBuffer](value) {
-      this.preserveDrawingBuffer = value;
-    }
-    get [dartx.stencil]() {
-      return this.stencil;
-    }
-    set [dartx.stencil](value) {
-      this.stencil = value;
-    }
-  };
-  dart.setSignature(web_gl.ContextAttributes, {
-    constructors: () => ({_: dart.definiteFunctionType(web_gl.ContextAttributes, [])}),
-    fields: () => ({
-      [dartx.alpha]: core.bool,
-      [dartx.antialias]: core.bool,
-      [dartx.depth]: core.bool,
-      [dartx.failIfMajorPerformanceCaveat]: core.bool,
-      [dartx.premultipliedAlpha]: core.bool,
-      [dartx.preserveDrawingBuffer]: core.bool,
-      [dartx.stencil]: core.bool
-    })
-  });
-  dart.registerExtension(dart.global.WebGLContextAttributes, web_gl.ContextAttributes);
+  dart.registerExtension(dart.global.WEBGL_compressed_texture_s3tc, web_gl.CompressedTextureS3TC);
   dart.defineExtensionNames([
     'statusMessage'
   ]);
@@ -94141,13 +94127,35 @@ dart_library.library('dart_sdk', null, /* Imports */[
     static _() {
       dart.throw(new core.UnsupportedError("Not supported"));
     }
+    static new(type, eventInit) {
+      if (eventInit === void 0) eventInit = null;
+      if (eventInit != null) {
+        let eventInit_1 = html_common.convertDartToNative_Dictionary(eventInit);
+        return web_gl.ContextEvent._create_1(type, eventInit_1);
+      }
+      return web_gl.ContextEvent._create_2(type);
+    }
+    static _create_1(type, eventInit) {
+      return new WebGLContextEvent(type, eventInit);
+    }
+    static _create_2(type) {
+      return new WebGLContextEvent(type);
+    }
     get [dartx.statusMessage]() {
       return this.statusMessage;
     }
   };
   dart.setSignature(web_gl.ContextEvent, {
-    constructors: () => ({_: dart.definiteFunctionType(web_gl.ContextEvent, [])}),
-    fields: () => ({[dartx.statusMessage]: core.String})
+    constructors: () => ({
+      _: dart.definiteFunctionType(web_gl.ContextEvent, []),
+      new: dart.definiteFunctionType(web_gl.ContextEvent, [core.String], [core.Map])
+    }),
+    fields: () => ({[dartx.statusMessage]: core.String}),
+    statics: () => ({
+      _create_1: dart.definiteFunctionType(web_gl.ContextEvent, [dart.dynamic, dart.dynamic]),
+      _create_2: dart.definiteFunctionType(web_gl.ContextEvent, [dart.dynamic])
+    }),
+    names: ['_create_1', '_create_2']
   });
   dart.registerExtension(dart.global.WebGLContextEvent, web_gl.ContextEvent);
   web_gl.DebugRendererInfo = class DebugRendererInfo extends _interceptors.Interceptor {
@@ -94165,6 +94173,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
   web_gl.DebugRendererInfo.UNMASKED_RENDERER_WEBGL = 37446;
   web_gl.DebugRendererInfo.UNMASKED_VENDOR_WEBGL = 37445;
   dart.registerExtension(dart.global.WebGLDebugRendererInfo, web_gl.DebugRendererInfo);
+  dart.registerExtension(dart.global.WEBGL_debug_renderer_info, web_gl.DebugRendererInfo);
   dart.defineExtensionNames([
     'getTranslatedShaderSource'
   ]);
@@ -94181,6 +94190,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
     methods: () => ({[dartx.getTranslatedShaderSource]: dart.definiteFunctionType(core.String, [web_gl.Shader])})
   });
   dart.registerExtension(dart.global.WebGLDebugShaders, web_gl.DebugShaders);
+  dart.registerExtension(dart.global.WEBGL_debug_shaders, web_gl.DebugShaders);
   web_gl.DepthTexture = class DepthTexture extends _interceptors.Interceptor {
     static _() {
       dart.throw(new core.UnsupportedError("Not supported"));
@@ -94192,6 +94202,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
   });
   web_gl.DepthTexture.UNSIGNED_INT_24_8_WEBGL = 34042;
   dart.registerExtension(dart.global.WebGLDepthTexture, web_gl.DepthTexture);
+  dart.registerExtension(dart.global.WEBGL_depth_texture, web_gl.DepthTexture);
   dart.defineExtensionNames([
     'drawBuffersWebgl'
   ]);
@@ -94278,6 +94289,27 @@ dart_library.library('dart_sdk', null, /* Imports */[
   web_gl.DrawBuffers.MAX_COLOR_ATTACHMENTS_WEBGL = 36063;
   web_gl.DrawBuffers.MAX_DRAW_BUFFERS_WEBGL = 34852;
   dart.registerExtension(dart.global.WebGLDrawBuffers, web_gl.DrawBuffers);
+  dart.registerExtension(dart.global.WEBGL_draw_buffers, web_gl.DrawBuffers);
+  web_gl.EXTsRgb = class EXTsRgb extends _interceptors.Interceptor {
+    static _() {
+      dart.throw(new core.UnsupportedError("Not supported"));
+    }
+  };
+  dart.setSignature(web_gl.EXTsRgb, {
+    constructors: () => ({_: dart.definiteFunctionType(web_gl.EXTsRgb, [])}),
+    sfields: () => ({
+      FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING_EXT: core.int,
+      SRGB8_ALPHA8_EXT: core.int,
+      SRGB_ALPHA_EXT: core.int,
+      SRGB_EXT: core.int
+    })
+  });
+  web_gl.EXTsRgb.FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING_EXT = 33296;
+  web_gl.EXTsRgb.SRGB8_ALPHA8_EXT = 35907;
+  web_gl.EXTsRgb.SRGB_ALPHA_EXT = 35906;
+  web_gl.EXTsRgb.SRGB_EXT = 35904;
+  dart.registerExtension(dart.global.EXTsRGB, web_gl.EXTsRgb);
+  dart.registerExtension(dart.global.EXT_sRGB, web_gl.EXTsRgb);
   web_gl.ExtBlendMinMax = class ExtBlendMinMax extends _interceptors.Interceptor {
     static _() {
       dart.throw(new core.UnsupportedError("Not supported"));
@@ -94293,6 +94325,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
   web_gl.ExtBlendMinMax.MAX_EXT = 32776;
   web_gl.ExtBlendMinMax.MIN_EXT = 32775;
   dart.registerExtension(dart.global.EXTBlendMinMax, web_gl.ExtBlendMinMax);
+  dart.registerExtension(dart.global.EXT_blend_minmax, web_gl.ExtBlendMinMax);
   web_gl.ExtFragDepth = class ExtFragDepth extends _interceptors.Interceptor {
     static _() {
       dart.throw(new core.UnsupportedError("Not supported"));
@@ -94302,6 +94335,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
     constructors: () => ({_: dart.definiteFunctionType(web_gl.ExtFragDepth, [])})
   });
   dart.registerExtension(dart.global.EXTFragDepth, web_gl.ExtFragDepth);
+  dart.registerExtension(dart.global.EXT_frag_depth, web_gl.ExtFragDepth);
   web_gl.ExtShaderTextureLod = class ExtShaderTextureLod extends _interceptors.Interceptor {
     static _() {
       dart.throw(new core.UnsupportedError("Not supported"));
@@ -94311,6 +94345,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
     constructors: () => ({_: dart.definiteFunctionType(web_gl.ExtShaderTextureLod, [])})
   });
   dart.registerExtension(dart.global.EXTShaderTextureLOD, web_gl.ExtShaderTextureLod);
+  dart.registerExtension(dart.global.EXT_shader_texture_lod, web_gl.ExtShaderTextureLod);
   web_gl.ExtTextureFilterAnisotropic = class ExtTextureFilterAnisotropic extends _interceptors.Interceptor {
     static _() {
       dart.throw(new core.UnsupportedError("Not supported"));
@@ -94326,6 +94361,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
   web_gl.ExtTextureFilterAnisotropic.MAX_TEXTURE_MAX_ANISOTROPY_EXT = 34047;
   web_gl.ExtTextureFilterAnisotropic.TEXTURE_MAX_ANISOTROPY_EXT = 34046;
   dart.registerExtension(dart.global.EXTTextureFilterAnisotropic, web_gl.ExtTextureFilterAnisotropic);
+  dart.registerExtension(dart.global.EXT_texture_filter_anisotropic, web_gl.ExtTextureFilterAnisotropic);
   web_gl.Framebuffer = class Framebuffer extends _interceptors.Interceptor {
     static _() {
       dart.throw(new core.UnsupportedError("Not supported"));
@@ -94359,6 +94395,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
   });
   dart.registerExtension(dart.global.WebGLLoseContext, web_gl.LoseContext);
   dart.registerExtension(dart.global.WebGLExtensionLoseContext, web_gl.LoseContext);
+  dart.registerExtension(dart.global.WEBGL_lose_context, web_gl.LoseContext);
   web_gl.OesElementIndexUint = class OesElementIndexUint extends _interceptors.Interceptor {
     static _() {
       dart.throw(new core.UnsupportedError("Not supported"));
@@ -94368,6 +94405,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
     constructors: () => ({_: dart.definiteFunctionType(web_gl.OesElementIndexUint, [])})
   });
   dart.registerExtension(dart.global.OESElementIndexUint, web_gl.OesElementIndexUint);
+  dart.registerExtension(dart.global.OES_element_index_uint, web_gl.OesElementIndexUint);
   web_gl.OesStandardDerivatives = class OesStandardDerivatives extends _interceptors.Interceptor {
     static _() {
       dart.throw(new core.UnsupportedError("Not supported"));
@@ -94379,6 +94417,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
   });
   web_gl.OesStandardDerivatives.FRAGMENT_SHADER_DERIVATIVE_HINT_OES = 35723;
   dart.registerExtension(dart.global.OESStandardDerivatives, web_gl.OesStandardDerivatives);
+  dart.registerExtension(dart.global.OES_standard_derivatives, web_gl.OesStandardDerivatives);
   web_gl.OesTextureFloat = class OesTextureFloat extends _interceptors.Interceptor {
     static _() {
       dart.throw(new core.UnsupportedError("Not supported"));
@@ -94388,6 +94427,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
     constructors: () => ({_: dart.definiteFunctionType(web_gl.OesTextureFloat, [])})
   });
   dart.registerExtension(dart.global.OESTextureFloat, web_gl.OesTextureFloat);
+  dart.registerExtension(dart.global.OES_texture_float, web_gl.OesTextureFloat);
   web_gl.OesTextureFloatLinear = class OesTextureFloatLinear extends _interceptors.Interceptor {
     static _() {
       dart.throw(new core.UnsupportedError("Not supported"));
@@ -94397,6 +94437,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
     constructors: () => ({_: dart.definiteFunctionType(web_gl.OesTextureFloatLinear, [])})
   });
   dart.registerExtension(dart.global.OESTextureFloatLinear, web_gl.OesTextureFloatLinear);
+  dart.registerExtension(dart.global.OES_texture_float_linear, web_gl.OesTextureFloatLinear);
   web_gl.OesTextureHalfFloatLinear = class OesTextureHalfFloatLinear extends _interceptors.Interceptor {
     static _() {
       dart.throw(new core.UnsupportedError("Not supported"));
@@ -94406,6 +94447,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
     constructors: () => ({_: dart.definiteFunctionType(web_gl.OesTextureHalfFloatLinear, [])})
   });
   dart.registerExtension(dart.global.OESTextureHalfFloatLinear, web_gl.OesTextureHalfFloatLinear);
+  dart.registerExtension(dart.global.OES_texture_half_float_linear, web_gl.OesTextureHalfFloatLinear);
   dart.defineExtensionNames([
     'bindVertexArray',
     'createVertexArray',
@@ -94432,15 +94474,16 @@ dart_library.library('dart_sdk', null, /* Imports */[
   dart.setSignature(web_gl.OesVertexArrayObject, {
     constructors: () => ({_: dart.definiteFunctionType(web_gl.OesVertexArrayObject, [])}),
     methods: () => ({
-      [dartx.bindVertexArray]: dart.definiteFunctionType(dart.void, [web_gl.VertexArrayObject]),
-      [dartx.createVertexArray]: dart.definiteFunctionType(web_gl.VertexArrayObject, []),
-      [dartx.deleteVertexArray]: dart.definiteFunctionType(dart.void, [web_gl.VertexArrayObject]),
-      [dartx.isVertexArray]: dart.definiteFunctionType(core.bool, [web_gl.VertexArrayObject])
+      [dartx.bindVertexArray]: dart.definiteFunctionType(dart.void, [web_gl.VertexArrayObjectOes]),
+      [dartx.createVertexArray]: dart.definiteFunctionType(web_gl.VertexArrayObjectOes, []),
+      [dartx.deleteVertexArray]: dart.definiteFunctionType(dart.void, [web_gl.VertexArrayObjectOes]),
+      [dartx.isVertexArray]: dart.definiteFunctionType(core.bool, [web_gl.VertexArrayObjectOes])
     }),
     sfields: () => ({VERTEX_ARRAY_BINDING_OES: core.int})
   });
   web_gl.OesVertexArrayObject.VERTEX_ARRAY_BINDING_OES = 34229;
   dart.registerExtension(dart.global.OESVertexArrayObject, web_gl.OesVertexArrayObject);
+  dart.registerExtension(dart.global.OES_vertex_array_object, web_gl.OesVertexArrayObject);
   web_gl.Program = class Program extends _interceptors.Interceptor {
     static _() {
       dart.throw(new core.UnsupportedError("Not supported"));
@@ -94450,6 +94493,15 @@ dart_library.library('dart_sdk', null, /* Imports */[
     constructors: () => ({_: dart.definiteFunctionType(web_gl.Program, [])})
   });
   dart.registerExtension(dart.global.WebGLProgram, web_gl.Program);
+  web_gl.Query = class Query extends _interceptors.Interceptor {
+    static _() {
+      dart.throw(new core.UnsupportedError("Not supported"));
+    }
+  };
+  dart.setSignature(web_gl.Query, {
+    constructors: () => ({_: dart.definiteFunctionType(web_gl.Query, [])})
+  });
+  dart.registerExtension(dart.global.WebGLQuery, web_gl.Query);
   web_gl.Renderbuffer = class Renderbuffer extends _interceptors.Interceptor {
     static _() {
       dart.throw(new core.UnsupportedError("Not supported"));
@@ -94459,6 +94511,1915 @@ dart_library.library('dart_sdk', null, /* Imports */[
     constructors: () => ({_: dart.definiteFunctionType(web_gl.Renderbuffer, [])})
   });
   dart.registerExtension(dart.global.WebGLRenderbuffer, web_gl.Renderbuffer);
+  const _getUniformIndices_1 = Symbol('_getUniformIndices_1');
+  const _texSubImage3D_1 = Symbol('_texSubImage3D_1');
+  const _texSubImage3D_2 = Symbol('_texSubImage3D_2');
+  const _texSubImage3D_3 = Symbol('_texSubImage3D_3');
+  const _texSubImage3D_4 = Symbol('_texSubImage3D_4');
+  const _texSubImage3D_5 = Symbol('_texSubImage3D_5');
+  const _transformFeedbackVaryings_1 = Symbol('_transformFeedbackVaryings_1');
+  dart.defineExtensionNames([
+    'beginQuery',
+    'beginTransformFeedback',
+    'bindBufferBase',
+    'bindBufferRange',
+    'bindSampler',
+    'bindTransformFeedback',
+    'bindVertexArray',
+    'blitFramebuffer',
+    'clearBufferfi',
+    'clearBufferfv',
+    'clearBufferiv',
+    'clearBufferuiv',
+    'clientWaitSync',
+    'compressedTexImage3D',
+    'compressedTexSubImage3D',
+    'copyBufferSubData',
+    'copyTexSubImage3D',
+    'createQuery',
+    'createSampler',
+    'createTransformFeedback',
+    'createVertexArray',
+    'deleteQuery',
+    'deleteSampler',
+    'deleteSync',
+    'deleteTransformFeedback',
+    'deleteVertexArray',
+    'drawArraysInstanced',
+    'drawBuffers',
+    'drawElementsInstanced',
+    'drawRangeElements',
+    'endQuery',
+    'endTransformFeedback',
+    'fenceSync',
+    'framebufferTextureLayer',
+    'getActiveUniformBlockName',
+    'getActiveUniformBlockParameter',
+    'getActiveUniforms',
+    'getBufferSubData',
+    'getFragDataLocation',
+    'getIndexedParameter',
+    'getInternalformatParameter',
+    'getQuery',
+    'getQueryParameter',
+    'getSamplerParameter',
+    'getSyncParameter',
+    'getTransformFeedbackVarying',
+    'getUniformBlockIndex',
+    'getUniformIndices',
+    'invalidateFramebuffer',
+    'invalidateSubFramebuffer',
+    'isQuery',
+    'isSampler',
+    'isSync',
+    'isTransformFeedback',
+    'isVertexArray',
+    'pauseTransformFeedback',
+    'readBuffer',
+    'renderbufferStorageMultisample',
+    'resumeTransformFeedback',
+    'samplerParameterf',
+    'samplerParameteri',
+    'texImage3D',
+    'texStorage2D',
+    'texStorage3D',
+    'texSubImage3D',
+    'transformFeedbackVaryings',
+    'uniform1ui',
+    'uniform1uiv',
+    'uniform2ui',
+    'uniform2uiv',
+    'uniform3ui',
+    'uniform3uiv',
+    'uniform4ui',
+    'uniform4uiv',
+    'uniformBlockBinding',
+    'uniformMatrix2x3fv',
+    'uniformMatrix2x4fv',
+    'uniformMatrix3x2fv',
+    'uniformMatrix3x4fv',
+    'uniformMatrix4x2fv',
+    'uniformMatrix4x3fv',
+    'vertexAttribDivisor',
+    'vertexAttribI4i',
+    'vertexAttribI4iv',
+    'vertexAttribI4ui',
+    'vertexAttribI4uiv',
+    'vertexAttribIPointer',
+    'waitSync',
+    'activeTexture',
+    'attachShader',
+    'bindAttribLocation',
+    'bindBuffer',
+    'bindFramebuffer',
+    'bindRenderbuffer',
+    'bindTexture',
+    'blendColor',
+    'blendEquation',
+    'blendEquationSeparate',
+    'blendFunc',
+    'blendFuncSeparate',
+    'bufferData',
+    'bufferSubData',
+    'checkFramebufferStatus',
+    'clear',
+    'clearColor',
+    'clearDepth',
+    'clearStencil',
+    'colorMask',
+    'compileShader',
+    'compressedTexImage2D',
+    'compressedTexSubImage2D',
+    'copyTexImage2D',
+    'copyTexSubImage2D',
+    'createBuffer',
+    'createFramebuffer',
+    'createProgram',
+    'createRenderbuffer',
+    'createShader',
+    'createTexture',
+    'cullFace',
+    'deleteBuffer',
+    'deleteFramebuffer',
+    'deleteProgram',
+    'deleteRenderbuffer',
+    'deleteShader',
+    'deleteTexture',
+    'depthFunc',
+    'depthMask',
+    'depthRange',
+    'detachShader',
+    'disable',
+    'disableVertexAttribArray',
+    'drawArrays',
+    'drawElements',
+    'enable',
+    'enableVertexAttribArray',
+    'finish',
+    'flush',
+    'framebufferRenderbuffer',
+    'framebufferTexture2D',
+    'frontFace',
+    'generateMipmap',
+    'getActiveAttrib',
+    'getActiveUniform',
+    'getAttachedShaders',
+    'getAttribLocation',
+    'getBufferParameter',
+    'getContextAttributes',
+    'getError',
+    'getExtension',
+    'getFramebufferAttachmentParameter',
+    'getParameter',
+    'getProgramInfoLog',
+    'getProgramParameter',
+    'getRenderbufferParameter',
+    'getShaderInfoLog',
+    'getShaderParameter',
+    'getShaderPrecisionFormat',
+    'getShaderSource',
+    'getSupportedExtensions',
+    'getTexParameter',
+    'getUniform',
+    'getUniformLocation',
+    'getVertexAttrib',
+    'getVertexAttribOffset',
+    'hint',
+    'isBuffer',
+    'isContextLost',
+    'isEnabled',
+    'isFramebuffer',
+    'isProgram',
+    'isRenderbuffer',
+    'isShader',
+    'isTexture',
+    'lineWidth',
+    'linkProgram',
+    'pixelStorei',
+    'polygonOffset',
+    'readPixels',
+    'renderbufferStorage',
+    'sampleCoverage',
+    'scissor',
+    'shaderSource',
+    'stencilFunc',
+    'stencilFuncSeparate',
+    'stencilMask',
+    'stencilMaskSeparate',
+    'stencilOp',
+    'stencilOpSeparate',
+    'texImage2D',
+    'texParameterf',
+    'texParameteri',
+    'texSubImage2D',
+    'uniform1f',
+    'uniform1fv',
+    'uniform1i',
+    'uniform1iv',
+    'uniform2f',
+    'uniform2fv',
+    'uniform2i',
+    'uniform2iv',
+    'uniform3f',
+    'uniform3fv',
+    'uniform3i',
+    'uniform3iv',
+    'uniform4f',
+    'uniform4fv',
+    'uniform4i',
+    'uniform4iv',
+    'uniformMatrix2fv',
+    'uniformMatrix3fv',
+    'uniformMatrix4fv',
+    'useProgram',
+    'validateProgram',
+    'vertexAttrib1f',
+    'vertexAttrib1fv',
+    'vertexAttrib2f',
+    'vertexAttrib2fv',
+    'vertexAttrib3f',
+    'vertexAttrib3fv',
+    'vertexAttrib4f',
+    'vertexAttrib4fv',
+    'vertexAttribPointer',
+    'viewport',
+    'canvas',
+    'drawingBufferHeight',
+    'drawingBufferWidth'
+  ]);
+  web_gl.RenderingContext2 = class RenderingContext2 extends _interceptors.Interceptor {
+    static _() {
+      dart.throw(new core.UnsupportedError("Not supported"));
+    }
+    [dartx.beginQuery](...args) {
+      return this.beginQuery.apply(this, args);
+    }
+    [dartx.beginTransformFeedback](...args) {
+      return this.beginTransformFeedback.apply(this, args);
+    }
+    [dartx.bindBufferBase](...args) {
+      return this.bindBufferBase.apply(this, args);
+    }
+    [dartx.bindBufferRange](...args) {
+      return this.bindBufferRange.apply(this, args);
+    }
+    [dartx.bindSampler](...args) {
+      return this.bindSampler.apply(this, args);
+    }
+    [dartx.bindTransformFeedback](...args) {
+      return this.bindTransformFeedback.apply(this, args);
+    }
+    [dartx.bindVertexArray](...args) {
+      return this.bindVertexArray.apply(this, args);
+    }
+    [dartx.blitFramebuffer](...args) {
+      return this.blitFramebuffer.apply(this, args);
+    }
+    [dartx.clearBufferfi](...args) {
+      return this.clearBufferfi.apply(this, args);
+    }
+    [dartx.clearBufferfv](...args) {
+      return this.clearBufferfv.apply(this, args);
+    }
+    [dartx.clearBufferiv](...args) {
+      return this.clearBufferiv.apply(this, args);
+    }
+    [dartx.clearBufferuiv](...args) {
+      return this.clearBufferuiv.apply(this, args);
+    }
+    [dartx.clientWaitSync](...args) {
+      return this.clientWaitSync.apply(this, args);
+    }
+    [dartx.compressedTexImage3D](...args) {
+      return this.compressedTexImage3D.apply(this, args);
+    }
+    [dartx.compressedTexSubImage3D](...args) {
+      return this.compressedTexSubImage3D.apply(this, args);
+    }
+    [dartx.copyBufferSubData](...args) {
+      return this.copyBufferSubData.apply(this, args);
+    }
+    [dartx.copyTexSubImage3D](...args) {
+      return this.copyTexSubImage3D.apply(this, args);
+    }
+    [dartx.createQuery](...args) {
+      return this.createQuery.apply(this, args);
+    }
+    [dartx.createSampler](...args) {
+      return this.createSampler.apply(this, args);
+    }
+    [dartx.createTransformFeedback](...args) {
+      return this.createTransformFeedback.apply(this, args);
+    }
+    [dartx.createVertexArray](...args) {
+      return this.createVertexArray.apply(this, args);
+    }
+    [dartx.deleteQuery](...args) {
+      return this.deleteQuery.apply(this, args);
+    }
+    [dartx.deleteSampler](...args) {
+      return this.deleteSampler.apply(this, args);
+    }
+    [dartx.deleteSync](...args) {
+      return this.deleteSync.apply(this, args);
+    }
+    [dartx.deleteTransformFeedback](...args) {
+      return this.deleteTransformFeedback.apply(this, args);
+    }
+    [dartx.deleteVertexArray](...args) {
+      return this.deleteVertexArray.apply(this, args);
+    }
+    [dartx.drawArraysInstanced](...args) {
+      return this.drawArraysInstanced.apply(this, args);
+    }
+    [dartx.drawBuffers](...args) {
+      return this.drawBuffers.apply(this, args);
+    }
+    [dartx.drawElementsInstanced](...args) {
+      return this.drawElementsInstanced.apply(this, args);
+    }
+    [dartx.drawRangeElements](...args) {
+      return this.drawRangeElements.apply(this, args);
+    }
+    [dartx.endQuery](...args) {
+      return this.endQuery.apply(this, args);
+    }
+    [dartx.endTransformFeedback](...args) {
+      return this.endTransformFeedback.apply(this, args);
+    }
+    [dartx.fenceSync](...args) {
+      return this.fenceSync.apply(this, args);
+    }
+    [dartx.framebufferTextureLayer](...args) {
+      return this.framebufferTextureLayer.apply(this, args);
+    }
+    [dartx.getActiveUniformBlockName](...args) {
+      return this.getActiveUniformBlockName.apply(this, args);
+    }
+    [dartx.getActiveUniformBlockParameter](...args) {
+      return this.getActiveUniformBlockParameter.apply(this, args);
+    }
+    [dartx.getActiveUniforms](...args) {
+      return this.getActiveUniforms.apply(this, args);
+    }
+    [dartx.getBufferSubData](...args) {
+      return this.getBufferSubData.apply(this, args);
+    }
+    [dartx.getFragDataLocation](...args) {
+      return this.getFragDataLocation.apply(this, args);
+    }
+    [dartx.getIndexedParameter](...args) {
+      return this.getIndexedParameter.apply(this, args);
+    }
+    [dartx.getInternalformatParameter](...args) {
+      return this.getInternalformatParameter.apply(this, args);
+    }
+    [dartx.getQuery](...args) {
+      return this.getQuery.apply(this, args);
+    }
+    [dartx.getQueryParameter](...args) {
+      return this.getQueryParameter.apply(this, args);
+    }
+    [dartx.getSamplerParameter](...args) {
+      return this.getSamplerParameter.apply(this, args);
+    }
+    [dartx.getSyncParameter](...args) {
+      return this.getSyncParameter.apply(this, args);
+    }
+    [dartx.getTransformFeedbackVarying](...args) {
+      return this.getTransformFeedbackVarying.apply(this, args);
+    }
+    [dartx.getUniformBlockIndex](...args) {
+      return this.getUniformBlockIndex.apply(this, args);
+    }
+    [dartx.getUniformIndices](program, uniformNames) {
+      let uniformNames_1 = html_common.convertDartToNative_StringArray(uniformNames);
+      return this[_getUniformIndices_1](program, uniformNames_1);
+    }
+    [_getUniformIndices_1](...args) {
+      return this.getUniformIndices.apply(this, args);
+    }
+    [dartx.invalidateFramebuffer](...args) {
+      return this.invalidateFramebuffer.apply(this, args);
+    }
+    [dartx.invalidateSubFramebuffer](...args) {
+      return this.invalidateSubFramebuffer.apply(this, args);
+    }
+    [dartx.isQuery](...args) {
+      return this.isQuery.apply(this, args);
+    }
+    [dartx.isSampler](...args) {
+      return this.isSampler.apply(this, args);
+    }
+    [dartx.isSync](...args) {
+      return this.isSync.apply(this, args);
+    }
+    [dartx.isTransformFeedback](...args) {
+      return this.isTransformFeedback.apply(this, args);
+    }
+    [dartx.isVertexArray](...args) {
+      return this.isVertexArray.apply(this, args);
+    }
+    [dartx.pauseTransformFeedback](...args) {
+      return this.pauseTransformFeedback.apply(this, args);
+    }
+    [dartx.readBuffer](...args) {
+      return this.readBuffer.apply(this, args);
+    }
+    [dartx.renderbufferStorageMultisample](...args) {
+      return this.renderbufferStorageMultisample.apply(this, args);
+    }
+    [dartx.resumeTransformFeedback](...args) {
+      return this.resumeTransformFeedback.apply(this, args);
+    }
+    [dartx.samplerParameterf](...args) {
+      return this.samplerParameterf.apply(this, args);
+    }
+    [dartx.samplerParameteri](...args) {
+      return this.samplerParameteri.apply(this, args);
+    }
+    [dartx.texImage3D](...args) {
+      return this.texImage3D.apply(this, args);
+    }
+    [dartx.texStorage2D](...args) {
+      return this.texStorage2D.apply(this, args);
+    }
+    [dartx.texStorage3D](...args) {
+      return this.texStorage3D.apply(this, args);
+    }
+    [dartx.texSubImage3D](target, level, xoffset, yoffset, zoffset, format_OR_width, height_OR_type, canvas_OR_data_OR_depth_OR_image_OR_video, format, type, pixels) {
+      if (format === void 0) format = null;
+      if (type === void 0) type = null;
+      if (pixels === void 0) pixels = null;
+      if (type != null && format != null && typeof canvas_OR_data_OR_depth_OR_image_OR_video == 'number') {
+        this[_texSubImage3D_1](target, level, xoffset, yoffset, zoffset, format_OR_width, height_OR_type, canvas_OR_data_OR_depth_OR_image_OR_video, format, type, pixels);
+        return;
+      }
+      if ((html$.ImageData.is(canvas_OR_data_OR_depth_OR_image_OR_video) || canvas_OR_data_OR_depth_OR_image_OR_video == null) && format == null && type == null && pixels == null) {
+        let data_1 = html_common.convertDartToNative_ImageData(html$.ImageData._check(canvas_OR_data_OR_depth_OR_image_OR_video));
+        this[_texSubImage3D_2](target, level, xoffset, yoffset, zoffset, format_OR_width, height_OR_type, data_1);
+        return;
+      }
+      if ((html$.ImageElement.is(canvas_OR_data_OR_depth_OR_image_OR_video) || canvas_OR_data_OR_depth_OR_image_OR_video == null) && format == null && type == null && pixels == null) {
+        this[_texSubImage3D_3](target, level, xoffset, yoffset, zoffset, format_OR_width, height_OR_type, html$.ImageElement._check(canvas_OR_data_OR_depth_OR_image_OR_video));
+        return;
+      }
+      if ((html$.CanvasElement.is(canvas_OR_data_OR_depth_OR_image_OR_video) || canvas_OR_data_OR_depth_OR_image_OR_video == null) && format == null && type == null && pixels == null) {
+        this[_texSubImage3D_4](target, level, xoffset, yoffset, zoffset, format_OR_width, height_OR_type, html$.CanvasElement._check(canvas_OR_data_OR_depth_OR_image_OR_video));
+        return;
+      }
+      if ((html$.VideoElement.is(canvas_OR_data_OR_depth_OR_image_OR_video) || canvas_OR_data_OR_depth_OR_image_OR_video == null) && format == null && type == null && pixels == null) {
+        this[_texSubImage3D_5](target, level, xoffset, yoffset, zoffset, format_OR_width, height_OR_type, html$.VideoElement._check(canvas_OR_data_OR_depth_OR_image_OR_video));
+        return;
+      }
+      dart.throw(new core.ArgumentError("Incorrect number or type of arguments"));
+    }
+    [_texSubImage3D_1](...args) {
+      return this.texSubImage3D.apply(this, args);
+    }
+    [_texSubImage3D_2](...args) {
+      return this.texSubImage3D.apply(this, args);
+    }
+    [_texSubImage3D_3](...args) {
+      return this.texSubImage3D.apply(this, args);
+    }
+    [_texSubImage3D_4](...args) {
+      return this.texSubImage3D.apply(this, args);
+    }
+    [_texSubImage3D_5](...args) {
+      return this.texSubImage3D.apply(this, args);
+    }
+    [dartx.transformFeedbackVaryings](program, varyings, bufferMode) {
+      let varyings_1 = html_common.convertDartToNative_StringArray(varyings);
+      this[_transformFeedbackVaryings_1](program, varyings_1, bufferMode);
+      return;
+    }
+    [_transformFeedbackVaryings_1](...args) {
+      return this.transformFeedbackVaryings.apply(this, args);
+    }
+    [dartx.uniform1ui](...args) {
+      return this.uniform1ui.apply(this, args);
+    }
+    [dartx.uniform1uiv](...args) {
+      return this.uniform1uiv.apply(this, args);
+    }
+    [dartx.uniform2ui](...args) {
+      return this.uniform2ui.apply(this, args);
+    }
+    [dartx.uniform2uiv](...args) {
+      return this.uniform2uiv.apply(this, args);
+    }
+    [dartx.uniform3ui](...args) {
+      return this.uniform3ui.apply(this, args);
+    }
+    [dartx.uniform3uiv](...args) {
+      return this.uniform3uiv.apply(this, args);
+    }
+    [dartx.uniform4ui](...args) {
+      return this.uniform4ui.apply(this, args);
+    }
+    [dartx.uniform4uiv](...args) {
+      return this.uniform4uiv.apply(this, args);
+    }
+    [dartx.uniformBlockBinding](...args) {
+      return this.uniformBlockBinding.apply(this, args);
+    }
+    [dartx.uniformMatrix2x3fv](...args) {
+      return this.uniformMatrix2x3fv.apply(this, args);
+    }
+    [dartx.uniformMatrix2x4fv](...args) {
+      return this.uniformMatrix2x4fv.apply(this, args);
+    }
+    [dartx.uniformMatrix3x2fv](...args) {
+      return this.uniformMatrix3x2fv.apply(this, args);
+    }
+    [dartx.uniformMatrix3x4fv](...args) {
+      return this.uniformMatrix3x4fv.apply(this, args);
+    }
+    [dartx.uniformMatrix4x2fv](...args) {
+      return this.uniformMatrix4x2fv.apply(this, args);
+    }
+    [dartx.uniformMatrix4x3fv](...args) {
+      return this.uniformMatrix4x3fv.apply(this, args);
+    }
+    [dartx.vertexAttribDivisor](...args) {
+      return this.vertexAttribDivisor.apply(this, args);
+    }
+    [dartx.vertexAttribI4i](...args) {
+      return this.vertexAttribI4i.apply(this, args);
+    }
+    [dartx.vertexAttribI4iv](...args) {
+      return this.vertexAttribI4iv.apply(this, args);
+    }
+    [dartx.vertexAttribI4ui](...args) {
+      return this.vertexAttribI4ui.apply(this, args);
+    }
+    [dartx.vertexAttribI4uiv](...args) {
+      return this.vertexAttribI4uiv.apply(this, args);
+    }
+    [dartx.vertexAttribIPointer](...args) {
+      return this.vertexAttribIPointer.apply(this, args);
+    }
+    [dartx.waitSync](...args) {
+      return this.waitSync.apply(this, args);
+    }
+    get [dartx.canvas]() {
+      return this.canvas;
+    }
+    get [dartx.drawingBufferHeight]() {
+      return this.drawingBufferHeight;
+    }
+    get [dartx.drawingBufferWidth]() {
+      return this.drawingBufferWidth;
+    }
+    [dartx.activeTexture](...args) {
+      return this.activeTexture.apply(this, args);
+    }
+    [dartx.attachShader](...args) {
+      return this.attachShader.apply(this, args);
+    }
+    [dartx.bindAttribLocation](...args) {
+      return this.bindAttribLocation.apply(this, args);
+    }
+    [dartx.bindBuffer](...args) {
+      return this.bindBuffer.apply(this, args);
+    }
+    [dartx.bindFramebuffer](...args) {
+      return this.bindFramebuffer.apply(this, args);
+    }
+    [dartx.bindRenderbuffer](...args) {
+      return this.bindRenderbuffer.apply(this, args);
+    }
+    [dartx.bindTexture](...args) {
+      return this.bindTexture.apply(this, args);
+    }
+    [dartx.blendColor](...args) {
+      return this.blendColor.apply(this, args);
+    }
+    [dartx.blendEquation](...args) {
+      return this.blendEquation.apply(this, args);
+    }
+    [dartx.blendEquationSeparate](...args) {
+      return this.blendEquationSeparate.apply(this, args);
+    }
+    [dartx.blendFunc](...args) {
+      return this.blendFunc.apply(this, args);
+    }
+    [dartx.blendFuncSeparate](...args) {
+      return this.blendFuncSeparate.apply(this, args);
+    }
+    [dartx.bufferData](...args) {
+      return this.bufferData.apply(this, args);
+    }
+    [dartx.bufferSubData](...args) {
+      return this.bufferSubData.apply(this, args);
+    }
+    [dartx.checkFramebufferStatus](...args) {
+      return this.checkFramebufferStatus.apply(this, args);
+    }
+    [dartx.clear](...args) {
+      return this.clear.apply(this, args);
+    }
+    [dartx.clearColor](...args) {
+      return this.clearColor.apply(this, args);
+    }
+    [dartx.clearDepth](...args) {
+      return this.clearDepth.apply(this, args);
+    }
+    [dartx.clearStencil](...args) {
+      return this.clearStencil.apply(this, args);
+    }
+    [dartx.colorMask](...args) {
+      return this.colorMask.apply(this, args);
+    }
+    [dartx.compileShader](...args) {
+      return this.compileShader.apply(this, args);
+    }
+    [dartx.compressedTexImage2D](...args) {
+      return this.compressedTexImage2D.apply(this, args);
+    }
+    [dartx.compressedTexSubImage2D](...args) {
+      return this.compressedTexSubImage2D.apply(this, args);
+    }
+    [dartx.copyTexImage2D](...args) {
+      return this.copyTexImage2D.apply(this, args);
+    }
+    [dartx.copyTexSubImage2D](...args) {
+      return this.copyTexSubImage2D.apply(this, args);
+    }
+    [dartx.createBuffer](...args) {
+      return this.createBuffer.apply(this, args);
+    }
+    [dartx.createFramebuffer](...args) {
+      return this.createFramebuffer.apply(this, args);
+    }
+    [dartx.createProgram](...args) {
+      return this.createProgram.apply(this, args);
+    }
+    [dartx.createRenderbuffer](...args) {
+      return this.createRenderbuffer.apply(this, args);
+    }
+    [dartx.createShader](...args) {
+      return this.createShader.apply(this, args);
+    }
+    [dartx.createTexture](...args) {
+      return this.createTexture.apply(this, args);
+    }
+    [dartx.cullFace](...args) {
+      return this.cullFace.apply(this, args);
+    }
+    [dartx.deleteBuffer](...args) {
+      return this.deleteBuffer.apply(this, args);
+    }
+    [dartx.deleteFramebuffer](...args) {
+      return this.deleteFramebuffer.apply(this, args);
+    }
+    [dartx.deleteProgram](...args) {
+      return this.deleteProgram.apply(this, args);
+    }
+    [dartx.deleteRenderbuffer](...args) {
+      return this.deleteRenderbuffer.apply(this, args);
+    }
+    [dartx.deleteShader](...args) {
+      return this.deleteShader.apply(this, args);
+    }
+    [dartx.deleteTexture](...args) {
+      return this.deleteTexture.apply(this, args);
+    }
+    [dartx.depthFunc](...args) {
+      return this.depthFunc.apply(this, args);
+    }
+    [dartx.depthMask](...args) {
+      return this.depthMask.apply(this, args);
+    }
+    [dartx.depthRange](...args) {
+      return this.depthRange.apply(this, args);
+    }
+    [dartx.detachShader](...args) {
+      return this.detachShader.apply(this, args);
+    }
+    [dartx.disable](...args) {
+      return this.disable.apply(this, args);
+    }
+    [dartx.disableVertexAttribArray](...args) {
+      return this.disableVertexAttribArray.apply(this, args);
+    }
+    [dartx.drawArrays](...args) {
+      return this.drawArrays.apply(this, args);
+    }
+    [dartx.drawElements](...args) {
+      return this.drawElements.apply(this, args);
+    }
+    [dartx.enable](...args) {
+      return this.enable.apply(this, args);
+    }
+    [dartx.enableVertexAttribArray](...args) {
+      return this.enableVertexAttribArray.apply(this, args);
+    }
+    [dartx.finish](...args) {
+      return this.finish.apply(this, args);
+    }
+    [dartx.flush](...args) {
+      return this.flush.apply(this, args);
+    }
+    [dartx.framebufferRenderbuffer](...args) {
+      return this.framebufferRenderbuffer.apply(this, args);
+    }
+    [dartx.framebufferTexture2D](...args) {
+      return this.framebufferTexture2D.apply(this, args);
+    }
+    [dartx.frontFace](...args) {
+      return this.frontFace.apply(this, args);
+    }
+    [dartx.generateMipmap](...args) {
+      return this.generateMipmap.apply(this, args);
+    }
+    [dartx.getActiveAttrib](...args) {
+      return this.getActiveAttrib.apply(this, args);
+    }
+    [dartx.getActiveUniform](...args) {
+      return this.getActiveUniform.apply(this, args);
+    }
+    [dartx.getAttachedShaders](...args) {
+      return this.getAttachedShaders.apply(this, args);
+    }
+    [dartx.getAttribLocation](...args) {
+      return this.getAttribLocation.apply(this, args);
+    }
+    [dartx.getBufferParameter](...args) {
+      return this.getBufferParameter.apply(this, args);
+    }
+    [dartx.getContextAttributes]() {
+      return html_common.convertNativeToDart_Dictionary(this[_getContextAttributes_1$]());
+    }
+    [_getContextAttributes_1$](...args) {
+      return this.getContextAttributes.apply(this, args);
+    }
+    [dartx.getError](...args) {
+      return this.getError.apply(this, args);
+    }
+    [dartx.getExtension](...args) {
+      return this.getExtension.apply(this, args);
+    }
+    [dartx.getFramebufferAttachmentParameter](...args) {
+      return this.getFramebufferAttachmentParameter.apply(this, args);
+    }
+    [dartx.getParameter](...args) {
+      return this.getParameter.apply(this, args);
+    }
+    [dartx.getProgramInfoLog](...args) {
+      return this.getProgramInfoLog.apply(this, args);
+    }
+    [dartx.getProgramParameter](...args) {
+      return this.getProgramParameter.apply(this, args);
+    }
+    [dartx.getRenderbufferParameter](...args) {
+      return this.getRenderbufferParameter.apply(this, args);
+    }
+    [dartx.getShaderInfoLog](...args) {
+      return this.getShaderInfoLog.apply(this, args);
+    }
+    [dartx.getShaderParameter](...args) {
+      return this.getShaderParameter.apply(this, args);
+    }
+    [dartx.getShaderPrecisionFormat](...args) {
+      return this.getShaderPrecisionFormat.apply(this, args);
+    }
+    [dartx.getShaderSource](...args) {
+      return this.getShaderSource.apply(this, args);
+    }
+    [dartx.getSupportedExtensions](...args) {
+      return this.getSupportedExtensions.apply(this, args);
+    }
+    [dartx.getTexParameter](...args) {
+      return this.getTexParameter.apply(this, args);
+    }
+    [dartx.getUniform](...args) {
+      return this.getUniform.apply(this, args);
+    }
+    [dartx.getUniformLocation](...args) {
+      return this.getUniformLocation.apply(this, args);
+    }
+    [dartx.getVertexAttrib](...args) {
+      return this.getVertexAttrib.apply(this, args);
+    }
+    [dartx.getVertexAttribOffset](...args) {
+      return this.getVertexAttribOffset.apply(this, args);
+    }
+    [dartx.hint](...args) {
+      return this.hint.apply(this, args);
+    }
+    [dartx.isBuffer](...args) {
+      return this.isBuffer.apply(this, args);
+    }
+    [dartx.isContextLost](...args) {
+      return this.isContextLost.apply(this, args);
+    }
+    [dartx.isEnabled](...args) {
+      return this.isEnabled.apply(this, args);
+    }
+    [dartx.isFramebuffer](...args) {
+      return this.isFramebuffer.apply(this, args);
+    }
+    [dartx.isProgram](...args) {
+      return this.isProgram.apply(this, args);
+    }
+    [dartx.isRenderbuffer](...args) {
+      return this.isRenderbuffer.apply(this, args);
+    }
+    [dartx.isShader](...args) {
+      return this.isShader.apply(this, args);
+    }
+    [dartx.isTexture](...args) {
+      return this.isTexture.apply(this, args);
+    }
+    [dartx.lineWidth](...args) {
+      return this.lineWidth.apply(this, args);
+    }
+    [dartx.linkProgram](...args) {
+      return this.linkProgram.apply(this, args);
+    }
+    [dartx.pixelStorei](...args) {
+      return this.pixelStorei.apply(this, args);
+    }
+    [dartx.polygonOffset](...args) {
+      return this.polygonOffset.apply(this, args);
+    }
+    [dartx.readPixels](...args) {
+      return this.readPixels.apply(this, args);
+    }
+    [dartx.renderbufferStorage](...args) {
+      return this.renderbufferStorage.apply(this, args);
+    }
+    [dartx.sampleCoverage](...args) {
+      return this.sampleCoverage.apply(this, args);
+    }
+    [dartx.scissor](...args) {
+      return this.scissor.apply(this, args);
+    }
+    [dartx.shaderSource](...args) {
+      return this.shaderSource.apply(this, args);
+    }
+    [dartx.stencilFunc](...args) {
+      return this.stencilFunc.apply(this, args);
+    }
+    [dartx.stencilFuncSeparate](...args) {
+      return this.stencilFuncSeparate.apply(this, args);
+    }
+    [dartx.stencilMask](...args) {
+      return this.stencilMask.apply(this, args);
+    }
+    [dartx.stencilMaskSeparate](...args) {
+      return this.stencilMaskSeparate.apply(this, args);
+    }
+    [dartx.stencilOp](...args) {
+      return this.stencilOp.apply(this, args);
+    }
+    [dartx.stencilOpSeparate](...args) {
+      return this.stencilOpSeparate.apply(this, args);
+    }
+    [dartx.texImage2D](target, level, internalformat, format_OR_width, height_OR_type, border_OR_canvas_OR_image_OR_pixels_OR_video, format, type, pixels) {
+      if (format === void 0) format = null;
+      if (type === void 0) type = null;
+      if (pixels === void 0) pixels = null;
+      if (type != null && format != null && typeof border_OR_canvas_OR_image_OR_pixels_OR_video == 'number') {
+        this[_texImage2D_1](target, level, internalformat, format_OR_width, height_OR_type, border_OR_canvas_OR_image_OR_pixels_OR_video, format, type, pixels);
+        return;
+      }
+      if ((html$.ImageData.is(border_OR_canvas_OR_image_OR_pixels_OR_video) || border_OR_canvas_OR_image_OR_pixels_OR_video == null) && format == null && type == null && pixels == null) {
+        let pixels_1 = html_common.convertDartToNative_ImageData(html$.ImageData._check(border_OR_canvas_OR_image_OR_pixels_OR_video));
+        this[_texImage2D_2](target, level, internalformat, format_OR_width, height_OR_type, pixels_1);
+        return;
+      }
+      if (html$.ImageElement.is(border_OR_canvas_OR_image_OR_pixels_OR_video) && format == null && type == null && pixels == null) {
+        this[_texImage2D_3](target, level, internalformat, format_OR_width, height_OR_type, border_OR_canvas_OR_image_OR_pixels_OR_video);
+        return;
+      }
+      if (html$.CanvasElement.is(border_OR_canvas_OR_image_OR_pixels_OR_video) && format == null && type == null && pixels == null) {
+        this[_texImage2D_4](target, level, internalformat, format_OR_width, height_OR_type, border_OR_canvas_OR_image_OR_pixels_OR_video);
+        return;
+      }
+      if (html$.VideoElement.is(border_OR_canvas_OR_image_OR_pixels_OR_video) && format == null && type == null && pixels == null) {
+        this[_texImage2D_5](target, level, internalformat, format_OR_width, height_OR_type, border_OR_canvas_OR_image_OR_pixels_OR_video);
+        return;
+      }
+      dart.throw(new core.ArgumentError("Incorrect number or type of arguments"));
+    }
+    [_texImage2D_1](...args) {
+      return this.texImage2D.apply(this, args);
+    }
+    [_texImage2D_2](...args) {
+      return this.texImage2D.apply(this, args);
+    }
+    [_texImage2D_3](...args) {
+      return this.texImage2D.apply(this, args);
+    }
+    [_texImage2D_4](...args) {
+      return this.texImage2D.apply(this, args);
+    }
+    [_texImage2D_5](...args) {
+      return this.texImage2D.apply(this, args);
+    }
+    [dartx.texParameterf](...args) {
+      return this.texParameterf.apply(this, args);
+    }
+    [dartx.texParameteri](...args) {
+      return this.texParameteri.apply(this, args);
+    }
+    [dartx.texSubImage2D](target, level, xoffset, yoffset, format_OR_width, height_OR_type, canvas_OR_format_OR_image_OR_pixels_OR_video, type, pixels) {
+      if (type === void 0) type = null;
+      if (pixels === void 0) pixels = null;
+      if (type != null && typeof canvas_OR_format_OR_image_OR_pixels_OR_video == 'number') {
+        this[_texSubImage2D_1](target, level, xoffset, yoffset, format_OR_width, height_OR_type, canvas_OR_format_OR_image_OR_pixels_OR_video, type, pixels);
+        return;
+      }
+      if ((html$.ImageData.is(canvas_OR_format_OR_image_OR_pixels_OR_video) || canvas_OR_format_OR_image_OR_pixels_OR_video == null) && type == null && pixels == null) {
+        let pixels_1 = html_common.convertDartToNative_ImageData(html$.ImageData._check(canvas_OR_format_OR_image_OR_pixels_OR_video));
+        this[_texSubImage2D_2](target, level, xoffset, yoffset, format_OR_width, height_OR_type, pixels_1);
+        return;
+      }
+      if (html$.ImageElement.is(canvas_OR_format_OR_image_OR_pixels_OR_video) && type == null && pixels == null) {
+        this[_texSubImage2D_3](target, level, xoffset, yoffset, format_OR_width, height_OR_type, canvas_OR_format_OR_image_OR_pixels_OR_video);
+        return;
+      }
+      if (html$.CanvasElement.is(canvas_OR_format_OR_image_OR_pixels_OR_video) && type == null && pixels == null) {
+        this[_texSubImage2D_4](target, level, xoffset, yoffset, format_OR_width, height_OR_type, canvas_OR_format_OR_image_OR_pixels_OR_video);
+        return;
+      }
+      if (html$.VideoElement.is(canvas_OR_format_OR_image_OR_pixels_OR_video) && type == null && pixels == null) {
+        this[_texSubImage2D_5](target, level, xoffset, yoffset, format_OR_width, height_OR_type, canvas_OR_format_OR_image_OR_pixels_OR_video);
+        return;
+      }
+      dart.throw(new core.ArgumentError("Incorrect number or type of arguments"));
+    }
+    [_texSubImage2D_1](...args) {
+      return this.texSubImage2D.apply(this, args);
+    }
+    [_texSubImage2D_2](...args) {
+      return this.texSubImage2D.apply(this, args);
+    }
+    [_texSubImage2D_3](...args) {
+      return this.texSubImage2D.apply(this, args);
+    }
+    [_texSubImage2D_4](...args) {
+      return this.texSubImage2D.apply(this, args);
+    }
+    [_texSubImage2D_5](...args) {
+      return this.texSubImage2D.apply(this, args);
+    }
+    [dartx.uniform1f](...args) {
+      return this.uniform1f.apply(this, args);
+    }
+    [dartx.uniform1fv](...args) {
+      return this.uniform1fv.apply(this, args);
+    }
+    [dartx.uniform1i](...args) {
+      return this.uniform1i.apply(this, args);
+    }
+    [dartx.uniform1iv](...args) {
+      return this.uniform1iv.apply(this, args);
+    }
+    [dartx.uniform2f](...args) {
+      return this.uniform2f.apply(this, args);
+    }
+    [dartx.uniform2fv](...args) {
+      return this.uniform2fv.apply(this, args);
+    }
+    [dartx.uniform2i](...args) {
+      return this.uniform2i.apply(this, args);
+    }
+    [dartx.uniform2iv](...args) {
+      return this.uniform2iv.apply(this, args);
+    }
+    [dartx.uniform3f](...args) {
+      return this.uniform3f.apply(this, args);
+    }
+    [dartx.uniform3fv](...args) {
+      return this.uniform3fv.apply(this, args);
+    }
+    [dartx.uniform3i](...args) {
+      return this.uniform3i.apply(this, args);
+    }
+    [dartx.uniform3iv](...args) {
+      return this.uniform3iv.apply(this, args);
+    }
+    [dartx.uniform4f](...args) {
+      return this.uniform4f.apply(this, args);
+    }
+    [dartx.uniform4fv](...args) {
+      return this.uniform4fv.apply(this, args);
+    }
+    [dartx.uniform4i](...args) {
+      return this.uniform4i.apply(this, args);
+    }
+    [dartx.uniform4iv](...args) {
+      return this.uniform4iv.apply(this, args);
+    }
+    [dartx.uniformMatrix2fv](...args) {
+      return this.uniformMatrix2fv.apply(this, args);
+    }
+    [dartx.uniformMatrix3fv](...args) {
+      return this.uniformMatrix3fv.apply(this, args);
+    }
+    [dartx.uniformMatrix4fv](...args) {
+      return this.uniformMatrix4fv.apply(this, args);
+    }
+    [dartx.useProgram](...args) {
+      return this.useProgram.apply(this, args);
+    }
+    [dartx.validateProgram](...args) {
+      return this.validateProgram.apply(this, args);
+    }
+    [dartx.vertexAttrib1f](...args) {
+      return this.vertexAttrib1f.apply(this, args);
+    }
+    [dartx.vertexAttrib1fv](...args) {
+      return this.vertexAttrib1fv.apply(this, args);
+    }
+    [dartx.vertexAttrib2f](...args) {
+      return this.vertexAttrib2f.apply(this, args);
+    }
+    [dartx.vertexAttrib2fv](...args) {
+      return this.vertexAttrib2fv.apply(this, args);
+    }
+    [dartx.vertexAttrib3f](...args) {
+      return this.vertexAttrib3f.apply(this, args);
+    }
+    [dartx.vertexAttrib3fv](...args) {
+      return this.vertexAttrib3fv.apply(this, args);
+    }
+    [dartx.vertexAttrib4f](...args) {
+      return this.vertexAttrib4f.apply(this, args);
+    }
+    [dartx.vertexAttrib4fv](...args) {
+      return this.vertexAttrib4fv.apply(this, args);
+    }
+    [dartx.vertexAttribPointer](...args) {
+      return this.vertexAttribPointer.apply(this, args);
+    }
+    [dartx.viewport](...args) {
+      return this.viewport.apply(this, args);
+    }
+  };
+  web_gl.RenderingContext2[dart.implements] = () => [web_gl._WebGL2RenderingContextBase, web_gl._WebGLRenderingContextBase];
+  dart.setSignature(web_gl.RenderingContext2, {
+    constructors: () => ({_: dart.definiteFunctionType(web_gl.RenderingContext2, [])}),
+    fields: () => ({
+      [dartx.canvas]: html$.CanvasElement,
+      [dartx.drawingBufferHeight]: core.int,
+      [dartx.drawingBufferWidth]: core.int
+    }),
+    methods: () => ({
+      [dartx.beginQuery]: dart.definiteFunctionType(dart.void, [core.int, web_gl.Query]),
+      [dartx.beginTransformFeedback]: dart.definiteFunctionType(dart.void, [core.int]),
+      [dartx.bindBufferBase]: dart.definiteFunctionType(dart.void, [core.int, core.int, web_gl.Buffer]),
+      [dartx.bindBufferRange]: dart.definiteFunctionType(dart.void, [core.int, core.int, web_gl.Buffer, core.int, core.int]),
+      [dartx.bindSampler]: dart.definiteFunctionType(dart.void, [core.int, web_gl.Sampler]),
+      [dartx.bindTransformFeedback]: dart.definiteFunctionType(dart.void, [core.int, web_gl.TransformFeedback]),
+      [dartx.bindVertexArray]: dart.definiteFunctionType(dart.void, [web_gl.VertexArrayObject]),
+      [dartx.blitFramebuffer]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int, core.int, core.int, core.int, core.int, core.int]),
+      [dartx.clearBufferfi]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.num, core.int]),
+      [dartx.clearBufferfv]: dart.definiteFunctionType(dart.void, [core.int, core.int, dart.dynamic]),
+      [dartx.clearBufferiv]: dart.definiteFunctionType(dart.void, [core.int, core.int, dart.dynamic]),
+      [dartx.clearBufferuiv]: dart.definiteFunctionType(dart.void, [core.int, core.int, dart.dynamic]),
+      [dartx.clientWaitSync]: dart.definiteFunctionType(core.int, [web_gl.Sync, core.int, core.int]),
+      [dartx.compressedTexImage3D]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int, core.int, core.int, typed_data.TypedData]),
+      [dartx.compressedTexSubImage3D]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int, core.int, core.int, core.int, core.int, typed_data.TypedData]),
+      [dartx.copyBufferSubData]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int]),
+      [dartx.copyTexSubImage3D]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int, core.int, core.int, core.int, core.int]),
+      [dartx.createQuery]: dart.definiteFunctionType(web_gl.Query, []),
+      [dartx.createSampler]: dart.definiteFunctionType(web_gl.Sampler, []),
+      [dartx.createTransformFeedback]: dart.definiteFunctionType(web_gl.TransformFeedback, []),
+      [dartx.createVertexArray]: dart.definiteFunctionType(web_gl.VertexArrayObject, []),
+      [dartx.deleteQuery]: dart.definiteFunctionType(dart.void, [web_gl.Query]),
+      [dartx.deleteSampler]: dart.definiteFunctionType(dart.void, [web_gl.Sampler]),
+      [dartx.deleteSync]: dart.definiteFunctionType(dart.void, [web_gl.Sync]),
+      [dartx.deleteTransformFeedback]: dart.definiteFunctionType(dart.void, [web_gl.TransformFeedback]),
+      [dartx.deleteVertexArray]: dart.definiteFunctionType(dart.void, [web_gl.VertexArrayObject]),
+      [dartx.drawArraysInstanced]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int]),
+      [dartx.drawBuffers]: dart.definiteFunctionType(dart.void, [ListOfint()]),
+      [dartx.drawElementsInstanced]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int]),
+      [dartx.drawRangeElements]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int, core.int]),
+      [dartx.endQuery]: dart.definiteFunctionType(dart.void, [core.int]),
+      [dartx.endTransformFeedback]: dart.definiteFunctionType(dart.void, []),
+      [dartx.fenceSync]: dart.definiteFunctionType(web_gl.Sync, [core.int, core.int]),
+      [dartx.framebufferTextureLayer]: dart.definiteFunctionType(dart.void, [core.int, core.int, web_gl.Texture, core.int, core.int]),
+      [dartx.getActiveUniformBlockName]: dart.definiteFunctionType(core.String, [web_gl.Program, core.int]),
+      [dartx.getActiveUniformBlockParameter]: dart.definiteFunctionType(core.Object, [web_gl.Program, core.int, core.int]),
+      [dartx.getActiveUniforms]: dart.definiteFunctionType(core.List$(core.int), [web_gl.Program, ListOfint(), core.int]),
+      [dartx.getBufferSubData]: dart.definiteFunctionType(dart.void, [core.int, core.int, typed_data.ByteBuffer]),
+      [dartx.getFragDataLocation]: dart.definiteFunctionType(core.int, [web_gl.Program, core.String]),
+      [dartx.getIndexedParameter]: dart.definiteFunctionType(core.Object, [core.int, core.int]),
+      [dartx.getInternalformatParameter]: dart.definiteFunctionType(core.Object, [core.int, core.int, core.int]),
+      [dartx.getQuery]: dart.definiteFunctionType(web_gl.Query, [core.int, core.int]),
+      [dartx.getQueryParameter]: dart.definiteFunctionType(core.Object, [web_gl.Query, core.int]),
+      [dartx.getSamplerParameter]: dart.definiteFunctionType(core.Object, [web_gl.Sampler, core.int]),
+      [dartx.getSyncParameter]: dart.definiteFunctionType(core.Object, [web_gl.Sync, core.int]),
+      [dartx.getTransformFeedbackVarying]: dart.definiteFunctionType(web_gl.ActiveInfo, [web_gl.Program, core.int]),
+      [dartx.getUniformBlockIndex]: dart.definiteFunctionType(core.int, [web_gl.Program, core.String]),
+      [dartx.getUniformIndices]: dart.definiteFunctionType(core.List$(core.int), [web_gl.Program, ListOfString()]),
+      [_getUniformIndices_1]: dart.definiteFunctionType(core.List$(core.int), [web_gl.Program, core.List]),
+      [dartx.invalidateFramebuffer]: dart.definiteFunctionType(dart.void, [core.int, ListOfint()]),
+      [dartx.invalidateSubFramebuffer]: dart.definiteFunctionType(dart.void, [core.int, ListOfint(), core.int, core.int, core.int, core.int]),
+      [dartx.isQuery]: dart.definiteFunctionType(core.bool, [web_gl.Query]),
+      [dartx.isSampler]: dart.definiteFunctionType(core.bool, [web_gl.Sampler]),
+      [dartx.isSync]: dart.definiteFunctionType(core.bool, [web_gl.Sync]),
+      [dartx.isTransformFeedback]: dart.definiteFunctionType(core.bool, [web_gl.TransformFeedback]),
+      [dartx.isVertexArray]: dart.definiteFunctionType(core.bool, [web_gl.VertexArrayObject]),
+      [dartx.pauseTransformFeedback]: dart.definiteFunctionType(dart.void, []),
+      [dartx.readBuffer]: dart.definiteFunctionType(dart.void, [core.int]),
+      [dartx.renderbufferStorageMultisample]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int]),
+      [dartx.resumeTransformFeedback]: dart.definiteFunctionType(dart.void, []),
+      [dartx.samplerParameterf]: dart.definiteFunctionType(dart.void, [web_gl.Sampler, core.int, core.num]),
+      [dartx.samplerParameteri]: dart.definiteFunctionType(dart.void, [web_gl.Sampler, core.int, core.int]),
+      [dartx.texImage3D]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int, core.int, core.int, core.int, core.int, typed_data.TypedData]),
+      [dartx.texStorage2D]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int]),
+      [dartx.texStorage3D]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int, core.int]),
+      [dartx.texSubImage3D]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int, core.int, core.int, dart.dynamic], [core.int, core.int, typed_data.TypedData]),
+      [_texSubImage3D_1]: dart.definiteFunctionType(dart.void, [dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, core.int, dart.dynamic, dart.dynamic, typed_data.TypedData]),
+      [_texSubImage3D_2]: dart.definiteFunctionType(dart.void, [dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic]),
+      [_texSubImage3D_3]: dart.definiteFunctionType(dart.void, [dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, html$.ImageElement]),
+      [_texSubImage3D_4]: dart.definiteFunctionType(dart.void, [dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, html$.CanvasElement]),
+      [_texSubImage3D_5]: dart.definiteFunctionType(dart.void, [dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, html$.VideoElement]),
+      [dartx.transformFeedbackVaryings]: dart.definiteFunctionType(dart.void, [web_gl.Program, ListOfString(), core.int]),
+      [_transformFeedbackVaryings_1]: dart.definiteFunctionType(dart.void, [web_gl.Program, core.List, dart.dynamic]),
+      [dartx.uniform1ui]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.int]),
+      [dartx.uniform1uiv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, ListOfint()]),
+      [dartx.uniform2ui]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.int, core.int]),
+      [dartx.uniform2uiv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, ListOfint()]),
+      [dartx.uniform3ui]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.int, core.int, core.int]),
+      [dartx.uniform3uiv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, ListOfint()]),
+      [dartx.uniform4ui]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.int, core.int, core.int, core.int]),
+      [dartx.uniform4uiv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, ListOfint()]),
+      [dartx.uniformBlockBinding]: dart.definiteFunctionType(dart.void, [web_gl.Program, core.int, core.int]),
+      [dartx.uniformMatrix2x3fv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.bool, dart.dynamic]),
+      [dartx.uniformMatrix2x4fv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.bool, dart.dynamic]),
+      [dartx.uniformMatrix3x2fv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.bool, dart.dynamic]),
+      [dartx.uniformMatrix3x4fv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.bool, dart.dynamic]),
+      [dartx.uniformMatrix4x2fv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.bool, dart.dynamic]),
+      [dartx.uniformMatrix4x3fv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.bool, dart.dynamic]),
+      [dartx.vertexAttribDivisor]: dart.definiteFunctionType(dart.void, [core.int, core.int]),
+      [dartx.vertexAttribI4i]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int]),
+      [dartx.vertexAttribI4iv]: dart.definiteFunctionType(dart.void, [core.int, ListOfint()]),
+      [dartx.vertexAttribI4ui]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int]),
+      [dartx.vertexAttribI4uiv]: dart.definiteFunctionType(dart.void, [core.int, ListOfint()]),
+      [dartx.vertexAttribIPointer]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int]),
+      [dartx.waitSync]: dart.definiteFunctionType(dart.void, [web_gl.Sync, core.int, core.int]),
+      [dartx.activeTexture]: dart.definiteFunctionType(dart.void, [core.int]),
+      [dartx.attachShader]: dart.definiteFunctionType(dart.void, [web_gl.Program, web_gl.Shader]),
+      [dartx.bindAttribLocation]: dart.definiteFunctionType(dart.void, [web_gl.Program, core.int, core.String]),
+      [dartx.bindBuffer]: dart.definiteFunctionType(dart.void, [core.int, web_gl.Buffer]),
+      [dartx.bindFramebuffer]: dart.definiteFunctionType(dart.void, [core.int, web_gl.Framebuffer]),
+      [dartx.bindRenderbuffer]: dart.definiteFunctionType(dart.void, [core.int, web_gl.Renderbuffer]),
+      [dartx.bindTexture]: dart.definiteFunctionType(dart.void, [core.int, web_gl.Texture]),
+      [dartx.blendColor]: dart.definiteFunctionType(dart.void, [core.num, core.num, core.num, core.num]),
+      [dartx.blendEquation]: dart.definiteFunctionType(dart.void, [core.int]),
+      [dartx.blendEquationSeparate]: dart.definiteFunctionType(dart.void, [core.int, core.int]),
+      [dartx.blendFunc]: dart.definiteFunctionType(dart.void, [core.int, core.int]),
+      [dartx.blendFuncSeparate]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int]),
+      [dartx.bufferData]: dart.definiteFunctionType(dart.void, [core.int, dart.dynamic, core.int]),
+      [dartx.bufferSubData]: dart.definiteFunctionType(dart.void, [core.int, core.int, dart.dynamic]),
+      [dartx.checkFramebufferStatus]: dart.definiteFunctionType(core.int, [core.int]),
+      [dartx.clear]: dart.definiteFunctionType(dart.void, [core.int]),
+      [dartx.clearColor]: dart.definiteFunctionType(dart.void, [core.num, core.num, core.num, core.num]),
+      [dartx.clearDepth]: dart.definiteFunctionType(dart.void, [core.num]),
+      [dartx.clearStencil]: dart.definiteFunctionType(dart.void, [core.int]),
+      [dartx.colorMask]: dart.definiteFunctionType(dart.void, [core.bool, core.bool, core.bool, core.bool]),
+      [dartx.compileShader]: dart.definiteFunctionType(dart.void, [web_gl.Shader]),
+      [dartx.compressedTexImage2D]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int, core.int, typed_data.TypedData]),
+      [dartx.compressedTexSubImage2D]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int, core.int, core.int, typed_data.TypedData]),
+      [dartx.copyTexImage2D]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int, core.int, core.int, core.int]),
+      [dartx.copyTexSubImage2D]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int, core.int, core.int, core.int]),
+      [dartx.createBuffer]: dart.definiteFunctionType(web_gl.Buffer, []),
+      [dartx.createFramebuffer]: dart.definiteFunctionType(web_gl.Framebuffer, []),
+      [dartx.createProgram]: dart.definiteFunctionType(web_gl.Program, []),
+      [dartx.createRenderbuffer]: dart.definiteFunctionType(web_gl.Renderbuffer, []),
+      [dartx.createShader]: dart.definiteFunctionType(web_gl.Shader, [core.int]),
+      [dartx.createTexture]: dart.definiteFunctionType(web_gl.Texture, []),
+      [dartx.cullFace]: dart.definiteFunctionType(dart.void, [core.int]),
+      [dartx.deleteBuffer]: dart.definiteFunctionType(dart.void, [web_gl.Buffer]),
+      [dartx.deleteFramebuffer]: dart.definiteFunctionType(dart.void, [web_gl.Framebuffer]),
+      [dartx.deleteProgram]: dart.definiteFunctionType(dart.void, [web_gl.Program]),
+      [dartx.deleteRenderbuffer]: dart.definiteFunctionType(dart.void, [web_gl.Renderbuffer]),
+      [dartx.deleteShader]: dart.definiteFunctionType(dart.void, [web_gl.Shader]),
+      [dartx.deleteTexture]: dart.definiteFunctionType(dart.void, [web_gl.Texture]),
+      [dartx.depthFunc]: dart.definiteFunctionType(dart.void, [core.int]),
+      [dartx.depthMask]: dart.definiteFunctionType(dart.void, [core.bool]),
+      [dartx.depthRange]: dart.definiteFunctionType(dart.void, [core.num, core.num]),
+      [dartx.detachShader]: dart.definiteFunctionType(dart.void, [web_gl.Program, web_gl.Shader]),
+      [dartx.disable]: dart.definiteFunctionType(dart.void, [core.int]),
+      [dartx.disableVertexAttribArray]: dart.definiteFunctionType(dart.void, [core.int]),
+      [dartx.drawArrays]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int]),
+      [dartx.drawElements]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int]),
+      [dartx.enable]: dart.definiteFunctionType(dart.void, [core.int]),
+      [dartx.enableVertexAttribArray]: dart.definiteFunctionType(dart.void, [core.int]),
+      [dartx.finish]: dart.definiteFunctionType(dart.void, []),
+      [dartx.flush]: dart.definiteFunctionType(dart.void, []),
+      [dartx.framebufferRenderbuffer]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, web_gl.Renderbuffer]),
+      [dartx.framebufferTexture2D]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, web_gl.Texture, core.int]),
+      [dartx.frontFace]: dart.definiteFunctionType(dart.void, [core.int]),
+      [dartx.generateMipmap]: dart.definiteFunctionType(dart.void, [core.int]),
+      [dartx.getActiveAttrib]: dart.definiteFunctionType(web_gl.ActiveInfo, [web_gl.Program, core.int]),
+      [dartx.getActiveUniform]: dart.definiteFunctionType(web_gl.ActiveInfo, [web_gl.Program, core.int]),
+      [dartx.getAttachedShaders]: dart.definiteFunctionType(core.List$(web_gl.Shader), [web_gl.Program]),
+      [dartx.getAttribLocation]: dart.definiteFunctionType(core.int, [web_gl.Program, core.String]),
+      [dartx.getBufferParameter]: dart.definiteFunctionType(core.Object, [core.int, core.int]),
+      [dartx.getContextAttributes]: dart.definiteFunctionType(core.Map, []),
+      [_getContextAttributes_1$]: dart.definiteFunctionType(dart.dynamic, []),
+      [dartx.getError]: dart.definiteFunctionType(core.int, []),
+      [dartx.getExtension]: dart.definiteFunctionType(core.Object, [core.String]),
+      [dartx.getFramebufferAttachmentParameter]: dart.definiteFunctionType(core.Object, [core.int, core.int, core.int]),
+      [dartx.getParameter]: dart.definiteFunctionType(core.Object, [core.int]),
+      [dartx.getProgramInfoLog]: dart.definiteFunctionType(core.String, [web_gl.Program]),
+      [dartx.getProgramParameter]: dart.definiteFunctionType(core.Object, [web_gl.Program, core.int]),
+      [dartx.getRenderbufferParameter]: dart.definiteFunctionType(core.Object, [core.int, core.int]),
+      [dartx.getShaderInfoLog]: dart.definiteFunctionType(core.String, [web_gl.Shader]),
+      [dartx.getShaderParameter]: dart.definiteFunctionType(core.Object, [web_gl.Shader, core.int]),
+      [dartx.getShaderPrecisionFormat]: dart.definiteFunctionType(web_gl.ShaderPrecisionFormat, [core.int, core.int]),
+      [dartx.getShaderSource]: dart.definiteFunctionType(core.String, [web_gl.Shader]),
+      [dartx.getSupportedExtensions]: dart.definiteFunctionType(core.List$(core.String), []),
+      [dartx.getTexParameter]: dart.definiteFunctionType(core.Object, [core.int, core.int]),
+      [dartx.getUniform]: dart.definiteFunctionType(core.Object, [web_gl.Program, web_gl.UniformLocation]),
+      [dartx.getUniformLocation]: dart.definiteFunctionType(web_gl.UniformLocation, [web_gl.Program, core.String]),
+      [dartx.getVertexAttrib]: dart.definiteFunctionType(core.Object, [core.int, core.int]),
+      [dartx.getVertexAttribOffset]: dart.definiteFunctionType(core.int, [core.int, core.int]),
+      [dartx.hint]: dart.definiteFunctionType(dart.void, [core.int, core.int]),
+      [dartx.isBuffer]: dart.definiteFunctionType(core.bool, [web_gl.Buffer]),
+      [dartx.isContextLost]: dart.definiteFunctionType(core.bool, []),
+      [dartx.isEnabled]: dart.definiteFunctionType(core.bool, [core.int]),
+      [dartx.isFramebuffer]: dart.definiteFunctionType(core.bool, [web_gl.Framebuffer]),
+      [dartx.isProgram]: dart.definiteFunctionType(core.bool, [web_gl.Program]),
+      [dartx.isRenderbuffer]: dart.definiteFunctionType(core.bool, [web_gl.Renderbuffer]),
+      [dartx.isShader]: dart.definiteFunctionType(core.bool, [web_gl.Shader]),
+      [dartx.isTexture]: dart.definiteFunctionType(core.bool, [web_gl.Texture]),
+      [dartx.lineWidth]: dart.definiteFunctionType(dart.void, [core.num]),
+      [dartx.linkProgram]: dart.definiteFunctionType(dart.void, [web_gl.Program]),
+      [dartx.pixelStorei]: dart.definiteFunctionType(dart.void, [core.int, core.int]),
+      [dartx.polygonOffset]: dart.definiteFunctionType(dart.void, [core.num, core.num]),
+      [dartx.readPixels]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int, core.int, typed_data.TypedData]),
+      [dartx.renderbufferStorage]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int]),
+      [dartx.sampleCoverage]: dart.definiteFunctionType(dart.void, [core.num, core.bool]),
+      [dartx.scissor]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int]),
+      [dartx.shaderSource]: dart.definiteFunctionType(dart.void, [web_gl.Shader, core.String]),
+      [dartx.stencilFunc]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int]),
+      [dartx.stencilFuncSeparate]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int]),
+      [dartx.stencilMask]: dart.definiteFunctionType(dart.void, [core.int]),
+      [dartx.stencilMaskSeparate]: dart.definiteFunctionType(dart.void, [core.int, core.int]),
+      [dartx.stencilOp]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int]),
+      [dartx.stencilOpSeparate]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int]),
+      [dartx.texImage2D]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int, dart.dynamic], [core.int, core.int, typed_data.TypedData]),
+      [_texImage2D_1]: dart.definiteFunctionType(dart.void, [dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, core.int, dart.dynamic, dart.dynamic, typed_data.TypedData]),
+      [_texImage2D_2]: dart.definiteFunctionType(dart.void, [dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic]),
+      [_texImage2D_3]: dart.definiteFunctionType(dart.void, [dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, html$.ImageElement]),
+      [_texImage2D_4]: dart.definiteFunctionType(dart.void, [dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, html$.CanvasElement]),
+      [_texImage2D_5]: dart.definiteFunctionType(dart.void, [dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, html$.VideoElement]),
+      [dartx.texParameterf]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.num]),
+      [dartx.texParameteri]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int]),
+      [dartx.texSubImage2D]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int, core.int, core.int, dart.dynamic], [core.int, typed_data.TypedData]),
+      [_texSubImage2D_1]: dart.definiteFunctionType(dart.void, [dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, core.int, dart.dynamic, typed_data.TypedData]),
+      [_texSubImage2D_2]: dart.definiteFunctionType(dart.void, [dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic]),
+      [_texSubImage2D_3]: dart.definiteFunctionType(dart.void, [dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, html$.ImageElement]),
+      [_texSubImage2D_4]: dart.definiteFunctionType(dart.void, [dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, html$.CanvasElement]),
+      [_texSubImage2D_5]: dart.definiteFunctionType(dart.void, [dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, dart.dynamic, html$.VideoElement]),
+      [dartx.uniform1f]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.num]),
+      [dartx.uniform1fv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, dart.dynamic]),
+      [dartx.uniform1i]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.int]),
+      [dartx.uniform1iv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, dart.dynamic]),
+      [dartx.uniform2f]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.num, core.num]),
+      [dartx.uniform2fv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, dart.dynamic]),
+      [dartx.uniform2i]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.int, core.int]),
+      [dartx.uniform2iv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, dart.dynamic]),
+      [dartx.uniform3f]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.num, core.num, core.num]),
+      [dartx.uniform3fv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, dart.dynamic]),
+      [dartx.uniform3i]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.int, core.int, core.int]),
+      [dartx.uniform3iv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, dart.dynamic]),
+      [dartx.uniform4f]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.num, core.num, core.num, core.num]),
+      [dartx.uniform4fv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, dart.dynamic]),
+      [dartx.uniform4i]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.int, core.int, core.int, core.int]),
+      [dartx.uniform4iv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, dart.dynamic]),
+      [dartx.uniformMatrix2fv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.bool, dart.dynamic]),
+      [dartx.uniformMatrix3fv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.bool, dart.dynamic]),
+      [dartx.uniformMatrix4fv]: dart.definiteFunctionType(dart.void, [web_gl.UniformLocation, core.bool, dart.dynamic]),
+      [dartx.useProgram]: dart.definiteFunctionType(dart.void, [web_gl.Program]),
+      [dartx.validateProgram]: dart.definiteFunctionType(dart.void, [web_gl.Program]),
+      [dartx.vertexAttrib1f]: dart.definiteFunctionType(dart.void, [core.int, core.num]),
+      [dartx.vertexAttrib1fv]: dart.definiteFunctionType(dart.void, [core.int, dart.dynamic]),
+      [dartx.vertexAttrib2f]: dart.definiteFunctionType(dart.void, [core.int, core.num, core.num]),
+      [dartx.vertexAttrib2fv]: dart.definiteFunctionType(dart.void, [core.int, dart.dynamic]),
+      [dartx.vertexAttrib3f]: dart.definiteFunctionType(dart.void, [core.int, core.num, core.num, core.num]),
+      [dartx.vertexAttrib3fv]: dart.definiteFunctionType(dart.void, [core.int, dart.dynamic]),
+      [dartx.vertexAttrib4f]: dart.definiteFunctionType(dart.void, [core.int, core.num, core.num, core.num, core.num]),
+      [dartx.vertexAttrib4fv]: dart.definiteFunctionType(dart.void, [core.int, dart.dynamic]),
+      [dartx.vertexAttribPointer]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.bool, core.int, core.int]),
+      [dartx.viewport]: dart.definiteFunctionType(dart.void, [core.int, core.int, core.int, core.int])
+    }),
+    sfields: () => ({
+      ACTIVE_ATTRIBUTES: core.int,
+      ACTIVE_TEXTURE: core.int,
+      ACTIVE_UNIFORMS: core.int,
+      ALIASED_LINE_WIDTH_RANGE: core.int,
+      ALIASED_POINT_SIZE_RANGE: core.int,
+      ALPHA: core.int,
+      ALPHA_BITS: core.int,
+      ALWAYS: core.int,
+      ARRAY_BUFFER: core.int,
+      ARRAY_BUFFER_BINDING: core.int,
+      ATTACHED_SHADERS: core.int,
+      BACK: core.int,
+      BLEND: core.int,
+      BLEND_COLOR: core.int,
+      BLEND_DST_ALPHA: core.int,
+      BLEND_DST_RGB: core.int,
+      BLEND_EQUATION: core.int,
+      BLEND_EQUATION_ALPHA: core.int,
+      BLEND_EQUATION_RGB: core.int,
+      BLEND_SRC_ALPHA: core.int,
+      BLEND_SRC_RGB: core.int,
+      BLUE_BITS: core.int,
+      BOOL: core.int,
+      BOOL_VEC2: core.int,
+      BOOL_VEC3: core.int,
+      BOOL_VEC4: core.int,
+      BROWSER_DEFAULT_WEBGL: core.int,
+      BUFFER_SIZE: core.int,
+      BUFFER_USAGE: core.int,
+      BYTE: core.int,
+      CCW: core.int,
+      CLAMP_TO_EDGE: core.int,
+      COLOR_ATTACHMENT0: core.int,
+      COLOR_BUFFER_BIT: core.int,
+      COLOR_CLEAR_VALUE: core.int,
+      COLOR_WRITEMASK: core.int,
+      COMPILE_STATUS: core.int,
+      COMPRESSED_TEXTURE_FORMATS: core.int,
+      CONSTANT_ALPHA: core.int,
+      CONSTANT_COLOR: core.int,
+      CONTEXT_LOST_WEBGL: core.int,
+      CULL_FACE: core.int,
+      CULL_FACE_MODE: core.int,
+      CURRENT_PROGRAM: core.int,
+      CURRENT_VERTEX_ATTRIB: core.int,
+      CW: core.int,
+      DECR: core.int,
+      DECR_WRAP: core.int,
+      DELETE_STATUS: core.int,
+      DEPTH_ATTACHMENT: core.int,
+      DEPTH_BITS: core.int,
+      DEPTH_BUFFER_BIT: core.int,
+      DEPTH_CLEAR_VALUE: core.int,
+      DEPTH_COMPONENT: core.int,
+      DEPTH_COMPONENT16: core.int,
+      DEPTH_FUNC: core.int,
+      DEPTH_RANGE: core.int,
+      DEPTH_STENCIL: core.int,
+      DEPTH_STENCIL_ATTACHMENT: core.int,
+      DEPTH_TEST: core.int,
+      DEPTH_WRITEMASK: core.int,
+      DITHER: core.int,
+      DONT_CARE: core.int,
+      DST_ALPHA: core.int,
+      DST_COLOR: core.int,
+      DYNAMIC_DRAW: core.int,
+      ELEMENT_ARRAY_BUFFER: core.int,
+      ELEMENT_ARRAY_BUFFER_BINDING: core.int,
+      EQUAL: core.int,
+      FASTEST: core.int,
+      FLOAT: core.int,
+      FLOAT_MAT2: core.int,
+      FLOAT_MAT3: core.int,
+      FLOAT_MAT4: core.int,
+      FLOAT_VEC2: core.int,
+      FLOAT_VEC3: core.int,
+      FLOAT_VEC4: core.int,
+      FRAGMENT_SHADER: core.int,
+      FRAMEBUFFER: core.int,
+      FRAMEBUFFER_ATTACHMENT_OBJECT_NAME: core.int,
+      FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE: core.int,
+      FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE: core.int,
+      FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL: core.int,
+      FRAMEBUFFER_BINDING: core.int,
+      FRAMEBUFFER_COMPLETE: core.int,
+      FRAMEBUFFER_INCOMPLETE_ATTACHMENT: core.int,
+      FRAMEBUFFER_INCOMPLETE_DIMENSIONS: core.int,
+      FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT: core.int,
+      FRAMEBUFFER_UNSUPPORTED: core.int,
+      FRONT: core.int,
+      FRONT_AND_BACK: core.int,
+      FRONT_FACE: core.int,
+      FUNC_ADD: core.int,
+      FUNC_REVERSE_SUBTRACT: core.int,
+      FUNC_SUBTRACT: core.int,
+      GENERATE_MIPMAP_HINT: core.int,
+      GEQUAL: core.int,
+      GREATER: core.int,
+      GREEN_BITS: core.int,
+      HIGH_FLOAT: core.int,
+      HIGH_INT: core.int,
+      IMPLEMENTATION_COLOR_READ_FORMAT: core.int,
+      IMPLEMENTATION_COLOR_READ_TYPE: core.int,
+      INCR: core.int,
+      INCR_WRAP: core.int,
+      INT: core.int,
+      INT_VEC2: core.int,
+      INT_VEC3: core.int,
+      INT_VEC4: core.int,
+      INVALID_ENUM: core.int,
+      INVALID_FRAMEBUFFER_OPERATION: core.int,
+      INVALID_OPERATION: core.int,
+      INVALID_VALUE: core.int,
+      INVERT: core.int,
+      KEEP: core.int,
+      LEQUAL: core.int,
+      LESS: core.int,
+      LINEAR: core.int,
+      LINEAR_MIPMAP_LINEAR: core.int,
+      LINEAR_MIPMAP_NEAREST: core.int,
+      LINES: core.int,
+      LINE_LOOP: core.int,
+      LINE_STRIP: core.int,
+      LINE_WIDTH: core.int,
+      LINK_STATUS: core.int,
+      LOW_FLOAT: core.int,
+      LOW_INT: core.int,
+      LUMINANCE: core.int,
+      LUMINANCE_ALPHA: core.int,
+      MAX_COMBINED_TEXTURE_IMAGE_UNITS: core.int,
+      MAX_CUBE_MAP_TEXTURE_SIZE: core.int,
+      MAX_FRAGMENT_UNIFORM_VECTORS: core.int,
+      MAX_RENDERBUFFER_SIZE: core.int,
+      MAX_TEXTURE_IMAGE_UNITS: core.int,
+      MAX_TEXTURE_SIZE: core.int,
+      MAX_VARYING_VECTORS: core.int,
+      MAX_VERTEX_ATTRIBS: core.int,
+      MAX_VERTEX_TEXTURE_IMAGE_UNITS: core.int,
+      MAX_VERTEX_UNIFORM_VECTORS: core.int,
+      MAX_VIEWPORT_DIMS: core.int,
+      MEDIUM_FLOAT: core.int,
+      MEDIUM_INT: core.int,
+      MIRRORED_REPEAT: core.int,
+      NEAREST: core.int,
+      NEAREST_MIPMAP_LINEAR: core.int,
+      NEAREST_MIPMAP_NEAREST: core.int,
+      NEVER: core.int,
+      NICEST: core.int,
+      NONE: core.int,
+      NOTEQUAL: core.int,
+      NO_ERROR: core.int,
+      ONE: core.int,
+      ONE_MINUS_CONSTANT_ALPHA: core.int,
+      ONE_MINUS_CONSTANT_COLOR: core.int,
+      ONE_MINUS_DST_ALPHA: core.int,
+      ONE_MINUS_DST_COLOR: core.int,
+      ONE_MINUS_SRC_ALPHA: core.int,
+      ONE_MINUS_SRC_COLOR: core.int,
+      OUT_OF_MEMORY: core.int,
+      PACK_ALIGNMENT: core.int,
+      POINTS: core.int,
+      POLYGON_OFFSET_FACTOR: core.int,
+      POLYGON_OFFSET_FILL: core.int,
+      POLYGON_OFFSET_UNITS: core.int,
+      RED_BITS: core.int,
+      RENDERBUFFER: core.int,
+      RENDERBUFFER_ALPHA_SIZE: core.int,
+      RENDERBUFFER_BINDING: core.int,
+      RENDERBUFFER_BLUE_SIZE: core.int,
+      RENDERBUFFER_DEPTH_SIZE: core.int,
+      RENDERBUFFER_GREEN_SIZE: core.int,
+      RENDERBUFFER_HEIGHT: core.int,
+      RENDERBUFFER_INTERNAL_FORMAT: core.int,
+      RENDERBUFFER_RED_SIZE: core.int,
+      RENDERBUFFER_STENCIL_SIZE: core.int,
+      RENDERBUFFER_WIDTH: core.int,
+      RENDERER: core.int,
+      REPEAT: core.int,
+      REPLACE: core.int,
+      RGB: core.int,
+      RGB565: core.int,
+      RGB5_A1: core.int,
+      RGBA: core.int,
+      RGBA4: core.int,
+      SAMPLER_2D: core.int,
+      SAMPLER_CUBE: core.int,
+      SAMPLES: core.int,
+      SAMPLE_ALPHA_TO_COVERAGE: core.int,
+      SAMPLE_BUFFERS: core.int,
+      SAMPLE_COVERAGE: core.int,
+      SAMPLE_COVERAGE_INVERT: core.int,
+      SAMPLE_COVERAGE_VALUE: core.int,
+      SCISSOR_BOX: core.int,
+      SCISSOR_TEST: core.int,
+      SHADER_TYPE: core.int,
+      SHADING_LANGUAGE_VERSION: core.int,
+      SHORT: core.int,
+      SRC_ALPHA: core.int,
+      SRC_ALPHA_SATURATE: core.int,
+      SRC_COLOR: core.int,
+      STATIC_DRAW: core.int,
+      STENCIL_ATTACHMENT: core.int,
+      STENCIL_BACK_FAIL: core.int,
+      STENCIL_BACK_FUNC: core.int,
+      STENCIL_BACK_PASS_DEPTH_FAIL: core.int,
+      STENCIL_BACK_PASS_DEPTH_PASS: core.int,
+      STENCIL_BACK_REF: core.int,
+      STENCIL_BACK_VALUE_MASK: core.int,
+      STENCIL_BACK_WRITEMASK: core.int,
+      STENCIL_BITS: core.int,
+      STENCIL_BUFFER_BIT: core.int,
+      STENCIL_CLEAR_VALUE: core.int,
+      STENCIL_FAIL: core.int,
+      STENCIL_FUNC: core.int,
+      STENCIL_INDEX: core.int,
+      STENCIL_INDEX8: core.int,
+      STENCIL_PASS_DEPTH_FAIL: core.int,
+      STENCIL_PASS_DEPTH_PASS: core.int,
+      STENCIL_REF: core.int,
+      STENCIL_TEST: core.int,
+      STENCIL_VALUE_MASK: core.int,
+      STENCIL_WRITEMASK: core.int,
+      STREAM_DRAW: core.int,
+      SUBPIXEL_BITS: core.int,
+      TEXTURE: core.int,
+      TEXTURE0: core.int,
+      TEXTURE1: core.int,
+      TEXTURE10: core.int,
+      TEXTURE11: core.int,
+      TEXTURE12: core.int,
+      TEXTURE13: core.int,
+      TEXTURE14: core.int,
+      TEXTURE15: core.int,
+      TEXTURE16: core.int,
+      TEXTURE17: core.int,
+      TEXTURE18: core.int,
+      TEXTURE19: core.int,
+      TEXTURE2: core.int,
+      TEXTURE20: core.int,
+      TEXTURE21: core.int,
+      TEXTURE22: core.int,
+      TEXTURE23: core.int,
+      TEXTURE24: core.int,
+      TEXTURE25: core.int,
+      TEXTURE26: core.int,
+      TEXTURE27: core.int,
+      TEXTURE28: core.int,
+      TEXTURE29: core.int,
+      TEXTURE3: core.int,
+      TEXTURE30: core.int,
+      TEXTURE31: core.int,
+      TEXTURE4: core.int,
+      TEXTURE5: core.int,
+      TEXTURE6: core.int,
+      TEXTURE7: core.int,
+      TEXTURE8: core.int,
+      TEXTURE9: core.int,
+      TEXTURE_2D: core.int,
+      TEXTURE_BINDING_2D: core.int,
+      TEXTURE_BINDING_CUBE_MAP: core.int,
+      TEXTURE_CUBE_MAP: core.int,
+      TEXTURE_CUBE_MAP_NEGATIVE_X: core.int,
+      TEXTURE_CUBE_MAP_NEGATIVE_Y: core.int,
+      TEXTURE_CUBE_MAP_NEGATIVE_Z: core.int,
+      TEXTURE_CUBE_MAP_POSITIVE_X: core.int,
+      TEXTURE_CUBE_MAP_POSITIVE_Y: core.int,
+      TEXTURE_CUBE_MAP_POSITIVE_Z: core.int,
+      TEXTURE_MAG_FILTER: core.int,
+      TEXTURE_MIN_FILTER: core.int,
+      TEXTURE_WRAP_S: core.int,
+      TEXTURE_WRAP_T: core.int,
+      TRIANGLES: core.int,
+      TRIANGLE_FAN: core.int,
+      TRIANGLE_STRIP: core.int,
+      UNPACK_ALIGNMENT: core.int,
+      UNPACK_COLORSPACE_CONVERSION_WEBGL: core.int,
+      UNPACK_FLIP_Y_WEBGL: core.int,
+      UNPACK_PREMULTIPLY_ALPHA_WEBGL: core.int,
+      UNSIGNED_BYTE: core.int,
+      UNSIGNED_INT: core.int,
+      UNSIGNED_SHORT: core.int,
+      UNSIGNED_SHORT_4_4_4_4: core.int,
+      UNSIGNED_SHORT_5_5_5_1: core.int,
+      UNSIGNED_SHORT_5_6_5: core.int,
+      VALIDATE_STATUS: core.int,
+      VENDOR: core.int,
+      VERSION: core.int,
+      VERTEX_ATTRIB_ARRAY_BUFFER_BINDING: core.int,
+      VERTEX_ATTRIB_ARRAY_ENABLED: core.int,
+      VERTEX_ATTRIB_ARRAY_NORMALIZED: core.int,
+      VERTEX_ATTRIB_ARRAY_POINTER: core.int,
+      VERTEX_ATTRIB_ARRAY_SIZE: core.int,
+      VERTEX_ATTRIB_ARRAY_STRIDE: core.int,
+      VERTEX_ATTRIB_ARRAY_TYPE: core.int,
+      VERTEX_SHADER: core.int,
+      VIEWPORT: core.int,
+      ZERO: core.int
+    })
+  });
+  web_gl.RenderingContext2.ACTIVE_ATTRIBUTES = 35721;
+  web_gl.RenderingContext2.ACTIVE_TEXTURE = 34016;
+  web_gl.RenderingContext2.ACTIVE_UNIFORMS = 35718;
+  web_gl.RenderingContext2.ALIASED_LINE_WIDTH_RANGE = 33902;
+  web_gl.RenderingContext2.ALIASED_POINT_SIZE_RANGE = 33901;
+  web_gl.RenderingContext2.ALPHA = 6406;
+  web_gl.RenderingContext2.ALPHA_BITS = 3413;
+  web_gl.RenderingContext2.ALWAYS = 519;
+  web_gl.RenderingContext2.ARRAY_BUFFER = 34962;
+  web_gl.RenderingContext2.ARRAY_BUFFER_BINDING = 34964;
+  web_gl.RenderingContext2.ATTACHED_SHADERS = 35717;
+  web_gl.RenderingContext2.BACK = 1029;
+  web_gl.RenderingContext2.BLEND = 3042;
+  web_gl.RenderingContext2.BLEND_COLOR = 32773;
+  web_gl.RenderingContext2.BLEND_DST_ALPHA = 32970;
+  web_gl.RenderingContext2.BLEND_DST_RGB = 32968;
+  web_gl.RenderingContext2.BLEND_EQUATION = 32777;
+  web_gl.RenderingContext2.BLEND_EQUATION_ALPHA = 34877;
+  web_gl.RenderingContext2.BLEND_EQUATION_RGB = 32777;
+  web_gl.RenderingContext2.BLEND_SRC_ALPHA = 32971;
+  web_gl.RenderingContext2.BLEND_SRC_RGB = 32969;
+  web_gl.RenderingContext2.BLUE_BITS = 3412;
+  web_gl.RenderingContext2.BOOL = 35670;
+  web_gl.RenderingContext2.BOOL_VEC2 = 35671;
+  web_gl.RenderingContext2.BOOL_VEC3 = 35672;
+  web_gl.RenderingContext2.BOOL_VEC4 = 35673;
+  web_gl.RenderingContext2.BROWSER_DEFAULT_WEBGL = 37444;
+  web_gl.RenderingContext2.BUFFER_SIZE = 34660;
+  web_gl.RenderingContext2.BUFFER_USAGE = 34661;
+  web_gl.RenderingContext2.BYTE = 5120;
+  web_gl.RenderingContext2.CCW = 2305;
+  web_gl.RenderingContext2.CLAMP_TO_EDGE = 33071;
+  web_gl.RenderingContext2.COLOR_ATTACHMENT0 = 36064;
+  web_gl.RenderingContext2.COLOR_BUFFER_BIT = 16384;
+  web_gl.RenderingContext2.COLOR_CLEAR_VALUE = 3106;
+  web_gl.RenderingContext2.COLOR_WRITEMASK = 3107;
+  web_gl.RenderingContext2.COMPILE_STATUS = 35713;
+  web_gl.RenderingContext2.COMPRESSED_TEXTURE_FORMATS = 34467;
+  web_gl.RenderingContext2.CONSTANT_ALPHA = 32771;
+  web_gl.RenderingContext2.CONSTANT_COLOR = 32769;
+  web_gl.RenderingContext2.CONTEXT_LOST_WEBGL = 37442;
+  web_gl.RenderingContext2.CULL_FACE = 2884;
+  web_gl.RenderingContext2.CULL_FACE_MODE = 2885;
+  web_gl.RenderingContext2.CURRENT_PROGRAM = 35725;
+  web_gl.RenderingContext2.CURRENT_VERTEX_ATTRIB = 34342;
+  web_gl.RenderingContext2.CW = 2304;
+  web_gl.RenderingContext2.DECR = 7683;
+  web_gl.RenderingContext2.DECR_WRAP = 34056;
+  web_gl.RenderingContext2.DELETE_STATUS = 35712;
+  web_gl.RenderingContext2.DEPTH_ATTACHMENT = 36096;
+  web_gl.RenderingContext2.DEPTH_BITS = 3414;
+  web_gl.RenderingContext2.DEPTH_BUFFER_BIT = 256;
+  web_gl.RenderingContext2.DEPTH_CLEAR_VALUE = 2931;
+  web_gl.RenderingContext2.DEPTH_COMPONENT = 6402;
+  web_gl.RenderingContext2.DEPTH_COMPONENT16 = 33189;
+  web_gl.RenderingContext2.DEPTH_FUNC = 2932;
+  web_gl.RenderingContext2.DEPTH_RANGE = 2928;
+  web_gl.RenderingContext2.DEPTH_STENCIL = 34041;
+  web_gl.RenderingContext2.DEPTH_STENCIL_ATTACHMENT = 33306;
+  web_gl.RenderingContext2.DEPTH_TEST = 2929;
+  web_gl.RenderingContext2.DEPTH_WRITEMASK = 2930;
+  web_gl.RenderingContext2.DITHER = 3024;
+  web_gl.RenderingContext2.DONT_CARE = 4352;
+  web_gl.RenderingContext2.DST_ALPHA = 772;
+  web_gl.RenderingContext2.DST_COLOR = 774;
+  web_gl.RenderingContext2.DYNAMIC_DRAW = 35048;
+  web_gl.RenderingContext2.ELEMENT_ARRAY_BUFFER = 34963;
+  web_gl.RenderingContext2.ELEMENT_ARRAY_BUFFER_BINDING = 34965;
+  web_gl.RenderingContext2.EQUAL = 514;
+  web_gl.RenderingContext2.FASTEST = 4353;
+  web_gl.RenderingContext2.FLOAT = 5126;
+  web_gl.RenderingContext2.FLOAT_MAT2 = 35674;
+  web_gl.RenderingContext2.FLOAT_MAT3 = 35675;
+  web_gl.RenderingContext2.FLOAT_MAT4 = 35676;
+  web_gl.RenderingContext2.FLOAT_VEC2 = 35664;
+  web_gl.RenderingContext2.FLOAT_VEC3 = 35665;
+  web_gl.RenderingContext2.FLOAT_VEC4 = 35666;
+  web_gl.RenderingContext2.FRAGMENT_SHADER = 35632;
+  web_gl.RenderingContext2.FRAMEBUFFER = 36160;
+  web_gl.RenderingContext2.FRAMEBUFFER_ATTACHMENT_OBJECT_NAME = 36049;
+  web_gl.RenderingContext2.FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE = 36048;
+  web_gl.RenderingContext2.FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE = 36051;
+  web_gl.RenderingContext2.FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL = 36050;
+  web_gl.RenderingContext2.FRAMEBUFFER_BINDING = 36006;
+  web_gl.RenderingContext2.FRAMEBUFFER_COMPLETE = 36053;
+  web_gl.RenderingContext2.FRAMEBUFFER_INCOMPLETE_ATTACHMENT = 36054;
+  web_gl.RenderingContext2.FRAMEBUFFER_INCOMPLETE_DIMENSIONS = 36057;
+  web_gl.RenderingContext2.FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT = 36055;
+  web_gl.RenderingContext2.FRAMEBUFFER_UNSUPPORTED = 36061;
+  web_gl.RenderingContext2.FRONT = 1028;
+  web_gl.RenderingContext2.FRONT_AND_BACK = 1032;
+  web_gl.RenderingContext2.FRONT_FACE = 2886;
+  web_gl.RenderingContext2.FUNC_ADD = 32774;
+  web_gl.RenderingContext2.FUNC_REVERSE_SUBTRACT = 32779;
+  web_gl.RenderingContext2.FUNC_SUBTRACT = 32778;
+  web_gl.RenderingContext2.GENERATE_MIPMAP_HINT = 33170;
+  web_gl.RenderingContext2.GEQUAL = 518;
+  web_gl.RenderingContext2.GREATER = 516;
+  web_gl.RenderingContext2.GREEN_BITS = 3411;
+  web_gl.RenderingContext2.HIGH_FLOAT = 36338;
+  web_gl.RenderingContext2.HIGH_INT = 36341;
+  web_gl.RenderingContext2.IMPLEMENTATION_COLOR_READ_FORMAT = 35739;
+  web_gl.RenderingContext2.IMPLEMENTATION_COLOR_READ_TYPE = 35738;
+  web_gl.RenderingContext2.INCR = 7682;
+  web_gl.RenderingContext2.INCR_WRAP = 34055;
+  web_gl.RenderingContext2.INT = 5124;
+  web_gl.RenderingContext2.INT_VEC2 = 35667;
+  web_gl.RenderingContext2.INT_VEC3 = 35668;
+  web_gl.RenderingContext2.INT_VEC4 = 35669;
+  web_gl.RenderingContext2.INVALID_ENUM = 1280;
+  web_gl.RenderingContext2.INVALID_FRAMEBUFFER_OPERATION = 1286;
+  web_gl.RenderingContext2.INVALID_OPERATION = 1282;
+  web_gl.RenderingContext2.INVALID_VALUE = 1281;
+  web_gl.RenderingContext2.INVERT = 5386;
+  web_gl.RenderingContext2.KEEP = 7680;
+  web_gl.RenderingContext2.LEQUAL = 515;
+  web_gl.RenderingContext2.LESS = 513;
+  web_gl.RenderingContext2.LINEAR = 9729;
+  web_gl.RenderingContext2.LINEAR_MIPMAP_LINEAR = 9987;
+  web_gl.RenderingContext2.LINEAR_MIPMAP_NEAREST = 9985;
+  web_gl.RenderingContext2.LINES = 1;
+  web_gl.RenderingContext2.LINE_LOOP = 2;
+  web_gl.RenderingContext2.LINE_STRIP = 3;
+  web_gl.RenderingContext2.LINE_WIDTH = 2849;
+  web_gl.RenderingContext2.LINK_STATUS = 35714;
+  web_gl.RenderingContext2.LOW_FLOAT = 36336;
+  web_gl.RenderingContext2.LOW_INT = 36339;
+  web_gl.RenderingContext2.LUMINANCE = 6409;
+  web_gl.RenderingContext2.LUMINANCE_ALPHA = 6410;
+  web_gl.RenderingContext2.MAX_COMBINED_TEXTURE_IMAGE_UNITS = 35661;
+  web_gl.RenderingContext2.MAX_CUBE_MAP_TEXTURE_SIZE = 34076;
+  web_gl.RenderingContext2.MAX_FRAGMENT_UNIFORM_VECTORS = 36349;
+  web_gl.RenderingContext2.MAX_RENDERBUFFER_SIZE = 34024;
+  web_gl.RenderingContext2.MAX_TEXTURE_IMAGE_UNITS = 34930;
+  web_gl.RenderingContext2.MAX_TEXTURE_SIZE = 3379;
+  web_gl.RenderingContext2.MAX_VARYING_VECTORS = 36348;
+  web_gl.RenderingContext2.MAX_VERTEX_ATTRIBS = 34921;
+  web_gl.RenderingContext2.MAX_VERTEX_TEXTURE_IMAGE_UNITS = 35660;
+  web_gl.RenderingContext2.MAX_VERTEX_UNIFORM_VECTORS = 36347;
+  web_gl.RenderingContext2.MAX_VIEWPORT_DIMS = 3386;
+  web_gl.RenderingContext2.MEDIUM_FLOAT = 36337;
+  web_gl.RenderingContext2.MEDIUM_INT = 36340;
+  web_gl.RenderingContext2.MIRRORED_REPEAT = 33648;
+  web_gl.RenderingContext2.NEAREST = 9728;
+  web_gl.RenderingContext2.NEAREST_MIPMAP_LINEAR = 9986;
+  web_gl.RenderingContext2.NEAREST_MIPMAP_NEAREST = 9984;
+  web_gl.RenderingContext2.NEVER = 512;
+  web_gl.RenderingContext2.NICEST = 4354;
+  web_gl.RenderingContext2.NONE = 0;
+  web_gl.RenderingContext2.NOTEQUAL = 517;
+  web_gl.RenderingContext2.NO_ERROR = 0;
+  web_gl.RenderingContext2.ONE = 1;
+  web_gl.RenderingContext2.ONE_MINUS_CONSTANT_ALPHA = 32772;
+  web_gl.RenderingContext2.ONE_MINUS_CONSTANT_COLOR = 32770;
+  web_gl.RenderingContext2.ONE_MINUS_DST_ALPHA = 773;
+  web_gl.RenderingContext2.ONE_MINUS_DST_COLOR = 775;
+  web_gl.RenderingContext2.ONE_MINUS_SRC_ALPHA = 771;
+  web_gl.RenderingContext2.ONE_MINUS_SRC_COLOR = 769;
+  web_gl.RenderingContext2.OUT_OF_MEMORY = 1285;
+  web_gl.RenderingContext2.PACK_ALIGNMENT = 3333;
+  web_gl.RenderingContext2.POINTS = 0;
+  web_gl.RenderingContext2.POLYGON_OFFSET_FACTOR = 32824;
+  web_gl.RenderingContext2.POLYGON_OFFSET_FILL = 32823;
+  web_gl.RenderingContext2.POLYGON_OFFSET_UNITS = 10752;
+  web_gl.RenderingContext2.RED_BITS = 3410;
+  web_gl.RenderingContext2.RENDERBUFFER = 36161;
+  web_gl.RenderingContext2.RENDERBUFFER_ALPHA_SIZE = 36179;
+  web_gl.RenderingContext2.RENDERBUFFER_BINDING = 36007;
+  web_gl.RenderingContext2.RENDERBUFFER_BLUE_SIZE = 36178;
+  web_gl.RenderingContext2.RENDERBUFFER_DEPTH_SIZE = 36180;
+  web_gl.RenderingContext2.RENDERBUFFER_GREEN_SIZE = 36177;
+  web_gl.RenderingContext2.RENDERBUFFER_HEIGHT = 36163;
+  web_gl.RenderingContext2.RENDERBUFFER_INTERNAL_FORMAT = 36164;
+  web_gl.RenderingContext2.RENDERBUFFER_RED_SIZE = 36176;
+  web_gl.RenderingContext2.RENDERBUFFER_STENCIL_SIZE = 36181;
+  web_gl.RenderingContext2.RENDERBUFFER_WIDTH = 36162;
+  web_gl.RenderingContext2.RENDERER = 7937;
+  web_gl.RenderingContext2.REPEAT = 10497;
+  web_gl.RenderingContext2.REPLACE = 7681;
+  web_gl.RenderingContext2.RGB = 6407;
+  web_gl.RenderingContext2.RGB565 = 36194;
+  web_gl.RenderingContext2.RGB5_A1 = 32855;
+  web_gl.RenderingContext2.RGBA = 6408;
+  web_gl.RenderingContext2.RGBA4 = 32854;
+  web_gl.RenderingContext2.SAMPLER_2D = 35678;
+  web_gl.RenderingContext2.SAMPLER_CUBE = 35680;
+  web_gl.RenderingContext2.SAMPLES = 32937;
+  web_gl.RenderingContext2.SAMPLE_ALPHA_TO_COVERAGE = 32926;
+  web_gl.RenderingContext2.SAMPLE_BUFFERS = 32936;
+  web_gl.RenderingContext2.SAMPLE_COVERAGE = 32928;
+  web_gl.RenderingContext2.SAMPLE_COVERAGE_INVERT = 32939;
+  web_gl.RenderingContext2.SAMPLE_COVERAGE_VALUE = 32938;
+  web_gl.RenderingContext2.SCISSOR_BOX = 3088;
+  web_gl.RenderingContext2.SCISSOR_TEST = 3089;
+  web_gl.RenderingContext2.SHADER_TYPE = 35663;
+  web_gl.RenderingContext2.SHADING_LANGUAGE_VERSION = 35724;
+  web_gl.RenderingContext2.SHORT = 5122;
+  web_gl.RenderingContext2.SRC_ALPHA = 770;
+  web_gl.RenderingContext2.SRC_ALPHA_SATURATE = 776;
+  web_gl.RenderingContext2.SRC_COLOR = 768;
+  web_gl.RenderingContext2.STATIC_DRAW = 35044;
+  web_gl.RenderingContext2.STENCIL_ATTACHMENT = 36128;
+  web_gl.RenderingContext2.STENCIL_BACK_FAIL = 34817;
+  web_gl.RenderingContext2.STENCIL_BACK_FUNC = 34816;
+  web_gl.RenderingContext2.STENCIL_BACK_PASS_DEPTH_FAIL = 34818;
+  web_gl.RenderingContext2.STENCIL_BACK_PASS_DEPTH_PASS = 34819;
+  web_gl.RenderingContext2.STENCIL_BACK_REF = 36003;
+  web_gl.RenderingContext2.STENCIL_BACK_VALUE_MASK = 36004;
+  web_gl.RenderingContext2.STENCIL_BACK_WRITEMASK = 36005;
+  web_gl.RenderingContext2.STENCIL_BITS = 3415;
+  web_gl.RenderingContext2.STENCIL_BUFFER_BIT = 1024;
+  web_gl.RenderingContext2.STENCIL_CLEAR_VALUE = 2961;
+  web_gl.RenderingContext2.STENCIL_FAIL = 2964;
+  web_gl.RenderingContext2.STENCIL_FUNC = 2962;
+  web_gl.RenderingContext2.STENCIL_INDEX = 6401;
+  web_gl.RenderingContext2.STENCIL_INDEX8 = 36168;
+  web_gl.RenderingContext2.STENCIL_PASS_DEPTH_FAIL = 2965;
+  web_gl.RenderingContext2.STENCIL_PASS_DEPTH_PASS = 2966;
+  web_gl.RenderingContext2.STENCIL_REF = 2967;
+  web_gl.RenderingContext2.STENCIL_TEST = 2960;
+  web_gl.RenderingContext2.STENCIL_VALUE_MASK = 2963;
+  web_gl.RenderingContext2.STENCIL_WRITEMASK = 2968;
+  web_gl.RenderingContext2.STREAM_DRAW = 35040;
+  web_gl.RenderingContext2.SUBPIXEL_BITS = 3408;
+  web_gl.RenderingContext2.TEXTURE = 5890;
+  web_gl.RenderingContext2.TEXTURE0 = 33984;
+  web_gl.RenderingContext2.TEXTURE1 = 33985;
+  web_gl.RenderingContext2.TEXTURE10 = 33994;
+  web_gl.RenderingContext2.TEXTURE11 = 33995;
+  web_gl.RenderingContext2.TEXTURE12 = 33996;
+  web_gl.RenderingContext2.TEXTURE13 = 33997;
+  web_gl.RenderingContext2.TEXTURE14 = 33998;
+  web_gl.RenderingContext2.TEXTURE15 = 33999;
+  web_gl.RenderingContext2.TEXTURE16 = 34000;
+  web_gl.RenderingContext2.TEXTURE17 = 34001;
+  web_gl.RenderingContext2.TEXTURE18 = 34002;
+  web_gl.RenderingContext2.TEXTURE19 = 34003;
+  web_gl.RenderingContext2.TEXTURE2 = 33986;
+  web_gl.RenderingContext2.TEXTURE20 = 34004;
+  web_gl.RenderingContext2.TEXTURE21 = 34005;
+  web_gl.RenderingContext2.TEXTURE22 = 34006;
+  web_gl.RenderingContext2.TEXTURE23 = 34007;
+  web_gl.RenderingContext2.TEXTURE24 = 34008;
+  web_gl.RenderingContext2.TEXTURE25 = 34009;
+  web_gl.RenderingContext2.TEXTURE26 = 34010;
+  web_gl.RenderingContext2.TEXTURE27 = 34011;
+  web_gl.RenderingContext2.TEXTURE28 = 34012;
+  web_gl.RenderingContext2.TEXTURE29 = 34013;
+  web_gl.RenderingContext2.TEXTURE3 = 33987;
+  web_gl.RenderingContext2.TEXTURE30 = 34014;
+  web_gl.RenderingContext2.TEXTURE31 = 34015;
+  web_gl.RenderingContext2.TEXTURE4 = 33988;
+  web_gl.RenderingContext2.TEXTURE5 = 33989;
+  web_gl.RenderingContext2.TEXTURE6 = 33990;
+  web_gl.RenderingContext2.TEXTURE7 = 33991;
+  web_gl.RenderingContext2.TEXTURE8 = 33992;
+  web_gl.RenderingContext2.TEXTURE9 = 33993;
+  web_gl.RenderingContext2.TEXTURE_2D = 3553;
+  web_gl.RenderingContext2.TEXTURE_BINDING_2D = 32873;
+  web_gl.RenderingContext2.TEXTURE_BINDING_CUBE_MAP = 34068;
+  web_gl.RenderingContext2.TEXTURE_CUBE_MAP = 34067;
+  web_gl.RenderingContext2.TEXTURE_CUBE_MAP_NEGATIVE_X = 34070;
+  web_gl.RenderingContext2.TEXTURE_CUBE_MAP_NEGATIVE_Y = 34072;
+  web_gl.RenderingContext2.TEXTURE_CUBE_MAP_NEGATIVE_Z = 34074;
+  web_gl.RenderingContext2.TEXTURE_CUBE_MAP_POSITIVE_X = 34069;
+  web_gl.RenderingContext2.TEXTURE_CUBE_MAP_POSITIVE_Y = 34071;
+  web_gl.RenderingContext2.TEXTURE_CUBE_MAP_POSITIVE_Z = 34073;
+  web_gl.RenderingContext2.TEXTURE_MAG_FILTER = 10240;
+  web_gl.RenderingContext2.TEXTURE_MIN_FILTER = 10241;
+  web_gl.RenderingContext2.TEXTURE_WRAP_S = 10242;
+  web_gl.RenderingContext2.TEXTURE_WRAP_T = 10243;
+  web_gl.RenderingContext2.TRIANGLES = 4;
+  web_gl.RenderingContext2.TRIANGLE_FAN = 6;
+  web_gl.RenderingContext2.TRIANGLE_STRIP = 5;
+  web_gl.RenderingContext2.UNPACK_ALIGNMENT = 3317;
+  web_gl.RenderingContext2.UNPACK_COLORSPACE_CONVERSION_WEBGL = 37443;
+  web_gl.RenderingContext2.UNPACK_FLIP_Y_WEBGL = 37440;
+  web_gl.RenderingContext2.UNPACK_PREMULTIPLY_ALPHA_WEBGL = 37441;
+  web_gl.RenderingContext2.UNSIGNED_BYTE = 5121;
+  web_gl.RenderingContext2.UNSIGNED_INT = 5125;
+  web_gl.RenderingContext2.UNSIGNED_SHORT = 5123;
+  web_gl.RenderingContext2.UNSIGNED_SHORT_4_4_4_4 = 32819;
+  web_gl.RenderingContext2.UNSIGNED_SHORT_5_5_5_1 = 32820;
+  web_gl.RenderingContext2.UNSIGNED_SHORT_5_6_5 = 33635;
+  web_gl.RenderingContext2.VALIDATE_STATUS = 35715;
+  web_gl.RenderingContext2.VENDOR = 7936;
+  web_gl.RenderingContext2.VERSION = 7938;
+  web_gl.RenderingContext2.VERTEX_ATTRIB_ARRAY_BUFFER_BINDING = 34975;
+  web_gl.RenderingContext2.VERTEX_ATTRIB_ARRAY_ENABLED = 34338;
+  web_gl.RenderingContext2.VERTEX_ATTRIB_ARRAY_NORMALIZED = 34922;
+  web_gl.RenderingContext2.VERTEX_ATTRIB_ARRAY_POINTER = 34373;
+  web_gl.RenderingContext2.VERTEX_ATTRIB_ARRAY_SIZE = 34339;
+  web_gl.RenderingContext2.VERTEX_ATTRIB_ARRAY_STRIDE = 34340;
+  web_gl.RenderingContext2.VERTEX_ATTRIB_ARRAY_TYPE = 34341;
+  web_gl.RenderingContext2.VERTEX_SHADER = 35633;
+  web_gl.RenderingContext2.VIEWPORT = 2978;
+  web_gl.RenderingContext2.ZERO = 0;
+  dart.registerExtension(dart.global.WebGL2RenderingContext, web_gl.RenderingContext2);
+  web_gl.Sampler = class Sampler extends _interceptors.Interceptor {
+    static _() {
+      dart.throw(new core.UnsupportedError("Not supported"));
+    }
+  };
+  dart.setSignature(web_gl.Sampler, {
+    constructors: () => ({_: dart.definiteFunctionType(web_gl.Sampler, [])})
+  });
+  dart.registerExtension(dart.global.WebGLSampler, web_gl.Sampler);
   web_gl.Shader = class Shader extends _interceptors.Interceptor {
     static _() {
       dart.throw(new core.UnsupportedError("Not supported"));
@@ -94496,6 +96457,15 @@ dart_library.library('dart_sdk', null, /* Imports */[
     })
   });
   dart.registerExtension(dart.global.WebGLShaderPrecisionFormat, web_gl.ShaderPrecisionFormat);
+  web_gl.Sync = class Sync extends _interceptors.Interceptor {
+    static _() {
+      dart.throw(new core.UnsupportedError("Not supported"));
+    }
+  };
+  dart.setSignature(web_gl.Sync, {
+    constructors: () => ({_: dart.definiteFunctionType(web_gl.Sync, [])})
+  });
+  dart.registerExtension(dart.global.WebGLSync, web_gl.Sync);
   web_gl.Texture = class Texture extends _interceptors.Interceptor {
     static _() {
       dart.throw(new core.UnsupportedError("Not supported"));
@@ -94505,6 +96475,15 @@ dart_library.library('dart_sdk', null, /* Imports */[
     constructors: () => ({_: dart.definiteFunctionType(web_gl.Texture, [])})
   });
   dart.registerExtension(dart.global.WebGLTexture, web_gl.Texture);
+  web_gl.TransformFeedback = class TransformFeedback extends _interceptors.Interceptor {
+    static _() {
+      dart.throw(new core.UnsupportedError("Not supported"));
+    }
+  };
+  dart.setSignature(web_gl.TransformFeedback, {
+    constructors: () => ({_: dart.definiteFunctionType(web_gl.TransformFeedback, [])})
+  });
+  dart.registerExtension(dart.global.WebGLTransformFeedback, web_gl.TransformFeedback);
   web_gl.UniformLocation = class UniformLocation extends _interceptors.Interceptor {
     static _() {
       dart.throw(new core.UnsupportedError("Not supported"));
@@ -94522,7 +96501,26 @@ dart_library.library('dart_sdk', null, /* Imports */[
   dart.setSignature(web_gl.VertexArrayObject, {
     constructors: () => ({_: dart.definiteFunctionType(web_gl.VertexArrayObject, [])})
   });
-  dart.registerExtension(dart.global.WebGLVertexArrayObjectOES, web_gl.VertexArrayObject);
+  dart.registerExtension(dart.global.WebGLVertexArrayObject, web_gl.VertexArrayObject);
+  web_gl.VertexArrayObjectOes = class VertexArrayObjectOes extends _interceptors.Interceptor {
+    static _() {
+      dart.throw(new core.UnsupportedError("Not supported"));
+    }
+  };
+  dart.setSignature(web_gl.VertexArrayObjectOes, {
+    constructors: () => ({_: dart.definiteFunctionType(web_gl.VertexArrayObjectOes, [])})
+  });
+  dart.registerExtension(dart.global.WebGLVertexArrayObjectOES, web_gl.VertexArrayObjectOes);
+  web_gl._WebGL2RenderingContextBase = class _WebGL2RenderingContextBase extends _interceptors.Interceptor {
+    static _() {
+      dart.throw(new core.UnsupportedError("Not supported"));
+    }
+  };
+  web_gl._WebGL2RenderingContextBase[dart.implements] = () => [web_gl._WebGLRenderingContextBase];
+  dart.setSignature(web_gl._WebGL2RenderingContextBase, {
+    constructors: () => ({_: dart.definiteFunctionType(web_gl._WebGL2RenderingContextBase, [])})
+  });
+  dart.registerExtension(dart.global.WebGL2RenderingContextBase, web_gl._WebGL2RenderingContextBase);
   web_gl._WebGLRenderingContextBase = class _WebGLRenderingContextBase extends _interceptors.Interceptor {
     static _() {
       dart.throw(new core.UnsupportedError("Not supported"));
@@ -94734,7 +96732,7 @@ dart_library.library('dart_sdk', null, /* Imports */[
   };
   dart.setSignature(web_sql.SqlTransaction, {
     constructors: () => ({_: dart.definiteFunctionType(web_sql.SqlTransaction, [])}),
-    methods: () => ({[dartx.executeSql]: dart.definiteFunctionType(dart.void, [core.String, ListOfObject()], [web_sql.SqlStatementCallback, web_sql.SqlStatementErrorCallback])})
+    methods: () => ({[dartx.executeSql]: dart.definiteFunctionType(dart.void, [core.String], [core.List, web_sql.SqlStatementCallback, web_sql.SqlStatementErrorCallback])})
   });
   dart.registerExtension(dart.global.SQLTransaction, web_sql.SqlTransaction);
   // Exports:

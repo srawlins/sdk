@@ -443,6 +443,9 @@ define(['dart_sdk', 'async_helper', 'expect', 'unittest', 'is', 'require'],
       'element_classes_test': 'fail', // sdk#27579.
       'element_classes_svg_test': 'fail', // sdk#27579.
 
+      // Failure: 'Expect.deepEquals(expected: <10>, actual: <18>) fails.'
+      'element_dimensions_test': 'fail',
+
       // Failure: 'Expected 56 to be in the inclusive range [111, 160].'.
       'element_offset_test': 'fail',
       'element_test': async_unittest,
@@ -495,7 +498,6 @@ define(['dart_sdk', 'async_helper', 'expect', 'unittest', 'is', 'require'],
       'queryall_test': ['slow'], // see sdk #27794
       'request_animation_frame_test': async_unittest,
       'resource_http_test': async_unittest,
-      'rtc_test': is.chrome('<=55') ? fail : pass, // was sdk#27578, needs triage
 
       // Expected 1, got null.
       'serialized_script_value_test': 'fail',

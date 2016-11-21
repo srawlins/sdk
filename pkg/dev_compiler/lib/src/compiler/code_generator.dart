@@ -5246,10 +5246,10 @@ class CodeGenerator extends GeneralizingAstVisitor
     return result is JS.Node ? annotate(result, node) : result;
   }
 
-  List/*<T>*/ _visitList/*<T extends AstNode>*/(Iterable/*<T>*/ nodes) {
+  List<T> _visitList<T extends AstNode>(Iterable<T> nodes) {
     if (nodes == null) return null;
-    var result = /*<T>*/ [];
-    for (var node in nodes) result.add(_visit(node) as dynamic/*=T*/);
+    var result = <T>[];
+    for (var node in nodes) result.add(_visit(node) as T);
     return result;
   }
 
@@ -5422,12 +5422,12 @@ class CodeGenerator extends GeneralizingAstVisitor
             () => new JS.TemporaryId(jsLibraryName(_libraryRoot, library)));
   }
 
-  JS.Node/*=T*/ annotate/*<T extends JS.Node>*/(
-      JS.Node/*=T*/ node, AstNode original,
+  T annotate<T extends JS.Node>(
+      T node, AstNode original,
       [Element element]) {
     if (options.closure && element != null) {
       node = node.withClosureAnnotation(closureAnnotationFor(
-          node, original, element, namedArgumentTemp.name)) as dynamic/*=T*/;
+          node, original, element, namedArgumentTemp.name)) as T;
     }
     return node..sourceInformation = original;
   }

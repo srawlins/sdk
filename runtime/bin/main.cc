@@ -133,7 +133,6 @@ static void ErrorExit(int exit_code, const char* format, ...) {
   va_start(arguments, format);
   Log::VPrintErr(format, arguments);
   va_end(arguments);
-  fflush(stderr);
 
   Dart_ExitScope();
   Dart_ShutdownIsolate();
@@ -807,18 +806,19 @@ static Dart_Isolate CreateIsolateAndSetupHelper(const char* script_uri,
       !run_app_snapshot &&
       TryReadKernel(script_uri, &kernel_file, &kernel_length);
 
-  IsolateData* isolate_data =
-      new IsolateData(script_uri, package_root, packages_config);
-  Dart_Isolate isolate =
-      is_kernel ? Dart_CreateIsolateFromKernel(script_uri, main, kernel_file,
-                                               kernel_length, flags,
-                                               isolate_data, error)
-                : Dart_CreateIsolate(script_uri, main, isolate_snapshot_buffer,
-                                     flags, isolate_data, error);
+  void* kernel_program = NULL;
   if (is_kernel) {
+    kernel_program = Dart_ReadKernelBinary(kernel_file, kernel_length);
     free(const_cast<uint8_t*>(kernel_file));
   }
 
+  IsolateData* isolate_data =
+      new IsolateData(script_uri, package_root, packages_config);
+  Dart_Isolate isolate =
+      is_kernel ? Dart_CreateIsolateFromKernel(script_uri, main, kernel_program,
+                                               flags, isolate_data, error)
+                : Dart_CreateIsolate(script_uri, main, isolate_snapshot_buffer,
+                                     flags, isolate_data, error);
   if (isolate == NULL) {
     delete isolate_data;
     return NULL;
@@ -831,12 +831,7 @@ static Dart_Isolate CreateIsolateAndSetupHelper(const char* script_uri,
   CHECK_RESULT(result);
 
   if (is_kernel) {
-    // TODO(27590): We should not read the kernel file again!
-    if (!TryReadKernel(script_uri, &kernel_file, &kernel_length)) {
-      FATAL("Failed to read kernel second time");
-    }
-    Dart_Handle result = Dart_LoadKernel(kernel_file, kernel_length);
-    free(const_cast<uint8_t*>(kernel_file));
+    Dart_Handle result = Dart_LoadKernel(kernel_program);
     CHECK_RESULT(result);
   }
   if (is_kernel || (isolate_snapshot_buffer != NULL)) {
@@ -1240,14 +1235,23 @@ static bool ReadAppSnapshotBlobs(const char* script_name,
     return false;
   }
 
+  int64_t vmisolate_size = header[1];
   int64_t vmisolate_position =
       Utils::RoundUp(file->Position(), kAppSnapshotPageSize);
+  int64_t isolate_size = header[2];
   int64_t isolate_position =
-      Utils::RoundUp(vmisolate_position + header[1], kAppSnapshotPageSize);
-  int64_t rodata_position =
-      Utils::RoundUp(isolate_position + header[2], kAppSnapshotPageSize);
-  int64_t instructions_position =
-      Utils::RoundUp(rodata_position + header[3], kAppSnapshotPageSize);
+      Utils::RoundUp(vmisolate_position + vmisolate_size, kAppSnapshotPageSize);
+  int64_t rodata_size = header[3];
+  int64_t rodata_position = isolate_position + isolate_size;
+  if (rodata_size != 0) {
+    rodata_position = Utils::RoundUp(rodata_position, kAppSnapshotPageSize);
+  }
+  int64_t instructions_size = header[4];
+  int64_t instructions_position = rodata_position + rodata_size;
+  if (instructions_size != 0) {
+    instructions_position =
+        Utils::RoundUp(instructions_position, kAppSnapshotPageSize);
+  }
 
   void* read_only_buffer =
       file->Map(File::kReadOnly, vmisolate_position,
@@ -1261,14 +1265,14 @@ static bool ReadAppSnapshotBlobs(const char* script_name,
                       (vmisolate_position - vmisolate_position);
   *isolate_buffer = reinterpret_cast<const uint8_t*>(read_only_buffer) +
                     (isolate_position - vmisolate_position);
-  if (header[3] == 0) {
+  if (rodata_size == 0) {
     *rodata_buffer = NULL;
   } else {
     *rodata_buffer = reinterpret_cast<const uint8_t*>(read_only_buffer) +
                      (rodata_position - vmisolate_position);
   }
 
-  if (header[4] == 0) {
+  if (instructions_size == 0) {
     *instructions_buffer = NULL;
   } else {
     *instructions_buffer = reinterpret_cast<const uint8_t*>(
@@ -1589,9 +1593,8 @@ bool RunMainIsolate(const char* script_name, CommandLineOptions* dart_options) {
       // Load the embedder's portion of the VM service's Dart code so it will
       // be included in the app snapshot.
       if (!VmService::LoadForGenPrecompiled()) {
-        fprintf(stderr, "VM service loading failed: %s\n",
-                VmService::GetErrorMessage());
-        fflush(stderr);
+        Log::PrintErr("VM service loading failed: %s\n",
+                      VmService::GetErrorMessage());
         exit(kErrorExitCode);
       }
     }
@@ -1839,8 +1842,7 @@ void main(int argc, char** argv) {
 
   if (!DartUtils::SetOriginalWorkingDirectory()) {
     OSError err;
-    fprintf(stderr, "Error determining current directory: %s\n", err.message());
-    fflush(stderr);
+    Log::PrintErr("Error determining current directory: %s\n", err.message());
     Platform::Exit(kErrorExitCode);
   }
 
@@ -1901,8 +1903,7 @@ void main(int argc, char** argv) {
   char* error = Dart_Initialize(&init_params);
   if (error != NULL) {
     EventHandler::Stop();
-    fprintf(stderr, "VM initialization failed: %s\n", error);
-    fflush(stderr);
+    Log::PrintErr("VM initialization failed: %s\n", error);
     free(error);
     Platform::Exit(kErrorExitCode);
   }

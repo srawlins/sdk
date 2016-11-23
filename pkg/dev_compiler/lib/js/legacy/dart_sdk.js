@@ -1148,6 +1148,23 @@ dart_library.library('dart_sdk', null, /* Imports */[
     }
     return type[dart._typeObject] = new dart.WrappedType(type);
   };
+  dart.lazyJSType = function(getJSTypeCallback, name) {
+    let key = getJSTypeCallback.toString();
+    if (dart._lazyJSTypes.has(key)) {
+      return dart._lazyJSTypes.get(key);
+    }
+    let ret = new dart.LazyJSType(getJSTypeCallback, name);
+    dart._lazyJSTypes.set(key, ret);
+    return ret;
+  };
+  dart.lazyAnonymousJSType = function(name) {
+    if (dart._lazyJSTypes.has(name)) {
+      return dart._lazyJSTypes.get(name);
+    }
+    let ret = new dart.LazyJSType(null, name);
+    dart._lazyJSTypes.set(name, ret);
+    return ret;
+  };
   const _wrappedType = Symbol('_wrappedType');
   dart.unwrapType = function(obj) {
     return dart.dload(obj, _wrappedType);
@@ -1170,6 +1187,26 @@ dart_library.library('dart_sdk', null, /* Imports */[
   dart.tagLazy = function(value, compute) {
     dart.defineLazyProperty(value, dart._runtimeType, {get: compute});
   };
+  const _jsTypeCallback = Symbol('_jsTypeCallback');
+  const _rawJSType = Symbol('_rawJSType');
+  dart._isInstanceOfLazyJSType = function(o, t) {
+    if (t[_jsTypeCallback] != null) {
+      return dart.is(o, t[_rawJSType]);
+    }
+    if (o == null) return false;
+    return dart._isJSObject(o);
+  };
+  dart._asInstanceOfLazyJSType = function(o, t) {
+    if (t[_jsTypeCallback] != null) {
+      return dart.as(o, t[_rawJSType]);
+    }
+    if (o == null) return null;
+    if (!dart.test(dart._isJSObject(o))) dart._throwCastError(o, t, true);
+    return o;
+  };
+  dart._isJSObject = function(o) {
+    return !dart.getReifiedType(o)[dart._runtimeType];
+  };
   dart._initialize2 = function() {
     dart.TypeRep.prototype.is = function is_T(object) {
       return dart.is(object, this);
@@ -1188,6 +1225,12 @@ dart_library.library('dart_sdk', null, /* Imports */[
     };
     dart.Dynamic.prototype._check = function check_Dynamic(object) {
       return object;
+    };
+    dart.LazyJSType.prototype.is = function is_T(object) {
+      return dart._isInstanceOfLazyJSType(object, this);
+    };
+    dart.LazyJSType.prototype.as = function as_T(object) {
+      return dart._asInstanceOfLazyJSType(object, this);
     };
   };
   dart._functionType = function(definite, returnType, args, extra) {
@@ -1250,6 +1293,11 @@ dart_library.library('dart_sdk', null, /* Imports */[
   };
   dart.isFunctionType = function(type) {
     return type instanceof dart.AbstractFunctionType || type === core.Function;
+  };
+  dart.isLazyJSSubtype = function(t1, t2, covariant) {
+    if (dart.equals(t1, t2)) return true;
+    if (t1[_jsTypeCallback] == null || t2[_jsTypeCallback] == null) return true;
+    return dart.isClassSubType(t1[_rawJSType], t2[_rawJSType], covariant);
   };
   dart.isFunctionSubtype = function(ft1, ft2, covariant) {
     if (ft2 === core.Function) {
@@ -1346,6 +1394,9 @@ dart_library.library('dart_sdk', null, /* Imports */[
     if (dart.isFunctionType(t1) && dart.isFunctionType(t2)) {
       return dart.isFunctionSubtype(t1, t2, covariant);
     }
+    if (t1 instanceof dart.LazyJSType && t2 instanceof dart.LazyJSType) {
+      return dart.isLazyJSSubtype(t1, t2, covariant);
+    }
     return false;
   };
   dart.isClassSubType = function(t1, t2, covariant) {
@@ -1421,24 +1472,31 @@ dart_library.library('dart_sdk', null, /* Imports */[
     return true;
   };
   dart.throwCastError = function(object, actual, type) {
+    debugger;
     dart.throw(new _js_helper.CastErrorImplementation(object, dart.typeName(actual), dart.typeName(type)));
   };
   dart.throwTypeError = function(object, actual, type) {
+    debugger;
     dart.throw(new _js_helper.TypeErrorImplementation(object, dart.typeName(actual), dart.typeName(type)));
   };
   dart.throwStrongModeCastError = function(object, actual, type) {
+    debugger;
     dart.throw(new _js_helper.StrongModeCastError(object, dart.typeName(actual), dart.typeName(type)));
   };
   dart.throwStrongModeTypeError = function(object, actual, type) {
+    debugger;
     dart.throw(new _js_helper.StrongModeTypeError(object, dart.typeName(actual), dart.typeName(type)));
   };
   dart.throwUnimplementedError = function(message) {
+    debugger;
     dart.throw(new core.UnimplementedError(message));
   };
   dart.throwAssertionError = function() {
+    debugger;
     dart.throw(new core.AssertionError());
   };
   dart.throwNullValueError = function() {
+    debugger;
     dart.throw(new core.NoSuchMethodError(null, new core.Symbol('<Unexpected Null Value>'), null, null, null));
   };
   dart.syncStar = function(gen, E, ...args) {
@@ -1969,9 +2027,11 @@ dart_library.library('dart_sdk', null, /* Imports */[
     return Object.getOwnPropertySymbols(obj);
   };
   dart.throwStrongModeError = function(message) {
+    debugger;
     throw new _js_helper.StrongModeErrorImplementation(message);
   };
   dart.throwInternalError = function(message) {
+    debugger;
     throw Error(message);
   };
   dart.getOwnNamesAndSymbols = function(obj) {
@@ -2058,6 +2118,12 @@ dart_library.library('dart_sdk', null, /* Imports */[
   dart.dartx = dartx;
   dart._runtimeType = Symbol("_runtimeType");
   dart.isNamedConstructor = Symbol("isNamedConstructor");
+  dart.defineLazy(dart, {
+    get _lazyJSTypes() {
+      return new Map();
+    },
+    set _lazyJSTypes(_) {}
+  });
   dart.metadata = Symbol("metadata");
   dart._typeObject = Symbol("typeObject");
   core.Object = class Object {
@@ -2128,6 +2194,28 @@ dart_library.library('dart_sdk', null, /* Imports */[
       return 'dynamic';
     }
   };
+  const _dartName = Symbol('_dartName');
+  dart.LazyJSType = class LazyJSType extends core.Object {
+    new(jsTypeCallback, dartName) {
+      this[_jsTypeCallback] = jsTypeCallback;
+      this[_dartName] = dartName;
+    }
+    get [_rawJSType]() {
+      return this[_jsTypeCallback]();
+    }
+    toString() {
+      return core.String._check(this[_jsTypeCallback] != null ? dart.typeName(this[_rawJSType]) : this[_dartName]);
+    }
+  };
+  dart.LazyJSType[dart.implements] = () => [core.Type];
+  dart.setSignature(dart.LazyJSType, {
+    constructors: () => ({new: dart.definiteFunctionType(dart.LazyJSType, [dart.dynamic, dart.dynamic])}),
+    fields: () => ({
+      [_jsTypeCallback]: dart.dynamic,
+      [_dartName]: dart.dynamic
+    }),
+    getters: () => ({[_rawJSType]: dart.definiteFunctionType(dart.dynamic, [])})
+  });
   dart.dynamic = new dart.Dynamic();
   dart._initialize = dart._initialize2();
   dart.Void = class Void extends dart.TypeRep {

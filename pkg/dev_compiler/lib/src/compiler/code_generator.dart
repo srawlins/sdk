@@ -1314,7 +1314,7 @@ class CodeGenerator extends GeneralizingAstVisitor
       jsMethods.add(new JS.Method(
           _propertyName('constructor'),
           js.call('function(...args) { return this.new.apply(this, args); }')
-              as JS.Fun));
+          as JS.Fun));
     } else if (ctors.isEmpty) {
       jsMethods.add(_emitImplicitConstructor(node, fields, virtualFields));
     }
@@ -3395,7 +3395,7 @@ class CodeGenerator extends GeneralizingAstVisitor
       if (targetType is FunctionType) {
         // Call methods on function types should be handled as regular function
         // invocations.
-        return _emitFunctionCall(node);
+        return _emitFunctionCall(node, node.target);
       }
       if (targetType.isDartCoreFunction || targetType.isDynamic) {
         // TODO(vsm): Can a call method take generic type parameters?
@@ -3542,10 +3542,14 @@ class CodeGenerator extends GeneralizingAstVisitor
 
   /// Emits a function call, to a top-level function, local function, or
   /// an expression.
-  JS.Expression _emitFunctionCall(InvocationExpression node) {
-    var fn = _visit(node.function);
+  JS.Expression _emitFunctionCall(InvocationExpression node,
+      [Expression function]) {
+    if (function == null) {
+      function = node.function;
+    }
+    var fn = _visit(function);
     var args = _visit(node.argumentList) as List<JS.Expression>;
-    if (isDynamicInvoke(node.function)) {
+    if (isDynamicInvoke(function)) {
       return _emitDynamicInvoke(node, fn, args);
     } else {
       return new JS.Call(_applyInvokeTypeArguments(fn, node), args);
@@ -3967,7 +3971,7 @@ class CodeGenerator extends GeneralizingAstVisitor
           new JS.Method(
               access,
               js.call('function() { return #; }', _visitInitializer(node))
-                  as JS.Fun,
+              as JS.Fun,
               isGetter: true),
           node,
           _findAccessor(element, getter: true)));
@@ -4527,7 +4531,7 @@ class CodeGenerator extends GeneralizingAstVisitor
       }
       result = new PrefixedIdentifier(
           _bindValue(scope, 'o', ident.prefix, context: context)
-              as SimpleIdentifier,
+          as SimpleIdentifier,
           ident.period,
           ident.identifier);
     } else {

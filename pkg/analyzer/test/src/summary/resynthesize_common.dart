@@ -3448,7 +3448,11 @@ class D extends p.C {} // Prevent "unused import" warning
 
   test_import_short_absolute() {
     testFile = '/my/project/bin/test.dart';
-    addLibrarySource('/a.dart', 'class C {}');
+    // Note: "/a.dart" resolves differently on Windows vs. Posix.
+    var destinationPath =
+        resourceProvider.pathContext.fromUri(Uri.parse('/a.dart'));
+    print('destinationPath=$destinationPath');
+    addLibrarySource(destinationPath, 'class C {}');
     checkLibrary('import "/a.dart"; C c;');
   }
 
